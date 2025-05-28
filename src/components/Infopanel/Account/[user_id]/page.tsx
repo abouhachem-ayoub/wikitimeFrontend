@@ -21,7 +21,7 @@ const ProfilePage = ({ params }: { params: { user_id: string } }) => {
 const handleSubmit = async (e : React.FormEvent<HTMLFormElement>)=>{
   e.preventDefault();
   try {
-    const response = await fetch("http://localhost:3000/api/auth/edituserinfo", {
+    const response = await fetch(import.meta.env.VITE_API_BASE_URL+"/api/auth/edituserinfo", {
     method: "POST",
     headers: {
     Authorization: `Bearer ${token}`, // Send the token in the Authorization header
@@ -74,7 +74,7 @@ catch(error){
                   if (debouncedPseudo.trim() !== '' && debouncedPseudo!==user?.pseudo) {
                       const fetchData = async () => {
                           try {
-                              const response = await fetch("http://localhost:3000/api/auth/pseudoexists", {
+                              const response = await fetch(import.meta.env.VITE_API_BASE_URL+"/api/auth/pseudoexists", {
                               method: "POST",
                               headers: {
                               "Content-Type": "application/json",
@@ -279,7 +279,7 @@ catch(error){
             onClick={(e) => {
               e.preventDefault();
               // Logic to resend verification email
-              fetch("http://localhost:3000/api/auth/send_verification_email", {
+              fetch(import.meta.env.VITE_API_BASE_URL+"/api/auth/send_verification_email", {
                 method: "POST",
                 headers: {
                   "Content-Type": "application/json",

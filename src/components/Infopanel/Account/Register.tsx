@@ -64,7 +64,7 @@ const RegisterForm = ({ toggleForm }: { toggleForm: () => void }) => {
         if (debouncedPseudo.trim() !== '') {
             const fetchData = async () => {
                 try {
-                    const response = await fetch("http://localhost:3000/api/auth/pseudoexists", {
+                    const response = await fetch(import.meta.env.VITE_API_BASE_URL+"/api/auth/pseudoexists", {
                     method: "POST",
                     headers: {
                     "Content-Type": "application/json",
@@ -115,7 +115,7 @@ const RegisterForm = ({ toggleForm }: { toggleForm: () => void }) => {
                       setEmailExists(true);
                         return;
                     }
-                    const response = await fetch("http://localhost:3000/api/auth/emailexists", {
+                    const response = await fetch(import.meta.env.VITE_API_BASE_URL+"/api/auth/emailexists", {
                     method: "POST",
                     headers: {
                     "Content-Type": "application/json",
@@ -200,7 +200,7 @@ const RegisterForm = ({ toggleForm }: { toggleForm: () => void }) => {
         try{
             if(!pseudoExists && !emailExists && passwordErrorMessage === '' && formData.password === formData.password2){
                 setLoading(true);
-                    const response = await fetch("http://localhost:3000/api/auth/register", {
+                    const response = await fetch(import.meta.env.VITE_API_BASE_URL+"/api/auth/register", {
                         method: "POST",
                         headers: {
                           "Content-Type": "application/json",
@@ -240,7 +240,7 @@ const RegisterForm = ({ toggleForm }: { toggleForm: () => void }) => {
     }
 
 const registerwithsocials = async(formData:any)=>{
-    const response = await fetch("http://localhost:3000/api/auth/register", {
+    const response = await fetch(import.meta.env.VITE_API_BASE_URL+"/api/auth/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -41,7 +41,7 @@ const Login: React.FC = () => {
       return;
     }
     try {
-      const response = await fetch("http://localhost:3000/api/auth/resetPassword", {
+      const response = await fetch(import.meta.env.VITE_API_BASE_URL+"/api/auth/resetPassword", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -69,7 +69,7 @@ const Login: React.FC = () => {
       return;
     }
     try {
-      const response = await fetch("http://localhost:3000/api/auth/setnewpassword", {
+      const response = await fetch(import.meta.env.VITE_API_BASE_URL+"/api/auth/setnewpassword", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -95,7 +95,7 @@ const Login: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      const response = await fetch("http://localhost:3000/api/auth/login", {
+      const response = await fetch(import.meta.env.VITE_API_BASE_URL+"/api/auth/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
