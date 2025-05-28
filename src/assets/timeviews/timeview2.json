@@ -1,0 +1,298 @@
+[
+  {
+    "caption": "0",
+    "bgColor": "#222222",
+    "textColor": "#ffffff",
+    "startYear": "-20 266 666 560",
+    "endYear": "20 266 666 560",
+    "width": "3%"
+  },
+  {
+    "caption": "1",
+    "bgColor": "#444444",
+    "textColor": "#ffffff",
+    "startYear": "-15 000 000 000",
+    "endYear": "4 447 893 120",
+    "width": "3%"
+  },
+  {
+    "caption": "2",
+    "bgColor": "#666666",
+    "textColor": "#ffffff",
+    "startYear": "-8 397 988 416",
+    "endYear": "933 109 824",
+    "width": "3%"
+  },
+  {
+    "caption": "3",
+    "bgColor": "#888888",
+    "textColor": "#000000",
+    "startYear": "-4 029 355 584",
+    "endYear": "447 706 176",
+    "width": "3%"
+  },
+  {
+    "caption": "4",
+    "bgColor": "#AAAAAA",
+    "textColor": "#000000",
+    "startYear": "-1 933 284 672",
+    "endYear": "214 809 408",
+    "width": "3%"
+  },
+  {
+    "caption": "5",
+    "bgColor": "#CCCCCC",
+    "textColor": "#000000",
+    "startYear": "-927 590 400",
+    "endYear": "103 065 600",
+    "width": "3%"
+  },
+  {
+    "caption": "6",
+    "bgColor": "#AAAAAA",
+    "textColor": "#000000",
+    "startYear": "-445 058 496",
+    "endYear": "49 450 944",
+    "width": "3%"
+  },
+  {
+    "caption": "7",
+    "bgColor": "#888888",
+    "textColor": "#000000",
+    "startYear": "-213 539 328",
+    "endYear": "23 726 592",
+    "width": "3%"
+  },
+  {
+    "caption": "8",
+    "bgColor": "#666666",
+    "textColor": "#ffffff",
+    "startYear": "-102 456 576",
+    "endYear": "11 384 064",
+    "width": "3%"
+  },
+  {
+    "caption": "9",
+    "bgColor": "#444444",
+    "textColor": "#ffffff",
+    "startYear": "-49 158 144",
+    "endYear": "5 462 016",
+    "width": "3%"
+  },
+  {
+    "caption": "10",
+    "bgColor": "#222222",
+    "textColor": "#ffffff",
+    "startYear": "-23 585 472",
+    "endYear": "2 620 608",
+    "width": "3%"
+  },
+  {
+    "caption": "11",
+    "bgColor": "#444444",
+    "textColor": "#ffffff",
+    "startYear": "-11 316 672",
+    "endYear": "1 257 408",
+    "width": "3%"
+  },
+  {
+    "caption": "12",
+    "bgColor": "#666666",
+    "textColor": "#FFFFFF",
+    "startYear": "-5 429 376",
+    "endYear": "603 264",
+    "width": "3%"
+  },
+  {
+    "caption": "13",
+    "bgColor": "#888888",
+    "textColor": "#000000",
+    "startYear": "-2 605 824",
+    "endYear": "289 536",
+    "width": "3%"
+  },
+  {
+    "caption": "14",
+    "bgColor": "#AAAAAA",
+    "textColor": "#000000",
+    "startYear": "-1 249 344",
+    "endYear": "138 816",
+    "width": "3%"
+  },
+  {
+    "caption": "15",
+    "bgColor": "#CCCCCC",
+    "textColor": "#000000",
+    "startYear": "-599 616",
+    "endYear": "66 624",
+    "width": "3%"
+  },
+  {
+    "caption": "16",
+    "bgColor": "#AAAAAA",
+    "textColor": "#000000",
+    "startYear": "-288 576",
+    "endYear": "32 064",
+    "width": "3%"
+  },
+  {
+    "caption": "17",
+    "bgColor": "#888888",
+    "textColor": "#000000",
+    "startYear": "-138 240",
+    "endYear": "15 360",
+    "width": "3%"
+  },
+  {
+    "caption": "18",
+    "bgColor": "#666666",
+    "textColor": "#ffffff",
+    "startYear": "-67 392",
+    "endYear": "7 488",
+    "width": "3%"
+  },
+  {
+    "caption": "19",
+    "bgColor": "#444444",
+    "textColor": "#ffffff",
+    "startYear": "-31 104",
+    "endYear": "3457/01/09",
+    "width": "3%"
+  },
+  {
+    "caption": "20",
+    "bgColor": "#222222",
+    "textColor": "#ffffff",
+    "startYear": "-15 180",
+    "endYear": "2100/12/30",
+    "width": "3%"
+  },
+  {
+    "caption": "21",
+    "bgColor": "#444444",
+    "textColor": "#ffffff",
+    "startYear": "-5 580",
+    "endYear": "2100/12/30",
+    "width": "3%"
+  },
+  {
+    "caption": "22",
+    "bgColor": "#666666",
+    "textColor": "#FFFFFF",
+    "startYear": "-1740/01/01",
+    "endYear": "2100/12/30",
+    "width": "3%"
+  },
+  {
+    "caption": "23",
+    "bgColor": "#888888",
+    "textColor": "#000000",
+    "startYear": "0110/01/01",
+    "endYear": "2030/12/30",
+    "width": "3%"
+  },
+  {
+    "caption": "24",
+    "bgColor": "#AAAAAA",
+    "textColor": "#000000",
+    "startYear": "1070/01/01",
+    "endYear": "2030/12/31",
+    "width": "3%"
+  },
+  {
+    "caption": "25",
+    "bgColor": "#CCCCCC",
+    "textColor": "#000000",
+    "startYear": "1549/01/01",
+    "endYear": "2029/12/31",
+    "width": "3%"
+  },
+  {
+    "caption": "26",
+    "bgColor": "#AAAAAA",
+    "textColor": "#000000",
+    "startYear": "1789/01/01",
+    "endYear": "2029/12/31",
+    "width": "3%"
+  },
+  {
+    "caption": "27",
+    "bgColor": "#888888",
+    "textColor": "#000000",
+    "startYear": "1908/01/01",
+    "endYear": "2028/12/31",
+    "width": "3%"
+  },
+  {
+    "caption": "28",
+    "bgColor": "#666666",
+    "textColor": "#ffffff",
+    "startYear": "1970/01/01",
+    "endYear": "2027/12/31",
+    "width": "3%"
+  },
+  {
+    "caption": "29",
+    "bgColor": "#444444",
+    "textColor": "#ffffff",
+    "startYear": "2001/01/01",
+    "endYear": "2027/12/31",
+    "width": "3%"
+  },
+  {
+    "caption": "30",
+    "bgColor": "#222222",
+    "textColor": "#ffffff",
+    "startYear": "2014/01/01",
+    "endYear": "2026/12/31",
+    "width": "3%"
+  },
+  {
+    "caption": "31",
+    "bgColor": "#444444",
+    "textColor": "#ffffff",
+    "startYear": "2021/09/28",
+    "endYear": "2026/12/31",
+    "width": "3%"
+  },
+  {
+    "caption": "32",
+    "bgColor": "#666666",
+    "textColor": "#FFFFFF",
+    "startYear": "2023/05/16",
+    "endYear": "2025/12/31",
+    "width": "3%"
+  },
+  {
+    "caption": "33",
+    "bgColor": "#888888",
+    "textColor": "#000000",
+    "startYear": "2024/03/07",
+    "endYear": "2025/06/30",
+    "width": "3%"
+  },
+  {
+    "caption": "34",
+    "bgColor": "#AAAAAA",
+    "textColor": "#000000",
+    "startYear": "2024/10/02",
+    "endYear": "2025/05/30",
+    "width": "3%"
+  },
+  {
+    "caption": "35",
+    "bgColor": "#CCCCCC",
+    "textColor": "#000000",
+    "startYear": "2024/12/16",
+    "endYear": "2025/04/15",
+    "width": "3%"
+  },
+  {
+    "caption": "36",
+    "bgColor": "#AAAAAA",
+    "textColor": "#000000",
+    "startYear": "2025/02/04",
+    "endYear": "2025/04/05",
+    "width": "3%"
+  }
+]

@@ -1,0 +1,16 @@
+.pixiSettingsContainer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  gap: 8px;
+  justify-content: center;
+  align-items: center;
+  input {width: 80px; text-align: center;}
+
+  .pixiSettingsItem {
+    display: flex;
+    gap: 3px;
+    align-items: center;
+  }
+}

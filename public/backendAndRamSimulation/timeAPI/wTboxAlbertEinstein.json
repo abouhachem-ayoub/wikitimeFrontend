@@ -1,0 +1,19 @@
+{
+  "timeObject": "timeBox",
+
+  "source": "wTbox",
+  "id": 10160,
+
+  "caption": "Einstein",
+  "url": "Albert_Einstein",
+  "type": "character",
+  "categories": ["s", "p", "c"],
+  "countries": ["USA", "Germany"],
+  "dateStartDay": 14,
+  "dateStartMonth": 3,
+  "dateStartYear": 1879,
+  "dateEndDay": 18,
+  "dateEndMonth": 4,
+  "dateEndYear": 1955
+  }
+  

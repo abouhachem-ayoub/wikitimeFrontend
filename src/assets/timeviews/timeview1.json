@@ -1,0 +1,82 @@
+[
+  {
+    "caption": "tv_universe",
+    "bgColor": "#000000",
+    "textColor": "#D9D9D9",
+    "startYear": -13800000000,
+    "endYear": 2025,
+    "width": "7%"
+  },
+  {
+    "caption": "tv_life",
+    "bgColor": "#8FAADC",
+    "textColor": "#2F5597",
+    "startYear": -4000000000,
+    "endYear": 2025,
+    "width": "7%"
+  },
+  {
+    "caption": "tv_dinosaurs",
+    "bgColor": "#FF9999",
+    "textColor": "#843C0C",
+    "startYear": -230000000,
+    "endYear": 2025,
+    "width": "7%"
+  },
+  {
+    "caption": "tv_apes",
+    "bgColor": "#81BB59",
+    "textColor": "#385723",
+    "startYear": -20000000,
+    "endYear": 2025,
+    "width": "7%"
+  },
+  {
+    "caption": "tv_homo",
+    "bgColor": "#FFD966",
+    "textColor": "#7F6000",
+    "startYear": -3500000,
+    "endYear": 2025,
+    "width": "7%"
+  },
+  {
+    "caption": "tv_humans",
+    "bgColor": "#595959",
+    "textColor": "#D9D9D9",
+    "startYear": -300000,
+    "endYear": 2025,
+    "width": "7%"
+  },
+  {
+    "caption": "tv_language",
+    "bgColor": "#797979",
+    "textColor": "#D9D9D9",
+    "startYear": -50000,
+    "endYear": 2025,
+    "width": "7%"
+  },
+  {
+    "caption": "tv_history",
+    "bgColor": "#999999",
+    "textColor": "#000000",
+    "startYear": -3500,
+    "endYear": 2025,
+    "width": "12%"
+  },
+  {
+    "caption": "tv_milenium",
+    "bgColor": "#999999",
+    "textColor": "#000000",
+    "startYear": 1025,
+    "endYear": 2025,
+    "width": "15%"
+  },
+  {
+    "caption": "tv_century",
+    "bgColor": "#999999",
+    "textColor": "#000000",
+    "startYear": 1925,
+    "endYear": 2025,
+    "width": "24%"
+  }
+]

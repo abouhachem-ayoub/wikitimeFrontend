@@ -1,0 +1,91 @@
+// Custom properties----------------------------------
+// DEFAULT values (set in src/config/customProperties.js)
+
+:root {
+  // from dark to light
+  // 868686
+  // 989898
+  // BFBFBF
+  // D9D9D9
+  // FFFFFF
+
+  //Workspace WS
+  --color-WSbackground: #D9D9D9;
+  --color-WSbackgrounddark: #BFBFBF;
+  --color-timeviewButtonBorder: black;
+  --value-chartHeight: 500px;
+
+  //Toolbar TB
+  --color-TBBackground: #989898;
+  --color-TBText: #FFFFFF;
+  --filter-TBLightBlue: invert(27%) sepia(100%) saturate(7471%) hue-rotate(190deg) brightness(254%) contrast(107%);
+  --value-TBSize: 0px; //DEVTimeline
+  --value-TBSize: 30px;
+  --value-TBBtnSize: 20px;
+
+  //InfoPanel IP
+  --value-IPNavbarSize: 40px;
+  --color-IPbackground: #D9D9D9;
+  --color-IPButton: #494949;
+  --color-IPButtonHover: #492626;
+  --color-IPButtonActive: #ad0404;
+  --color-IPButtonText: #FFFFFF;
+  --color-wikipediaimagesborder: #BFBFBF;
+  --color-wikipediaimagesbackground: #D9D9D9;
+
+  //VerticalHorizontal
+  --color-IPNavbar: red;
+  --color-IPNavbar-vertical: #868686;
+  --color-IPNavbar-horizontal: #989898;
+  --value-TBflex: column;
+  --value-TBflex-vertical: column;
+  --value-TBflex-horizontal: row;
+  --value-TBflexOpp: row;
+  --value-TBflexOpp-vertical: row;
+  --value-TBflexOpp-horizontal: column;
+}
+// mixins----------------------------------------------
+@mixin tooltip-styles($top, $left, $right) {
+	content: attr(dtooltip);
+	position: absolute;
+	white-space: nowrap; //border-radius: 5px;
+	background: transparent;
+	z-index: 6; // homemade tooltip
+	@include outline-text( #fff,#000, #161616);
+	top: $top;
+	left: $left;
+  right: $right;
+}
+
+@mixin outline-text($c0, $c1, $c2) {
+  //position in front of everything
+	color: $c0;
+  // 2     2     2
+  //    1  1  1
+  // 2  1  0  1  2
+  //    1  1  1
+  // 2     2     2
+  text-shadow:
+                     -1px -1px 0px $c1, 0px -1px 0px $c1, 1px -1px 0px $c1,
+                      1px  0px 0px $c1,                   1px  0px 0px $c1,
+                     -1px  1px 0px $c1, 0px  1px 0px $c1, 1px  1px 0px $c1,
+
+  -2px -2px 0px $c2,                    0px -2px 0px $c2,                   2px -2px 0px $c2,
+
+  -2px  0px 0px $c2,                                                        2px  0px 0px $c2,
+
+  -2px  2px 0px $c2,                    0px  2px 0px $c2,                   2px  2px 0px $c2, 
+}
+/* Someday to dig
+  -2px -2px 0px $c1,                    0px -2px 0px $c1,                   2px -2px 0px $c1,
+
+  -2px  0px 0px $c1,                                                        2px  0px 0px $c1,
+
+  -2px  2px 0px $c1,                    0px  2px 0px $c1,                   2px  2px 0px $c1, 
+
+  -3px -3px 0px $c2,                    0px -3px 0px $c2,                   3px -3px 0px $c2,
+
+  -3px  0px 0px $c2,                                                        3px  0px 0px $c2,
+
+  -3px  3px 0px $c2,                    0px  3px 0px $c2,                   3px  3px 0px $c2, 
+*/

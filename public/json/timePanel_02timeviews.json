@@ -1,0 +1,12 @@
+[
+  {"caption":"Space-Time -13.8B-?",            "itemUrl":"Universe",             "startYear":"-13800000000",                                "endYear":"today"                                },
+  {"caption":"Life -4B today",                 "itemUrl":"Abiogenesis",          "startYear":"-4000000000",                                 "endYear":"today"                                },
+  {"caption":"Dinosaurs -230B -20M",           "itemUrl":"Mesozoic",             "startYear":"-230000000",                                  "endYear":"-20000000"                            },
+  {"caption":"Great Apes -20M -3.5M",          "itemUrl":"Hominidae",            "startYear":"-20000000",                                   "endYear":"-3500000"                             },
+  {"caption":"Homo -3.M -300K",                "itemUrl":"Homo",                 "startYear":"-3500000",                                    "endYear":"-300000"                              },
+  {"caption":"Humans -300K today",             "itemUrl":"Human",                "startYear":"-300000",                                     "endYear":"today"                                },
+  {"caption":"Language -50K",                  "itemUrl":"Language",             "startYear":"-50000",                                      "endYear":"-50000"                               },
+  {"caption":"Writing -3.5K",                  "itemUrl":"History",              "startYear":"-3500",        "startMonth":1, "startDay":1,  "endYear":"today"                                },
+  {"caption":"Last Millenium",                 "itemUrl":"2nd_millennium",       "startYear":"999",          "startMonth":1, "startDay":1,  "endYear":"today"                                },
+  {"caption":"Last Century",                   "itemUrl":"20th_century",         "startYear":"1899",         "startMonth":1, "startDay":1,  "endYear":"today"                                }
+]

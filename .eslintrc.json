@@ -1,0 +1,21 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:@typescript-eslint/recommended",
+    "prettier"
+  ],
+  "overrides": [
+    {
+      "files": ["src/components/workspacepixi/**/*"],
+      "excludedFiles": "*.js"
+    } // I will use prettyfier step by step. keeping it in workspacepixi at the beginning
+  ],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
+}

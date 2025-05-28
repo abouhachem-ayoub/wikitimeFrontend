@@ -1,0 +1,23 @@
+{
+"language": "Français",
+"unit_billion": "Md",
+"unit_million": "M",
+"unit_thousand": "k",
+"source": "source",
+"version": "version",
+
+"account_normal": "Compte normal",
+"account_pro": "Compte Pro",
+"account_teacher": "Compte enseignant",
+"toggle_vh": "Basculer vertical/horizontal",
+"timeview_edition": "Modifier les timeviews",
+"timeview_save": "Sauver la timeview",
+"database_show": "Afficher la base de données",
+"datatable_show": "Afficher le tableau de données",
+"cat_science": "Science",
+"cat_power": "Pouvoir",
+"cat_culture": "Culture",
+"cat_trade": "Commerce",
+"cat_soul": "Âme",
+"settings": "Paramètres"
+}

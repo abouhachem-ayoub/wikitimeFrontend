@@ -1,0 +1,12 @@
+[
+  {"caption":"Hirst 1965-?",                   "itemUrl":"Damien_Hirst",         "startYear":"1965",         "startMonth":6, "startDay":7,  "endYear":"today"                                },
+  {"caption":"Koons 1955-?",                   "itemUrl":"Jeff_Koons",           "startYear":"1955",         "startMonth":1, "startDay":21, "endYear":"today"                                },
+  {"caption":"Hockney 1937-?",                 "itemUrl":"David_Hockney",        "startYear":"1937",         "startMonth":7, "startDay":9,  "endYear":"today"                                },
+  {"caption":"Banksy 1974-?",                  "itemUrl":"Banksy",               "startYear":"1974",         "startMonth":7, "startDay":28, "endYear":"today"                                },
+  {"caption":"Kara Walker 1969-?",             "itemUrl":"Kara_Walker",          "startYear":"1969",         "startMonth":11,"startDay":26, "endYear":"today"                                },
+  {"caption":"Kehinde Wiley 1977-?",           "itemUrl":"Kehinde_Wiley",        "startYear":"1977",         "startMonth":2, "startDay":28, "endYear":"today"                                },
+  {"caption":"Yoko Ono 1933-?",                "itemUrl":"Yoko_Ono",             "startYear":"1933",         "startMonth":2, "startDay":18, "endYear":"today"                                },
+  {"caption":"Marina Abramovic 1946-?",        "itemUrl":"Marina_Abramovic",     "startYear":"1946",         "startMonth":11,"startDay":30, "endYear":"today"                                },
+  {"caption":"Ai Weiwei 1957-?",               "itemUrl":"Ai_Weiwei",            "startYear":"1957",         "startMonth":5, "startDay":28, "endYear":"today"                                },
+  {"caption":"Kusama 1929-?",                  "itemUrl":"Yayoi_Kusama",         "startYear":"1929",         "startMonth":3, "startDay":22, "endYear":"today"                                }
+]

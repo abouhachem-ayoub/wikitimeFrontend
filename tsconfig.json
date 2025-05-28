@@ -1,0 +1,44 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "jsx": "react-jsx", // or "react-jsx" for React 17+
+    "moduleResolution": "Node",
+    "allowJs": true, // Allows importing .jsx files into .tsx and vice versa
+    "checkJs": false,
+    "baseUrl": "./src", // Optional: For cleaner imports
+    "paths": {
+      "@/*": ["src/*"],
+      "@components/*": ["src/components/*"],
+      "@utils/*": ["src/utils/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@types/*": ["src/types/*"],
+      "@contexts/*": ["src/contexts/*"],
+      "@config/*": ["src/config/*"],
+      "@modules/*": ["src/modules/*"]
+    },
+    "lib": [
+      "es2023",
+      "dom"
+    ],
+    "esModuleInterop": true,
+    "strict": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "types": [
+      "node",
+      "react",
+      "react-dom",
+      "vite/client"
+    ],
+    "resolveJsonModule": true,
+    "allowImportingTsExtensions": true,
+    "noEmit": true,
+  },
+  "include": [
+    "src",
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "src/**/*.d.ts"],
+  "exclude": ["node_modules", "dist"]
+}

@@ -1,0 +1,91 @@
+
+.workspace-container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  padding-top: 5px;
+  margin: 0; padding: 0;
+}
+
+.workspace-canvas {
+  width: 100%; height: 100%;
+  display: block;
+}
+.workspace-background {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  //background: linear-gradient(to bottom, var(--color-WSbackground), #BFBFBF);//background-color: var(--color-WSbackground);
+  background: linear-gradient(to bottom, var(--color-WSbackground) 0%, var(--color-WSbackground) 25%,  var(--color-WSbackgrounddark) 100%);
+  object-fit: cover;
+  z-index: 1; // cosmos behind
+}
+.workspace-content {
+  position: relative;
+  z-index: 2; // chart above
+}
+
+@media (min-width: 781px){
+  html {--max-width: 80vw;}
+  .spacevideo #app {max-height: 800px;height: 80vh;}
+  .content {max-height: calc(80vh - 65px);}
+}
+
+// chartViews
+.eCharts-container {
+  margin:0;
+  padding: 0;
+  height: var(--value-chartHeight);
+  /*
+  width: 100%;
+  overflow-x:auto;
+  overflow-y:hidden;
+  */
+}
+
+// timeviews--------------------------------------------------------
+.timeview_container {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 8px;
+  padding: 5px;
+  //AEFF should be transparent ???
+  background-color: var(--color-WSbackground);
+  overflow: hidden; // Prevents shadows in timeview_buttons overflowing out of their container
+}
+.timeview_buttons {
+  display: flex; /* Use flexbox for centering */
+  align-items: center; /* Center vertically */
+  justify-content: center; /* Center horizontally */
+  text-align: center;
+  text-decoration: none;
+
+  white-space: nowrap;      // Prevents text from wrapping to the next line
+  overflow: hidden;         // Hides any overflowing text
+
+  border-radius: 5px;
+  //margin-left: 5px;
+  //margin-right: 5px;
+  height: 25px;
+  //border: 1px solid;
+  border: none;
+
+  height: 25px;
+  border-radius: 5px;
+  padding: 5px 5px;
+
+  box-shadow: -4px -4px 4px 0px #fff9, -4px -4px 4px 0px #fff9,4px 4px 4px 0px #0002, 4px 4px 4px 0px #0001;
+  //box-shadow: -7px -7px 20px 0px #fff9, -4px -4px 5px 0px #fff9,7px 7px 20px 0px #0002, 4px 4px 5px 0px #0001;
+  transition: transform 0.2s;
+  &:hover {
+    cursor: pointer;
+    box-shadow: 4px 4px 6px 0 rgba(255, 255, 255, 0.5),-4px -4px 6px 0 rgba(116, 125, 136, 0.5),inset -4px -4px 6px 0 rgba(255, 255, 255, 0.2),inset 4px 4px 6px 0 rgba(0, 0, 0, 0.4);
+  }
+}
+.timeview_buttons:hover {
+//  transform: scale(1.05);
+  border: var(--color-timeviewButtonBorder); /* Add border */
+}

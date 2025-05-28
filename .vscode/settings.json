@@ -1,0 +1,52 @@
+{
+  "todo-tree.filtering.excludeGlobs": ["**/*.md", "**/node_modules/**", "**/bower_components/**", "**/dist/**", "**/build/**", "**/.vscode/**", "**/.github/**", "**/_output/**", "**/.next/**"],
+  "todo-tree.filtering.includeGlobs": ["**/*.js", "**/*.jsx", "**/*.ts", "**/*.tsx", "**/*.html", "**/*.php", "**/*.css", "**/*.scss"],
+  "todo-tree.general.showActivityBarBadge": true,
+  "todo-tree.tree.hideTreeWhenEmpty": true,
+  "todo-tree.general.tagGroups": {},
+  "todo-tree.filtering.scopes": [],
+  "todo-tree.highlights.foregroundColourScheme": ["white","black"],
+  "todo-tree.highlights.defaultHighlight": {"foreground": "white","background": "black","type": "text"},
+  "todo-tree.general.tags": ["BUG","IDEA","#region","#endregion","TODOnow","TODOsoon","TODOlater","TODOtbd","DEVChart", "DEVWorkspaceBackground", "DEVWikipedia", "DEVTimeline"],
+  "todo-tree.highlights.customHighlight": {
+    "#region":               {"icon": "gear" ,"foreground": "#3d3d3a","background": "#1f1f1f","type": "title"},
+    "#endregion":            {"icon": "gear" ,"foreground": "#3d3d3a","background": "#1f1f1f","type": "title"},
+    "BUG":                   {"icon": "bug"  ,"foreground": "white","background": "#660f0f","type": "line"},
+    "IDEA":                  {"icon": "x"    ,"foreground": "white","background": "#27813d","type": "line"},
+    "TODOnow":               {"icon": "tools","foreground": "white","background": "#ff0000","type": "line"},
+    "TODOsoon":              {"icon": "tools","foreground": "black","background": "#ffffff","type": "line"},
+    "TODOlater":             {"icon": "tools","foreground": "white","background": "#0000ff","type": "line"},
+    "TODOtbd":               {"icon": "tools","foreground": "black","background": "#8b940a","type": "line"},
+    "DEVChart":              {"icon": "tools","foreground": "white","background": "#0000ff","type": "line"},
+    "DEVWorkspaceBackground":{"icon": "tools","foreground": "black","background": "#ffffff","type": "line"},
+    "DEVWikipedia":          {"icon": "tools","foreground": "white","background": "#ff0000","type": "line"},
+    "DEVTimeline":           {"icon": "tools","foreground": "black","background": "#00ff00","type": "line"}
+  },
+
+  "maptz.regionfolder": {
+    "regionStart": "#region",
+    "regionEnd": "#endregion",
+    "foldAllRegionsOnOpen": true,
+    "unfoldAllRegionsOnClose": true
+  },
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#2f7c47",
+    "activityBar.background": "#2f7c47",
+    "activityBar.foreground": "#e7e7e7",
+    "activityBar.inactiveForeground": "#e7e7e799",
+    "activityBarBadge.background": "#422c74",
+    "activityBarBadge.foreground": "#e7e7e7",
+    "commandCenter.border": "#e7e7e799",
+    "sash.hoverBorder": "#2f7c47",
+    "statusBar.background": "#215732",
+    "statusBar.foreground": "#e7e7e7",
+    "statusBarItem.hoverBackground": "#2f7c47",
+    "statusBarItem.remoteBackground": "#215732",
+    "statusBarItem.remoteForeground": "#e7e7e7",
+    "titleBar.activeBackground": "#215732",
+    "titleBar.activeForeground": "#e7e7e7",
+    "titleBar.inactiveBackground": "#21573299",
+    "titleBar.inactiveForeground": "#e7e7e799"
+  },
+  "peacock.color": "#215732"
+}

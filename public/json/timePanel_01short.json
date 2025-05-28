@@ -1,0 +1,22 @@
+[
+  {"caption":"test -1B today",                 "itemUrl":"Abiogenesis",          "startYear":"-1000000000",                                 "endYear":"today"                                },
+  {"caption":"Dinosaurs -230B -20M",           "itemUrl":"Mesozoic",             "startYear":"-230000000",                                  "endYear":"-20000000"                            },
+  {"caption":"Great Apes -20M -3.5M",          "itemUrl":"Hominidae",            "startYear":"-20000000",                                   "endYear":"-3500000"                             },
+  {"caption":"Homo -3.M -300K",                "itemUrl":"Homo",                 "startYear":"-3500000",                                    "endYear":"-300000"                              },
+  {"caption":"Humans -300K today",             "itemUrl":"Human",                "startYear":"-300000",                                     "endYear":"today"                                },
+  {"caption":"Language -50K",                  "itemUrl":"Language",             "startYear":"-50000",                                      "endYear":"-50000"                               },
+  {"caption":"Writing -3.5K",                  "itemUrl":"History",              "startYear":"-3500",        "startMonth":1, "startDay":1,  "endYear":"-3500"      ,"endMonth":6, "endDay":30},
+  {"caption":"Test -500 +500",                 "itemUrl":"Universe",             "startYear":"-500",         "startMonth":1, "startDay":1,  "endYear":"500"        ,"endMonth":6, "endDay":30},
+  {"caption":"Test 1950-2050",                 "itemUrl":"Vincent_van_Gogh",     "startYear":"1950",         "startMonth":1, "startDay":1,  "endYear":"2050"       ,"endMonth":12,"endDay":31},
+  {"caption":"Last Millenium",                 "itemUrl":"2nd_millennium",       "startYear":"999",          "startMonth":1, "startDay":1,  "endYear":"today"                                },
+  {"caption":"Last Century",                   "itemUrl":"20th_century",         "startYear":"1899",         "startMonth":1, "startDay":1,  "endYear":"today"                                },
+  {"caption":"Roosevelt 1882-1945",            "itemUrl":"Franklin_D._Roosevelt","startYear":"1882",         "startMonth":1, "startDay":30, "endYear":"1945"       ,"endMonth":4, "endDay":12},
+  {"caption":"Einstein 1879-1955",             "itemUrl":"Albert_Einstein",      "startYear":"1879",         "startMonth":3, "startDay":14, "endYear":"1955"       ,"endMonth":4, "endDay":18},
+  {"caption":"Bohr 1885-1962",                 "itemUrl":"Niels_Bohr",           "startYear":"1885",         "startMonth":10, "startDay":7, "endYear":"1962"       ,"endMonth":11,"endDay":18},
+  {"caption":"Oppenheimer 1904-1967",          "itemUrl":"J._Robert_Oppenheimer","startYear":"1904",         "startMonth":4, "startDay":22, "endYear":"1967"       ,"endMonth":2, "endDay":18},
+  {"caption":"Picasso 1881-1973",              "itemUrl":"Pablo_Picasso",        "startYear":"1881",         "startMonth":10,"startDay":25, "endYear":"1973"       ,"endMonth":4, "endDay":8 },
+  {"caption":"Matisse 1869-1954",              "itemUrl":"Henri_Matisse",        "startYear":"1869",         "startMonth":12,"startDay":31, "endYear":"1954"       ,"endMonth":11,"endDay":3 },
+  {"caption":"Kandinsky 1866-1944",            "itemUrl":"Wassily_Kandinsky",    "startYear":"1866",         "startMonth":12,"startDay":16, "endYear":"1944"       ,"endMonth":12,"endDay":13},
+  {"caption":"Klee 1879-1940",                 "itemUrl":"Paul_Klee",            "startYear":"1879",         "startMonth":12,"startDay":18, "endYear":"1940"       ,"endMonth":6, "endDay":29},
+  {"caption":"Chagall 1887-1985",              "itemUrl":"Marc_Chagall",         "startYear":"1887",         "startMonth":7, "startDay":7,  "endYear":"1985"       ,"endMonth":3, "endDay":28}
+]

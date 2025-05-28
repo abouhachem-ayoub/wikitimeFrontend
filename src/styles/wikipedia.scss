@@ -1,0 +1,170 @@
+//wikipedia page-------------------------------------------------------
+.wikipedia {
+	height: 100%;
+	position: relative;
+	flex-grow: 1;
+	//background-color: var(--color-IPbackground);
+
+	.article-content {
+		overflow: auto;
+		//background-color: var(--color-IPbackground);
+		padding: 0.8rem 1.5rem 0.8rem 1.5rem; // Add some padding to prevent content from sticking to edges
+		position: relative;
+		height: calc(100% - var(--value-IPNavbarSize)); // TODOsoon refactor?
+		font-size: 1rem;
+		line-height: 1.6;
+		font-family: sans-serif;
+
+		h2 {
+			font-size: 150%;
+			font-weight: normal;
+			font-family: 'Linux Libertine', 'Georgia', 'Times', 'Source Serif Pro', serif;
+		}
+
+		h3,
+		h4 {
+			font-size: inherit;
+			font-weight: bold;
+		}
+
+		.image-content {
+			display: flex;
+			flex-wrap: wrap;
+			margin: 10px 0 30px 0;
+			gap: 5px;
+			font-size: smaller;//AEFFsize
+      text-align: center;
+			justify-content: center;
+			align-content: center;
+			align-items: center;
+      //			.trow {
+      //				display: flex;
+      //				justify-content: center;
+      //				height: fit-content;
+      //			}
+		}
+
+		.text-content-title {
+      inset: 0; //margin-top: 10px;
+			font-family: 'Linux Libertine', 'Georgia', 'Times', 'Source Serif Pro', serif;
+			font-weight: normal;
+			font-size: 1.8em;
+      //background-color: rgb(250, 230, 187);
+		}
+		.text-content {
+      //background-color: rgb(253, 227, 169); //AEFFcolor
+			p {margin: 0.1em 0 0.2em 0}
+			ul {
+        list-style-type: disc;
+        padding-left: 20px; /* Adjust this value to control the indentation */
+        margin-left: 0;     /* Remove any left margin */
+			}
+      /*
+      li {
+				ul {margin-left: 1.6em}
+			}
+      */
+
+      ol { //Adjust the padding and margin for ordered lists
+        padding-left: 20px;
+        margin-left: 0;
+      }
+		}
+    
+
+	}
+
+	.mw-heading {
+		padding-top: 10px;
+	}
+
+//wikipedia iframe--------------------------------------------------------
+	.iframe_content {
+		width: 100%;
+		height: calc(100% - var(--value-IPNavbarSize)); // TODOsoon refactor?
+		border: none;
+		position: relative;
+	}
+}
+
+a {
+  &.wp-in-progress {
+    background: rgba(255, 0, 0, 0.1);
+    color: blue;
+    text-decoration: underline;
+  }
+
+  &.wp-detected {
+    background: rgba(0, 0, 255, 0.2);
+    color: blue;
+    text-decoration: underline;
+  }
+
+  &.wp-not-detected {
+    color: blue;
+    text-decoration: underline;
+  }
+}
+
+
+//navbar--------------------------------------------------------
+.content-provider-navbar {
+  min-height: var(--value-TBSize);
+  max-height: var(--value-TBSize);
+  width: 100%;
+
+  padding-top: 5px;
+	margin: 0;
+	gap: 25px;
+  background-color: var(--color-IPNavbar);
+  //	overflow: hidden;
+	//position: relative;
+
+  display: flex;
+  flex-direction: row;
+	align-items: center;
+  justify-content: center;
+}
+.query-search-active {
+  min-height: var(--value-TBSize);
+  max-height: var(--value-TBSize);
+  width: 100%;
+
+  padding-top: 5px;
+	margin: 0;
+	gap: 25px;
+  background-color: var(--color-IPNavbar);
+}
+
+//Search Results--------------------------------------------------------
+.query-search-container {
+  gap: 5px;
+  padding: 5px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  flex-wrap: wrap; // Ensure elements wrap to the next line
+  background-color: aqua;
+  //TODOnow: bug doesn't row-wrap
+}
+.query-search-button {
+  border-color: black;
+  background-color: var(--color-WSbackground);
+  width: 250px;
+  height: 53px;
+  border-style: solid; border-radius: 10px; 
+  border-color: var(--color-WSbackgrounddark); border-width: 2px;
+  overflow: hidden;
+  &:hover {
+    cursor: pointer;
+    background-color: var(--color-WSbackgrounddark);
+  }
+}
+.query-search-title {
+  font-size: 15px;
+  font-weight: bold;
+}
+.query-search-subtitle {
+  font-size: smaller;
+}

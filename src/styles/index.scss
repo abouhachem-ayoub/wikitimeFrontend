@@ -1,0 +1,53 @@
+@use 'custom-properties';
+@use 'debug';
+@use 'infopanel';
+@use 'toolbar';
+@use 'wikipedia';
+@use 'workspace';
+@use 'workspaceuniverse';
+@use 'pixi';
+
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+*,
+*:before,
+*:after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    user-select: none; // Prevent text selection
+    outline: none; // Remove the blue frame (outline)
+}
+
+.allow-selection,
+.allow-selection * {
+  user-select: text !important;
+}
+
+:root {
+    font-size: 78.5%;
+}
+
+body {
+    font-family: "Montserrat", sans-serif;
+    text-rendering: optimizeLegibility;
+}
+
+a {
+	text-decoration: none;
+}
+
+// AEFF to recheck
+button {
+	border: none;
+	outline: none;
+}
+
+.canvas {
+  width: 100%;
+	height: 100%;
+	display: flex;
+  flex-direction: var(--value-TBflex);
+	overflow: hidden;
+  /*
+  */
+}

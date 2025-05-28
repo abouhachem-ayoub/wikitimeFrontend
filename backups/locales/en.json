@@ -1,0 +1,23 @@
+{
+  "language": "English",
+  "unit_billion": "B",
+  "unit_million": "M",
+  "unit_thousand": "K",
+  "source": "source",
+  "version": "version",
+  
+  "account_normal": "Normal Account",
+  "account_pro": "Pro Account",
+  "account_teacher": "Teacher Account",
+  "toggle_vh": "Toggle vertical/horizontal",
+  "timeview_edition": "Edit timeviews",
+  "timeview_save": "Save timeview",
+  "database_show": "Show database",
+  "datatable_show": "Show data table",
+  "cat_science": "Science",
+  "cat_power": "Power",
+  "cat_culture": "Culture",
+  "cat_trade": "Trade",
+  "cat_soul": "Soul",
+  "settings": "Settings"
+}

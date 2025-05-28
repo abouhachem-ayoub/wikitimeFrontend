@@ -1,0 +1,16 @@
+// top debug buttons--------------------------------------------------------
+.debug_container {
+  margin: 0; padding: 0;
+  background-color: rgb(218, 171, 171);
+  display: flex; flex-wrap: nowrap; align-items: center; justify-content: center;
+  gap: 10px;
+}
+.debug_buttons {
+  &.active {background-color: rgb(255, 0, 200)}
+  &.inactive {background-color: rgb(63, 1, 50);color:white}
+  &:hover {
+    background-color: rgb(255, 109, 255);
+    color: white;
+    cursor: pointer;
+  }
+}

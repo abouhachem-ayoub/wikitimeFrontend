@@ -1,0 +1,6 @@
+https://developer.wikimedia.org/use-content/
+
+
+https://www.mediawiki.org/wiki/Manual:Page_title
+page title (also page name) is the title of a wiki page as stored in the page table and represented by the Title object.
+unique within the wikimedia scope

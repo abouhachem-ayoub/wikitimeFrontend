@@ -1,0 +1,83 @@
+@import 'custom-properties';
+
+.toolbar {
+  z-index: 5; // toolbar above
+  background-color: var(--color-TBBackground);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &.toolbarV {
+    cursor: ew-resize;
+    min-width: var(--value-TBSize);
+    max-width: var(--value-TBSize);
+    flex-direction: column;
+    padding-top: 5px;
+  }
+
+  &.toolbarH {
+    cursor: n-resize;
+    min-height: var(--value-TBSize);
+    max-height: var(--value-TBSize);
+    flex-direction: row;
+    padding-left: 5px;
+  }
+}
+
+.toolbar_btn_container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+	flex-direction: var(--value-TBflexOpp);
+  gap: 10px;
+	//background-color: red;
+  //background-color: transparent;
+}
+
+.toolbar_btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+	background-color: transparent;
+	//background-color: rgb(62, 238, 70);
+
+	.toolbar_icons {
+    min-width: var(--value-TBBtnSize); max-width: var(--value-TBBtnSize);
+    min-height: var(--value-TBBtnSize); max-height: var(--value-TBBtnSize);
+
+		&:hover {
+      cursor: pointer;
+      filter: var(--filter-TBLightBlue);
+		}
+	}
+}
+
+.btntest {
+    min-width: var(--value-TBBtnSize); max-width: var(--value-TBBtnSize);
+    min-height: var(--value-TBBtnSize); max-height: var(--value-TBBtnSize);
+}
+
+.toolbar_btn.disabled {
+	cursor: not-allowed;
+	opacity: 0.2;
+}
+
+.tooltip {
+  position: relative;
+  &.al:hover::after {@include tooltip-styles(-25px,  10%, null)} // above left
+  &.ac:hover::after {@include tooltip-styles(-25px, null, null)} // above centered
+  &.ar:hover::after {@include tooltip-styles(-25px, null,  10%)} // above right
+  &.l:hover::after  {@include tooltip-styles(  3px, 35px, null)} //left
+  &.c:hover::after  {@include tooltip-styles(  3px, null, null)} //centered
+  &.r:hover::after  {@include tooltip-styles(  3px, null, 35px)} //right
+  &.bl:hover::after {@include tooltip-styles( 30px,  10%, null)} // below left
+  &.bc:hover::after {@include tooltip-styles( 30px, null, null)} // below centered
+  &.br:hover::after {@include tooltip-styles( 30px, null,  10%)} // below right
+}
+
+.version {
+	font-size: 10px;
+	color: var(--color-TBText);
+  display: flex; flex-direction: column; align-self: center; 
+  margin: 0; padding: 0;
+}
