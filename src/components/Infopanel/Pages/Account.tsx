@@ -13,21 +13,24 @@ import RegisterForm from '../Account/Register';
   };
   const getUserId = async () => {
     const token = localStorage.getItem("token");
-
+    console.log("Token in getUserId:", token);
+  
     if (token) {
       try {
-        const response = await fetch(import.meta.env.VITE_API_BASE_URL+"api/auth/decodetoken", {
+        const response = await fetch(import.meta.env.VITE_API_BASE_URL + "api/auth/decodetoken", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ token }),
         });
-
+  
         const data = await response.json();
         if (!response.ok) {
+          console.error("Error decoding token:", data.message);
           setUserId('');
         } else {
+          console.log("Decoded user ID:", data.user_id);
           setUserId(data.user_id);
         }
       } catch (error) {
@@ -38,9 +41,9 @@ import RegisterForm from '../Account/Register';
       setUserId('');
     }
   };
+      
 
   useEffect(() => {
-
     getUserId();
   }, [token]);
 
@@ -48,6 +51,9 @@ import RegisterForm from '../Account/Register';
     const handleStorageChange = () => {
       const newToken = localStorage.getItem("token");
       setToken(newToken);
+      if (newToken) {
+        getUserId(); // Ensure userId is updated immediately
+      }
     };
 
     window.addEventListener("storage", handleStorageChange);

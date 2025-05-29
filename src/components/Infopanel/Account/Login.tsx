@@ -111,6 +111,7 @@ const Login: React.FC = () => {
       localStorage.setItem("token", data.token);
       window.dispatchEvent(new Event("storage"));
       toast.success("Login successful!");
+      
     } catch (error: any) {
       toast.error(error.message || "An error occurred");
     }
