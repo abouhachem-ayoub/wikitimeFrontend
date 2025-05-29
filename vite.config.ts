@@ -7,7 +7,7 @@ import react from "@vitejs/plugin-react";
 export default defineConfig({
   plugins: [react(), glsl(), tsconfigPaths()],
   publicDir: "public",
-  base: "/wikit/",  // Ensure this matches your repository name
+  base: "/",  // Ensure this matches your repository name
   optimizeDeps: {
     include: ["simplex-noise"],
   },
