@@ -7,14 +7,12 @@ import RegisterForm from '../Account/Register';
   const [isRegistering, setIsRegistering] = useState(true);
   const [userId, setUserId] = useState<string>('');
   const [token, setToken] = useState<string | null>(localStorage.getItem("token"));
-  const [login,setlogin] = useState<boolean>(true);
   const toggleForm = () => {
     setIsRegistering(!isRegistering);
   };
   const getUserId = async () => {
     const token = localStorage.getItem("token");
     console.log("Token in getUserId:", token);
-  
     if (token) {
       try {
         const response = await fetch(import.meta.env.VITE_API_BASE_URL + "api/auth/decodetoken", {
@@ -62,9 +60,7 @@ import RegisterForm from '../Account/Register';
     };
   }, []);
 
-  const togglelogin = () =>{
-    setlogin(!login);
-  }
+
 
   const logout = async()=>{
     await localStorage.removeItem('token');
@@ -76,10 +72,12 @@ import RegisterForm from '../Account/Register';
       {!userId && (<div><button onClick={toggleForm}>Login</button>
         <button onClick={toggleForm}>Sign-Up</button></div>)}
       {!userId ? (isRegistering ? <Login />:<RegisterForm toggleForm = {toggleForm}/>) : 
-      <div>
+      (<div>
         <button onClick={logout}>Sign out</button>
         <ProfilePage params={{ user_id: userId }} />
-        </div>}
+        </div>
+      )  
+      }
     </div>
   );
 };
