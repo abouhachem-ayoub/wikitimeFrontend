@@ -5,7 +5,7 @@ import RegisterForm from '../Account/Register';
 import { useUser } from 'contexts/UserContext';
   const Account: React.FC = () => {
   const [isRegistering, setIsRegistering] = useState(true);
-  const { userId } = useUser();
+    const [userId,setUserId] = useState('');
   const [token, setToken] = useState<string | null>(localStorage.getItem("token"));
   const toggleForm = () => {
     setIsRegistering(!isRegistering);
@@ -36,8 +36,10 @@ import { useUser } from 'contexts/UserContext';
         const data = await response.json();
         if (!response.ok) {
           console.error("Error decoding token:", data.message);
+          setUserId('');
         } else {
           console.log("Decoded user ID:", data.user_id);
+          setUserId(data.user_id);
         }
       } catch (error) {
         console.error("Error fetching user ID:", error);
@@ -47,7 +49,7 @@ import { useUser } from 'contexts/UserContext';
   };
       
 
-  useEffect(() => {
+  /*useEffect(() => {
     getUserId();
   }, [token]);
 
@@ -67,7 +69,7 @@ import { useUser } from 'contexts/UserContext';
   }, []);
 
 
-
+*/
 //logout to be changed if the context idea works
   const logout = async()=>{
     await localStorage.removeItem('token');
