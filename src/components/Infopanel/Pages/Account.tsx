@@ -15,6 +15,7 @@ import { useUser } from 'contexts/UserContext';
   useEffect(() => {
     if (user && user.userId) {
       setUserId(user.userId);
+      setIsRegistering(false);
     } else {
       setUserId(null);
     }
@@ -77,7 +78,8 @@ useEffect(() => {
     <div>
       {!userId && (<div><button onClick={toggleForm}>Login</button>
         <button onClick={toggleForm}>Sign-Up</button></div>)}
-      {!userId ? (isRegistering ? <Login />:<RegisterForm toggleForm = {toggleForm}/>) : 
+      {!userId && (isRegistering ? <Login />:<RegisterForm toggleForm = {toggleForm}/>)}
+      {userId &&
       (<div>
         <button onClick={logout}>Sign out</button>
         <ProfilePage params={{ user_id: userId }} />
