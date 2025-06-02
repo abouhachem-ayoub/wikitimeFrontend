@@ -275,7 +275,6 @@ catch(error){
           features.
           <br />
           <a
-            href="api/auth/verify-email"
             className="text-blue-500 hover:underline"
             onClick={(e) => {
               e.preventDefault();
@@ -293,7 +292,6 @@ catch(error){
                     alert("Verification email resent. Please check your inbox.");
                   } else {
                     alert("Failed to send verification email.");
-                    localStorage.setItem('response',res.statusText)
                   }
                 })
                 .catch((err) => localStorage.setItem('error',err.message));
