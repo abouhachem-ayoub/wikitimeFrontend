@@ -128,9 +128,9 @@ catch(error){
         setUser(data);
         console.log(data);
         setFormData({...data,phone:phone});
-      } catch (error) {
+      } catch (error:Error|any) {
         console.error(error);
-        localStorage.setItem('error',JSON.stringify(error));
+        localStorage.setItem('error',error.message);
         setError("An error occurred while fetching user data");
       }
     };
