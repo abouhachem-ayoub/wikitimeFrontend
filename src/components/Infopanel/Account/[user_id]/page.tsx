@@ -130,7 +130,7 @@ catch(error){
         setFormData({...data,phone:phone});
       } catch (error:Error|any) {
         console.error(error);
-        localStorage.setItem('error',error.message+import.meta.env.VITE_API_BASE_URL+`user/${params.user_id}`);
+        localStorage.setItem('error',error.message+import.meta.env.VITE_API_BASE_URL+`api/user/${params.user_id}`);
         setError("An error occurred while fetching user data");
       }
     };
