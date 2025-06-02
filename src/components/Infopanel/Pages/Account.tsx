@@ -17,7 +17,6 @@ import { useUser } from 'contexts/UserContext';
       setUserId(user.userId);
       console.log(user);
       console.log(user.userId);
-      setIsRegistering(false);
     } else {
       setUserId(null);
     }

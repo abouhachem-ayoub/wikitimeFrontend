@@ -213,7 +213,8 @@ const RegisterForm = ({ toggleForm }: { toggleForm: () => void }) => {
                       }
                         localStorage.setItem("token", data.token);
                         window.dispatchEvent(new Event("storage"));
-                      toast.success("Registration successful! You can now log in.");
+                        toggleForm();
+                        toast.success("Registration successful! You can now log in.");
 
                       setFormData({
                         email:'',
