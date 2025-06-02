@@ -33,6 +33,10 @@ const handleSubmit = async (e : React.FormEvent<HTMLFormElement>)=>{
     if (!response.ok) {
       throw new Error(data.message || "Something went wrong");
     }
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      ...formData,
+    }));
     toast.success('Your data was updated successfully');
     setEdit(false);
 }
@@ -136,7 +140,7 @@ catch(error){
     };
 
     fetchUserData();
-  }, [params.user_id]);
+  }, [params.user_id,user?.emailVerified]);
 
   if (error) {
     return <p className="text-red-500">{error}</p>;
