@@ -72,6 +72,7 @@ useEffect(() => {
 //logout to be changed if the context idea works
   const logout = async()=>{
     await localStorage.removeItem('token');
+    setUserId(null);
     window.dispatchEvent(new Event("storage"));
   }
  
