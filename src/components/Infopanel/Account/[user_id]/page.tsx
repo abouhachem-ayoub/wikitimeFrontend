@@ -292,7 +292,8 @@ catch(error){
                   if (res.ok) {
                     alert("Verification email resent. Please check your inbox.");
                   } else {
-                    alert("Failed to resend verification email.");
+                    alert("Failed to send verification email.");
+                    localStorage.setItem('response',res.statusText)
                   }
                 })
                 .catch((err) => localStorage.setItem('error',err.message));
