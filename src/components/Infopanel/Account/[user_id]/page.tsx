@@ -3,7 +3,7 @@ import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import { FiEdit } from "react-icons/fi";
 import toast,{Toaster} from "react-hot-toast";
-const ProfilePage = ({ params }: { params: { user_id: string } }) => {
+const ProfilePage = ({ params }: { params: { user_id: string }}) => {
   const [user, setUser] = useState<{ email: string; emailVerified: boolean,firstName:string,lastName:string,pseudo:string,password:string,phone:string} | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [edit,setEdit] = useState(false);  

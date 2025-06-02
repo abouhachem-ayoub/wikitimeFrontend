@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import Login from '../Account/Login';
 import ProfilePage from '../Account/[user_id]/page';
 import RegisterForm from '../Account/Register';
-
+import { useUser } from 'contexts/UserContext';
   const Account: React.FC = () => {
   const [isRegistering, setIsRegistering] = useState(true);
-  const [userId, setUserId] = useState<string>('');
+  const { userId } = useUser();
   const [token, setToken] = useState<string | null>(localStorage.getItem("token"));
   const toggleForm = () => {
     setIsRegistering(!isRegistering);
@@ -26,17 +26,13 @@ import RegisterForm from '../Account/Register';
         const data = await response.json();
         if (!response.ok) {
           console.error("Error decoding token:", data.message);
-          setUserId('');
         } else {
           console.log("Decoded user ID:", data.user_id);
-          setUserId(data.user_id);
         }
       } catch (error) {
         console.error("Error fetching user ID:", error);
-        setUserId('');
       }
     } else {
-      setUserId('');
     }
   };
       

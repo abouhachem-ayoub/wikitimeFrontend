@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import toast, { Toaster } from 'react-hot-toast';
+import { useUser } from 'contexts/UserContext';
 
 const Login: React.FC = () => {
   const [forgottenPassword, setForgottenPassword] = useState(false);
@@ -9,6 +10,7 @@ const Login: React.FC = () => {
   const [type, setType] = useState('password');
   const params = new URLSearchParams(window.location.search);
   const resetpasswordtoken = params.get('token');
+  const { setUserId } = useUser();
   useEffect(() => {
     // Reset states on page reload
     setForgottenPassword(false);
@@ -110,6 +112,7 @@ const Login: React.FC = () => {
       }
       localStorage.setItem("token", data.token);
       window.dispatchEvent(new Event("storage"));
+      setUserId(data.user_id); // Set userId in context
       toast.success("Login successful!");
       
     } catch (error: any) {
