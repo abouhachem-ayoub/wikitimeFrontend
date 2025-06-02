@@ -10,9 +10,19 @@ import { useUser } from 'contexts/UserContext';
   const toggleForm = () => {
     setIsRegistering(!isRegistering);
   };
- /* const getUserId = async () => {
-    const token = localStorage.getItem("token");
-    console.log("Token in getUserId:", token);
+  const getTokenFromCookies = () => {
+    const match = document.cookie.match(/(^| )token=([^;]+)/);
+    return match ? match[2] : null;
+  };
+  
+  useEffect(() => {
+    const token = getTokenFromCookies();
+    if (token) {
+      setToken(token);
+      getUserId();
+    }
+  }, []);
+  const getUserId = async () => {
     if (token) {
       try {
         const response = await fetch(import.meta.env.VITE_API_BASE_URL + "api/auth/decodetoken", {
@@ -64,7 +74,7 @@ import { useUser } from 'contexts/UserContext';
     await localStorage.removeItem('token');
     window.dispatchEvent(new Event("storage"));
   }
-
+ 
   return (
     <div>
       {!userId && (<div><button onClick={toggleForm}>Login</button>
