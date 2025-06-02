@@ -110,6 +110,7 @@ catch(error){
             return;
           }
       try {
+        localStorage.setItem('fromuserId',params.user_id)
         const response = await fetch(import.meta.env.VITE_API_BASE_URL+`user/${params.user_id}`, {
             headers: {
               Authorization: `Bearer ${token}`, // Send the token in the Authorization header
