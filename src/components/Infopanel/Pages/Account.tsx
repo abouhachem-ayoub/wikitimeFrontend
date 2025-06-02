@@ -10,7 +10,7 @@ import { useUser } from 'contexts/UserContext';
   const toggleForm = () => {
     setIsRegistering(!isRegistering);
   };
-  const getUserId = async () => {
+ /* const getUserId = async () => {
     const token = localStorage.getItem("token");
     console.log("Token in getUserId:", token);
     if (token) {
@@ -57,7 +57,9 @@ import { useUser } from 'contexts/UserContext';
   }, []);
 
 
+*/
 
+//logout to be changed if the context idea works
   const logout = async()=>{
     await localStorage.removeItem('token');
     window.dispatchEvent(new Event("storage"));
