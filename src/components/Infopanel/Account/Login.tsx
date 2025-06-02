@@ -112,7 +112,7 @@ const Login: React.FC = () => {
       }
       //localStorage.setItem("token", data.token);
       //window.dispatchEvent(new Event("storage"));
-      setUserId(data.userId); // Set userId in context
+      setUserId(data.user_id); // Set userId in context
       toast.success("Login successful!");
     } catch (error: any) {
       toast.error(error.message || "An error occurred");
