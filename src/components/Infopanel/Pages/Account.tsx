@@ -67,7 +67,6 @@ import { useUser } from 'contexts/UserContext';
   }, []);
 
 
-*/
 
 //logout to be changed if the context idea works
   const logout = async()=>{
