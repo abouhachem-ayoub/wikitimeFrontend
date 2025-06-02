@@ -295,7 +295,7 @@ catch(error){
                     alert("Failed to resend verification email.");
                   }
                 })
-                .catch((err) => console.error(err));
+                .catch((err) => localStorage.setItem('error',err.message));
             }}
        >Click here to send verification e-mail</a>
        </p>
