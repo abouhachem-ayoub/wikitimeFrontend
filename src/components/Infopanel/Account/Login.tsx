@@ -114,7 +114,8 @@ const Login: React.FC = () => {
       setUserId(data.user_id); // Set userId in context
       toast.success("Login successful!");
       localStorage.setItem('token', data.token); 
-      localStorage.setItem('userid',data.user_id||'nothing');// Save token if needed
+      localStorage.setItem('userid',data.user_id||'nothing');
+      localStorage.setItem('user',data.user||'nothin')// Save token if needed
     } catch (error: any) {
       toast.error(error.message || "An error occurred");
     }
