@@ -114,8 +114,6 @@ const Login: React.FC = () => {
       //window.dispatchEvent(new Event("storage"));
       setUserId(data.user_id); // Set userId in context
       toast.success("Login successful!");
-      const event = new CustomEvent('userLoggedIn', { detail: { userId: data.user_id } });
-      window.dispatchEvent(event);
     } catch (error: any) {
       toast.error(error.message || "An error occurred");
     }

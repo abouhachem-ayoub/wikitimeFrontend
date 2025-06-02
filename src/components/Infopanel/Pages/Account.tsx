@@ -5,23 +5,21 @@ import RegisterForm from '../Account/Register';
 import { useUser } from 'contexts/UserContext';
   const Account: React.FC = () => {
   const [isRegistering, setIsRegistering] = useState(true);
-    const [userId,setUserId] = useState('');
-  const [token, setToken] = useState<string | null>(localStorage.getItem("token"));
+  //const [userId,setUserId] = useState('');
+  //const [token, setToken] = useState<string | null>(localStorage.getItem("token"));
+  const [userId, setUserId] = useState<string | null>(null);
+  const user = useUser();
   const toggleForm = () => {
     setIsRegistering(!isRegistering);
   };
-  const getTokenFromCookies = () => {
-    const match = document.cookie.match(/(^| )token=([^;]+)/);
-    return match ? match[2] : null;
-  };
-  
   useEffect(() => {
-    const token = getTokenFromCookies();
-    if (token) {
-      setToken(token);
-      getUserId();
+    if (user && user.userId) {
+      setUserId(user.userId);
+    } else {
+      setUserId(null);
     }
-  }, []);
+  }, [user]);
+/*
   const getUserId = async () => {
     if (token) {
       try {
@@ -47,9 +45,8 @@ import { useUser } from 'contexts/UserContext';
     } else {
     }
   };
-      
-
-  /*useEffect(() => {
+    
+useEffect(() => {
     getUserId();
   }, [token]);
 

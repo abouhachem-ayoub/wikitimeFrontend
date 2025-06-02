@@ -10,6 +10,7 @@ import { TimeLineProvider } from "./contexts/ContextTimeLine";
 import { WikipediaProvider } from "./contexts/ContextWikipedia";
 import App from "./App";
 import { TimePanelProvider } from 'contexts/ContextTimePanel';
+import { UserProvider } from "contexts/UserContext";
 
 import "./styles/index.scss";
 
@@ -25,6 +26,7 @@ createRoot(rootElement).render(
     
     <I18nextProvider i18n={i18n}>
       <AppProvider>
+        <UserProvider>
         <WikipediaProvider>
           <TimeLineProvider>
             <TimePanelProvider>
@@ -34,6 +36,7 @@ createRoot(rootElement).render(
             </TimePanelProvider>
           </TimeLineProvider>
         </WikipediaProvider>
+        </UserProvider>
       </AppProvider>
     </I18nextProvider>
   </StrictMode>

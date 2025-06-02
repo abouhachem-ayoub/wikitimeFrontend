@@ -4,9 +4,7 @@ import Wikitime from "./components/Wikitime";
 const App = (): JSX.Element => {
   return (
     <>
-    <UserProvider>
       <Wikitime />
-    </UserProvider>
     </>
   );
 };
