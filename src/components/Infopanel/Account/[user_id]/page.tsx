@@ -275,6 +275,7 @@ catch(error){
           features.
           <br />
           <a
+            href='#'
             className="text-blue-500 hover:underline"
             onClick={(e) => {
               e.preventDefault();
