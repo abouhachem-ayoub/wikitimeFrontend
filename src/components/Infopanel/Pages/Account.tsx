@@ -15,6 +15,8 @@ import { useUser } from 'contexts/UserContext';
   useEffect(() => {
     if (user && user.userId) {
       setUserId(user.userId);
+      console.log(user);
+      console.log(user.userId);
       setIsRegistering(false);
     } else {
       setUserId(null);
