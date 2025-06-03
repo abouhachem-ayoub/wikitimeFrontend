@@ -265,7 +265,7 @@ const registerwithsocials = async(formData:any)=>{
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({...formData,allowpasswordless:true}),
+        body: JSON.stringify(formData)
     });
     let  data = await response.json();
     if (!response.ok) {
@@ -295,7 +295,7 @@ const registerwithsocials = async(formData:any)=>{
             localStorage.setItem('user',data.user||'nothin')
         }
         catch(error){
-
+                console.log(error)
         }}
     else{
         try{
@@ -319,7 +319,7 @@ const registerwithsocials = async(formData:any)=>{
                     toast.success("Registration successful! You can now log in.");
                     }
         catch(error){
-
+                console.log(error);
         }
         }
             }
