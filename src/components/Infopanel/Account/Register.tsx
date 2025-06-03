@@ -266,7 +266,7 @@ const handlesociallogin= async (authProvider:string) => {
     console.log('result',result);
     console.log('user',user);
     console.log('userid',user.uid);
-    localStorage.setItem('useridfromgoogle',user.uid);
+    localStorage.setItem('useridfromgoogle',JSON.stringify(user));
     setUserId(user.uid);
     const socialFormData = {
         email: user.email || '',
