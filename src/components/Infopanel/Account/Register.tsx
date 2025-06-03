@@ -11,7 +11,7 @@ import GithubLogo from '../../../assets/social-login/github-logo.png'
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore/lite';
 import {getAuth, signInWithPopup, GoogleAuthProvider,FacebookAuthProvider,GithubAuthProvider} from "firebase/auth";
-
+import { useUser } from 'contexts/UserContext';
 const firebaseConfig = {
     apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
     authDomain: import.meta.env.VITE_AUTH_DOMAIN,
@@ -23,7 +23,6 @@ const firebaseConfig = {
   };
   
 const firebaseapp = initializeApp(firebaseConfig);
-const db = getFirestore(firebaseapp);
 const auth = getAuth();
 const defaultFormData = {
     email:'',
@@ -50,7 +49,7 @@ const RegisterForm = ({ toggleForm }: { toggleForm: () => void }) => {
     const [passwordErrorMessage,setPasswordErrorMessage] = useState('');
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-
+    const { setUserId } = useUser(); // Access the context's setUserId function
     useEffect(() => {
         const handler = setTimeout(() => {
             setDebouncedPseudo(pseudo);
@@ -215,7 +214,6 @@ const RegisterForm = ({ toggleForm }: { toggleForm: () => void }) => {
                         window.dispatchEvent(new Event("storage"));
                         toggleForm();
                         toast.success("Registration successful! You can now log in.");
-
                       setFormData({
                         email:'',
                         password:'',
@@ -269,6 +267,7 @@ const handlesociallogin= async (authProvider:string) => {
     console.log('user',user);
     console.log('userid',user.uid);
     localStorage.setItem('useridfromgoogle',user.uid);
+    setUserId(user.uid);
     const socialFormData = {
         email: user.email || '',
         password: '',
