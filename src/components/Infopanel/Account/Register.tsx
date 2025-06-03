@@ -237,24 +237,92 @@ const RegisterForm = ({ toggleForm }: { toggleForm: () => void }) => {
             setLoading(false);
         }
     }
-
+    const checkifsocialemailexists = async (email:any)=>{
+        try {
+            const response = await fetch(import.meta.env.VITE_API_BASE_URL+"api/auth/emailexists", {
+            method: "POST",
+            headers: {
+            "Content-Type": "application/json",
+                },
+            body: JSON.stringify({ email : email }),
+            });
+            const data = await response.json(); 
+            if (data.exists) {
+               return true;
+            } 
+            else {
+                return false;
+            }
+    }
+    catch(error){
+        return 'something went wrong';
+    }}
 const registerwithsocials = async(formData:any)=>{
-    const response = await fetch(import.meta.env.VITE_API_BASE_URL+"api/auth/register", {
+    if(!(await checkifsocialemailexists(formData.email))){
+        try{
+    let response = await fetch(import.meta.env.VITE_API_BASE_URL+"api/auth/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({...formData,allowpasswordless:true}),
     });
-    const data = await response.json();
+    let  data = await response.json();
     if (!response.ok) {
         throw new Error(data.message || "Something went wrong");
       }
         localStorage.setItem("token", data.token);
         window.dispatchEvent(new Event("storage"));
-      toast.success("Registration successful! You can now log in.");
-}
+        toast.success("Registration successful!");
+        response = await fetch(import.meta.env.VITE_API_BASE_URL+"api/auth/login", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({email:formData.email,allowpasswordless:true}),
+        });
+        data = await response.json();
+        if (!response.ok) {
+            throw new Error(data.message || "Something went wrong");
+          }
+            localStorage.setItem("token", data.token);
+            window.dispatchEvent(new Event("storage"));
+            toast.success("Registration successful! You can now log in.");
+            setUserId(data.user_id); // Set userId in context
+            toast.success("Login successful!");
+            localStorage.setItem('token', data.token); 
+            localStorage.setItem('userid',data.user_id||'nothing');
+            localStorage.setItem('user',data.user||'nothin')
+        }
+        catch(error){
 
+        }}
+    else{
+        try{
+                const response = await fetch(import.meta.env.VITE_API_BASE_URL+"api/auth/login", {
+                    method: "POST",
+                    headers: {
+                      "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({email:formData.email,allowpasswordless:true}),
+                });
+                const data = await response.json();
+                if (!response.ok) {
+                    throw new Error(data.message || "Something went wrong");
+                  }
+                    localStorage.setItem("token", data.token);
+                    window.dispatchEvent(new Event("storage"));
+                    setUserId(data.user_id); // Set userId in context
+                    toast.success("Login successful!");
+                    localStorage.setItem('userid',data.user_id||'nothing');
+                    localStorage.setItem('user',data.user||'nothin')
+                    toast.success("Registration successful! You can now log in.");
+                    }
+        catch(error){
+
+        }
+        }
+            }
 const handlesociallogin= async (authProvider:string) => {
     if(authProvider == 'google'){
         const provider = new GoogleAuthProvider();
@@ -265,22 +333,23 @@ const handlesociallogin= async (authProvider:string) => {
     const user = result.user;
     console.log('result',result);
     console.log('user',user);
-    console.log('userid',user.uid);
-    localStorage.setItem('useridfromgoogle',JSON.stringify(user));
-    setUserId(user.uid);
-    const socialFormData = {
-        email: user.email || '',
-        password: '',
-        password2: '',
-        firstName: '',
-        lastName: '',
-        phone: user.phoneNumber || '',
-        pseudo: user.displayName || '',
-      };
-    console.log('token',token);
-    console.log(socialFormData);
-    registerwithsocials(socialFormData);
-  }).catch((error) => {
+    console.log('userid',user.email);
+    //check if email exists in the firestore database
+    //if so than check if its verified and then make it verified
+    //check if phone exists if not replace it with user.phone
+    //if the email is not in the database register the user and then log him in directly
+        const socialFormData = {
+                        email: user.email || '',
+                        password: '',
+                        password2: '',
+                        firstName: '',
+                        lastName: '',
+                        phone: user.phoneNumber || '',
+                        pseudo: user.displayName || '',
+                      };
+                    registerwithsocials(socialFormData);
+                }
+  ).catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
     const email = error.customData.email;
