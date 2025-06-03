@@ -4,7 +4,7 @@ import galaxyMaterialFragmentShader from './galaxyMaterialFragmentShader.glsl';
 import galaxyMaterialVertexShader from './galaxyMaterialVertexShader.glsl';
 import universeMaterialFragmentShader from './universeMaterialFragmentShader.glsl';
 import universeMaterialVertexShader from './universeMaterialVertexShader.glsl';
-
+import { useUser } from 'contexts/UserContext';
 //three installed?
   //import { AdditiveBlending, BufferAttribute, BufferGeometry, CanvasTexture, Color, PerspectiveCamera, Points, RawShaderMaterial, Scene, WebGLRenderer } from 'three';
   //import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
@@ -19,6 +19,7 @@ import universeMaterialVertexShader from './universeMaterialVertexShader.glsl';
 //  import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 
 const BgdGalaxy = ({ workspaceRef }) => {
+  const {userId} = useUser();
   const bigbanganim = false; //AEFFsettings
   const coordCamera = false; //AEFFsettings
   const [cameraPosition, setCameraPosition] = useState({ x: 1, y: 1, z: 1 }); //AEFFsettings
@@ -268,7 +269,7 @@ const BgdGalaxy = ({ workspaceRef }) => {
 
   return (
     <>
-      {coordCamera && (
+      {(coordCamera && userId) && (
       <div className="ThreeGalaxy">
         x: {cameraPosition.x.toFixed(2)}, y: {cameraPosition.y.toFixed(2)}, z: {cameraPosition.z.toFixed(2)}
       </div>

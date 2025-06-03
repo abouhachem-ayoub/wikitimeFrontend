@@ -250,7 +250,8 @@ const BgdCosmos = ({ workspaceRef }: BgdCosmosProps) => {
       </div>
     );
   }
-
+else{
   return <div id="ThreeCosmos" ref={workspaceRef}></div>;
+}
 };
 export default BgdCosmos;
