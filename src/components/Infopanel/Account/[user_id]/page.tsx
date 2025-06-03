@@ -258,7 +258,7 @@ catch(error){
                     <PhoneInput
                         enableSearch={true}
                         country={'us'}
-                        value={phone}
+                        value={user.phone}
                         onChange={handlePhoneChange}
                     />}
                     {!edit && 
