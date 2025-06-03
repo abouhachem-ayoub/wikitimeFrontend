@@ -260,7 +260,7 @@ catch(error){
                         onChange={handlePhoneChange}
                     />}
                     {!edit && 
-                     <p className="non-editable">{user.phone ? (user.phone): ("")}</p>
+                     <p className="non-editable">{(user.phone)}</p>
                   }
                 </div>
                 <button
