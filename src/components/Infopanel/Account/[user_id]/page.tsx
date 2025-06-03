@@ -4,7 +4,7 @@ import 'react-phone-input-2/lib/style.css';
 import { FiEdit } from "react-icons/fi";
 import toast,{Toaster} from "react-hot-toast";
 const ProfilePage = ({ params }: { params: { user_id: string }}) => {
-  const [user, setUser] = useState<{ email: string; emailVerified: boolean,firstName:string,lastName:string,pseudo:string,password:string,phone:string} | null>(null);
+  const [user, setUser] = useState<{ email?: string|undefined; emailVerified?: boolean,firstName:string|undefined,lastName:string|undefined,pseudo:string|undefined,password?:string,phone:string|undefined} | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [edit,setEdit] = useState(false);  
   const [debouncedPseudo, setDebouncedPseudo] = useState('');
@@ -20,7 +20,12 @@ const ProfilePage = ({ params }: { params: { user_id: string }}) => {
   const token = localStorage.getItem('token');
 const handleSubmit = async (e : React.FormEvent<HTMLFormElement>)=>{
   e.preventDefault();
-  try {
+  const previousUser = user;
+  setUser((prevUser) => ({
+    ...prevUser,
+    ...formData,
+  }));
+   try {
     const response = await fetch(import.meta.env.VITE_API_BASE_URL+"api/auth/edituserinfo", {
     method: "POST",
     headers: {
@@ -41,6 +46,7 @@ const handleSubmit = async (e : React.FormEvent<HTMLFormElement>)=>{
     setEdit(false);
 }
 catch(error){
+    setUser(previousUser);
     console.log('this went wrong:',error)
 }
 }
@@ -228,7 +234,7 @@ catch(error){
                         className="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         placeholder="Pseudo"
                         required
-                        value={formData?.pseudo}
+                        value={user.pseudo}
                         onChange={handleInputChange}
                     />
                      {pseudoExists?
@@ -254,7 +260,7 @@ catch(error){
                         onChange={handlePhoneChange}
                     />}
                     {!edit && 
-                     <p className="non-editable">{" + "+formData.phone}</p>
+                     <p className="non-editable">{" + "+user.phone}</p>
                   }
                 </div>
                 <button
