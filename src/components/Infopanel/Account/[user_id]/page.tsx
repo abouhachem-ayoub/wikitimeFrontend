@@ -57,11 +57,12 @@ catch(error){
     setEdit(!edit);
   }
   const handlePhoneChange = (value: string) => {
-    setPhone(value); 
-    console.log(value);
-    setFormData({ ...formData, phone: phone }); 
-    console.log(formData);
-};
+    setPhone(value); // Update the phone state
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      phone: value, // Use the value directly from the onChange handler
+    }));
+  };
      const handleInputChange = (e :React.ChangeEvent <HTMLInputElement>) => {
           try{
           const{name,value}=e.target;
