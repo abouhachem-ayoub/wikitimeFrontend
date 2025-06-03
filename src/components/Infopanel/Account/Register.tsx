@@ -331,9 +331,6 @@ const handlesociallogin= async (authProvider:string) => {
     const credential = GoogleAuthProvider.credentialFromResult(result);
     const token = credential?.accessToken;
     const user = result.user;
-    console.log('result',result);
-    console.log('user',user);
-    console.log('userid',user.email);
     //check if email exists in the firestore database
     //if so than check if its verified and then make it verified
     //check if phone exists if not replace it with user.phone
@@ -358,8 +355,10 @@ const handlesociallogin= async (authProvider:string) => {
     }
     else if(authProvider=='facebook'){
     const provider = new FacebookAuthProvider();
+    localStorage.setItem('starting','strting');
     signInWithPopup(auth, provider)
     .then((result) => {
+    localStorage.setItem('part2','part2');
     const credential = FacebookAuthProvider.credentialFromResult(result);
     const token = credential?.accessToken;
     const user = result.user;
@@ -379,8 +378,11 @@ const handlesociallogin= async (authProvider:string) => {
     registerwithsocials(socialFormData);
   }).catch((error) => {
     const errorCode = error.code;
+    localStorage.setItem('fberrorcode',error.code);
     const errorMessage = error.message;
+    localStorage.set('fberrormessage',error.message);
     const email = error.customData.email;
+    localStorage.setItem('fberrorcustomemail',error.email);
     const credential = FacebookAuthProvider.credentialFromError(error);
     console.log(error);
   });
