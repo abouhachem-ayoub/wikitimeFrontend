@@ -3,8 +3,10 @@ import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import { FiEdit } from "react-icons/fi";
 import toast,{Toaster} from "react-hot-toast";
+import { useUser } from "contexts/UserContext";
 const ProfilePage = ({ params }: { params: { user_id: string }}) => {
   const [user, setUser] = useState<{ email?: string|undefined; emailVerified?: boolean,firstName:string|undefined,lastName:string|undefined,pseudo:string|undefined,password?:string,phone:string|undefined} | null>(null);
+  const {userId,setUserId} = useUser()
   const [error, setError] = useState<string | null>(null);
   const [edit,setEdit] = useState(false);  
   const [debouncedPseudo, setDebouncedPseudo] = useState('');
@@ -32,7 +34,7 @@ const handleSubmit = async (e : React.FormEvent<HTMLFormElement>)=>{
     Authorization: `Bearer ${token}`, // Send the token in the Authorization header
     "Content-Type": "application/json",
         },
-    body: JSON.stringify({...formData,userid:params.user_id}),
+    body: JSON.stringify({...formData,userid:userId}),
     });
     const data = await response.json();
     if (!response.ok) {
@@ -120,7 +122,7 @@ catch(error){
             return;
           }
       try {
-        const response = await fetch(import.meta.env.VITE_API_BASE_URL+`api/user/${params.user_id}`, {
+        const response = await fetch(import.meta.env.VITE_API_BASE_URL+`api/user/${userId}`, {
             headers: {
               Authorization: `Bearer ${token}`, // Send the token in the Authorization header
             },
@@ -140,13 +142,13 @@ catch(error){
         setFormData({...data,phone:phone});
       } catch (error:Error|any) {
         console.error(error);
-        localStorage.setItem('error',error.message+import.meta.env.VITE_API_BASE_URL+`api/user/${params.user_id}`);
+        localStorage.setItem('error',error.message+import.meta.env.VITE_API_BASE_URL+`api/user/${userId}`);
         setError("An error occurred while fetching user data");
       }
     };
 
     fetchUserData();
-  }, [params.user_id,user?.emailVerified]);
+  }, [userId,user?.emailVerified]);
 
   if (error) {
     return <p className="text-red-500">{error}</p>;
@@ -260,7 +262,7 @@ catch(error){
                         onChange={handlePhoneChange}
                     />}
                     {!edit && 
-                     <p className="non-editable">{(user.phone)}</p>
+                     <p className="non-editable">{user.phone}</p>
                   }
                 </div>
                 <button
