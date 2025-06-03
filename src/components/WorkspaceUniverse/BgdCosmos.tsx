@@ -1,7 +1,7 @@
 // codepen from 'isladjan' https://codepen.io/Pierre-Dumas/pen/abgrPKW
 import { useRef, useState, useEffect } from 'react';
 import { ContextApp } from '../../contexts/ContextApp';
-
+import { useUser } from 'contexts/UserContext';
   //in the codepen from isladjan :
   //https://cdn.jsdelivr.net/npm/three@0.121.1/build/three.min.js
   //https://cdn.jsdelivr.net/npm/three@0.121.1/examples/js/controls/OrbitControls.js
@@ -27,7 +27,7 @@ interface BgdCosmosProps {
 }
 
 const BgdCosmos = ({ workspaceRef }: BgdCosmosProps) => {
-
+    const { userId } = useUser(); // Access the user from the context
     const [SimplexNoise, setSimplexNoise] = useState<any>(null);
 
     useEffect(() => {
@@ -243,8 +243,14 @@ const BgdCosmos = ({ workspaceRef }: BgdCosmosProps) => {
     };
 
   }, [workspaceRef]);
+  if (!userId) {
+    return (
+      <div className="login-message">
+        <p>Please log in to view the cosmos.</p>
+      </div>
+    );
+  }
 
-  return (<div id="ThreeCosmos" ref={workspaceRef}></div>);
+  return <div id="ThreeCosmos" ref={workspaceRef}></div>;
 };
-
 export default BgdCosmos;
