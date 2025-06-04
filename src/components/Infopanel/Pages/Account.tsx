@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import Login from '../Account/Login';
 import ProfilePage from '../Account/[user_id]/page';
 import RegisterForm from '../Account/Register';
@@ -17,6 +17,38 @@ const Account: React.FC = () => {
     setUserId(null); // Clear userId in context
     window.dispatchEvent(new Event('storage')); // Notify other tabs
   };
+
+  useEffect(() => {
+    const checkToken = async () => {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        // No token found, log the user out
+        logout();
+        return;
+      }
+
+      try {
+        // Decode or validate the token (e.g., using a backend API or JWT library)
+        const response = await fetch(import.meta.env.VITE_API_BASE_URL + 'api/auth/decodetoken', {
+          method: 'POST',
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        });
+
+        if (!response.ok) {
+          // Token is invalid or expired
+          logout();
+        }
+      } catch (error) {
+        console.error('Error validating token:', error);
+        logout();
+      }
+    };
+
+    checkToken();
+  }, []);
 
   return (
     <div>
