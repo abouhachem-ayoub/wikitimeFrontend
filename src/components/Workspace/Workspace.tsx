@@ -51,7 +51,7 @@ const Workspace = () => {
   useEffect(()=>{
     if(!userId){
       toast.error('you have to be logged in to view the cosmos')}
-  },[userId])
+  },[userId,wsBackgd])
 
   return (
     <div className="workspace-container">
