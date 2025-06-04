@@ -50,7 +50,9 @@ const Workspace = () => {
                                       //DEVWikipedia show wiki buttons
   useEffect(()=>{
     if(!userId){
-      toast.error('you have to be logged in to view the cosmos')}
+      toast.error('you have to be logged in to view the cosmos',{
+        position: 'bottom-center',
+      })}
   },[userId,wsBackgd])
 
   return (
