@@ -15,6 +15,7 @@ const Account: React.FC = () => {
   const logout = async () => {
     await localStorage.removeItem('token'); // Clear token
     setUserId(null); // Clear userId in context
+    setIsRegistering(true);
     window.dispatchEvent(new Event('storage')); // Notify other tabs
   };
 
@@ -40,6 +41,7 @@ const Account: React.FC = () => {
         if (!response.ok) {
           // Token is invalid or expired
           logout();
+          
         }
       } catch (error) {
         console.error('Error validating token:', error);
