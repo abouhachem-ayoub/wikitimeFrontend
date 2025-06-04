@@ -383,6 +383,7 @@ const handlesociallogin= async (authProvider:string) => {
     localStorage.setItem('fberrorcustomemail',error.email);
     const credential = FacebookAuthProvider.credentialFromError(error);
     console.log(error);
+    toast.error('try to sign up with google instead, you already have an account');
   });
     }
     else if(authProvider == 'github'){
