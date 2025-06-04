@@ -11,6 +11,7 @@ import WikiDatesTable from 'components/Wikipedia/WikiDatesTable';
 import BgdVideo from 'components/WorkspaceUniverse/BgdVideo';
 import BgdGalaxy from 'components/WorkspaceUniverse/BgdGalaxy';
 import { useUser } from 'contexts/UserContext';
+import toast, { Toaster } from 'react-hot-toast';
 
 const Workspace = () => {
   const {
@@ -47,15 +48,17 @@ const Workspace = () => {
     setInfopanelShow('timelinetable');
   }, []); //DEVTimeline
                                       //DEVWikipedia show wiki buttons
-
+  useEffect(()=>{
+      toast.error('you have to be logged in to view the cosmos')
+  },[])
 
   return (
     <div className="workspace-container">
       <div className="workspace-background">
         {wsBackgd === 2 && (
           <canvas ref={workspaceRef} className="workspace-canvas"></canvas>)}
-          {(wsBackgd === 1 && userId)  ?  <BgdVideo /> : <div><h1>You are not logged in</h1></div>}                                            {/*//DEVWorkspaceUniverse */}
-          {(wsBackgd === 2 && userId)  ? <BgdGalaxy workspaceRef={workspaceRef} /> : <div><h1>You are not logged in</h1></div>}               {/*//DEVWorkspaceUniverse */}
+          {(wsBackgd === 1 && userId)  ?  <BgdVideo /> : <div ><Toaster/></div>}                                            {/*//DEVWorkspaceUniverse */}
+          {(wsBackgd === 2 && userId)  ? <BgdGalaxy workspaceRef={workspaceRef} /> : <div><Toaster/></div>}               {/*//DEVWorkspaceUniverse */}
           {/*wsBackgd === 3  && <BgdCosmos workspaceRef={workspaceRef}/>*/}                {/*//DEVWorkspaceUniverse */}
         
       </div>
