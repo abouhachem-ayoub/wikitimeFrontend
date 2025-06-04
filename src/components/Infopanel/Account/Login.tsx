@@ -86,7 +86,7 @@ const Login: React.FC = () => {
         toast.success("Password reset successful! You can now log in.");
         setTimeout(() => {
           window.location.href = data.redirectUrl;
-        }, 2000);
+        }, 200);
     }
       setResetPassword(false); // Switch back to login form
     } catch (error: any) {

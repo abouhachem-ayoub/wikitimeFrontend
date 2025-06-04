@@ -49,7 +49,7 @@ const Workspace = () => {
   }, []); //DEVTimeline
                                       //DEVWikipedia show wiki buttons
   useEffect(()=>{
-    if(!userId){
+    if(!userId && (wsBackgd == 1 || wsBackgd == 2)){
       toast.error('you have to be logged in to view the cosmos',{
         position: 'bottom-center',
       })}
