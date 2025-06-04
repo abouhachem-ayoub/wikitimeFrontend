@@ -2,7 +2,23 @@ import React, { useEffect, useState } from 'react';
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import toast, { Toaster } from 'react-hot-toast';
 import { useUser } from 'contexts/UserContext';
+import FbLogo from '../../../assets/social-login/facebook-logo.png'
+import GoogleLogo from '../../../assets/social-login/google-logo.png'
+import GithubLogo from '../../../assets/social-login/github-logo.png'
+import {getAuth, signInWithPopup, GoogleAuthProvider,FacebookAuthProvider,GithubAuthProvider} from "firebase/auth";
+import { initializeApp } from 'firebase/app';
 
+const firebaseConfig = {
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_APP_ID,
+  measurementId: import.meta.env.VITE_MEASUREMENT_ID
+};
+const firebaseapp = initializeApp(firebaseConfig);
+const auth = getAuth();
 const Login: React.FC = () => {
   const [forgottenPassword, setForgottenPassword] = useState(false);
   const [resetPassword, setResetPassword] = useState(false); // New state for reset password form
@@ -11,6 +27,191 @@ const Login: React.FC = () => {
   const params = new URLSearchParams(window.location.search);
   const resetpasswordtoken = params.get('token');
   const { setUserId } = useUser();
+
+  const handlesociallogin= async (authProvider:string) => {
+    if(authProvider == 'google'){
+        const provider = new GoogleAuthProvider();
+        signInWithPopup(auth, provider)
+  .then((result) => {
+    const credential = GoogleAuthProvider.credentialFromResult(result);
+    const token = credential?.accessToken;
+    const user = result.user;
+    //check if email exists in the firestore database
+    //if so than check if its verified and then make it verified
+    //check if phone exists if not replace it with user.phone
+    //if the email is not in the database register the user and then log him in directly
+        const socialFormData = {
+                        email: user.email || '',
+                        password: '',
+                        password2: '',
+                        firstName: '',
+                        lastName: '',
+                        phone: user.phoneNumber || '',
+                        pseudo: user.displayName || '',
+                      };
+                    registerwithsocials(socialFormData);
+                }
+  ).catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    const email = error.customData.email;
+    const credential = GoogleAuthProvider.credentialFromError(error);
+  });
+    }
+    else if(authProvider=='facebook'){
+    const provider = new FacebookAuthProvider();
+    signInWithPopup(auth, provider)
+    .then((result) => {
+    const credential = FacebookAuthProvider.credentialFromResult(result);
+    const token = credential?.accessToken;
+    const user = result.user;
+    console.log('result',result);
+    console.log('user',user);
+    const socialFormData = {
+        email: user.email || '',
+        password: '',
+        password2: '',
+        firstName: '',
+        lastName: '',
+        phone: user.phoneNumber || '',
+        pseudo: user.displayName || '',
+      };
+    console.log('token',token);
+      console.log(socialFormData);
+    registerwithsocials(socialFormData);
+  }).catch((error) => {
+    const errorCode = error.code;
+    localStorage.setItem('fberrorcode',error.code);
+    const errorMessage = error.message;
+    localStorage.set('fberrormessage',error.message);
+    const email = error.customData.email;
+    localStorage.setItem('fberrorcustomemail',error.email);
+    const credential = FacebookAuthProvider.credentialFromError(error);
+    console.log(error);
+    toast.error('try to sign up with google instead, you already have an account');
+  });
+    }
+    else if(authProvider == 'github'){
+        const provider = new GithubAuthProvider
+        signInWithPopup(auth, provider)
+        .then((result) => {
+        const credential = GithubAuthProvider.credentialFromResult(result);
+        const token = credential?.accessToken;
+        const user = result.user;
+        console.log('result',result);
+        console.log('user',user);
+        console.log('userid',user.uid)
+        const socialFormData = {
+            email: user.email || '',
+            password: '',
+            password2: '',
+            firstName: '',
+            lastName: '',
+            phone: user.phoneNumber || '',
+            pseudo: user.displayName || '',
+        };
+    console.log('token',token);
+    console.log(socialFormData);
+    registerwithsocials(socialFormData);
+  }).catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+    const email = error.customData.email;
+    console.log(email,errorMessage);
+    const credential = GithubAuthProvider.credentialFromError(error);
+    console.log(email,errorMessage,credential);
+    toast.error('try to sign up with google instead, you already have an account');
+}  
+  )
+    }}
+
+    const checkifsocialemailexists = async (email:any)=>{
+      try {
+          const response = await fetch(import.meta.env.VITE_API_BASE_URL+"api/auth/emailexists", {
+          method: "POST",
+          headers: {
+          "Content-Type": "application/json",
+              },
+          body: JSON.stringify({ email : email }),
+          });
+          const data = await response.json(); 
+          if (data.exists) {
+             return true;
+          } 
+          else {
+              return false;
+          }
+  }
+  catch(error){
+      return 'something went wrong';
+  }}
+    const registerwithsocials = async(formData:any)=>{
+      if(!(await checkifsocialemailexists(formData.email))){
+          try{
+      let response = await fetch(import.meta.env.VITE_API_BASE_URL+"api/auth/register", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({...formData,emailVerified:true})
+      });
+      let  data = await response.json();
+      if (!response.ok) {
+          throw new Error(data.message || "Something went wrong");
+        }
+          localStorage.setItem("token", data.token);
+          window.dispatchEvent(new Event("storage"));
+          toast.success("Registration successful!");
+          response = await fetch(import.meta.env.VITE_API_BASE_URL+"api/auth/login", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({email:formData.email,allowpasswordless:true}),
+          });
+          data = await response.json();
+          if (!response.ok) {
+              throw new Error(data.message || "Something went wrong");
+            }
+              localStorage.setItem("token", data.token);
+              window.dispatchEvent(new Event("storage"));
+              toast.success("Registration successful! You can now log in.");
+              setUserId(data.user_id); // Set userId in context
+              toast.success("Login successful!");
+              localStorage.setItem('token', data.token); 
+              localStorage.setItem('userid',data.user_id||'nothing');
+              localStorage.setItem('user',data.user||'nothin')
+          }
+          catch(error){
+                  console.log(error)
+          }}
+      else{
+          try{
+                  const response = await fetch(import.meta.env.VITE_API_BASE_URL+"api/auth/login", {
+                      method: "POST",
+                      headers: {
+                        "Content-Type": "application/json",
+                      },
+                      body: JSON.stringify({email:formData.email,allowpasswordless:true}),
+                  });
+                  const data = await response.json();
+                  if (!response.ok) {
+                      throw new Error(data.message || "Something went wrong");
+                    }
+                      localStorage.setItem("token", data.token);
+                      window.dispatchEvent(new Event("storage"));
+                      setUserId(data.user_id); // Set userId in context
+                      toast.success("Login successful!");
+                      localStorage.setItem('userid',data.user_id||'nothing');
+                      localStorage.setItem('user',data.user||'nothin')
+                      toast.success("Registration successful! You can now log in.");
+                      }
+          catch(error){
+                  console.log(error);
+          }
+          }
+              }
+  
   useEffect(() => {
     // Reset states on page reload
     setForgottenPassword(false);
@@ -276,6 +477,26 @@ const Login: React.FC = () => {
               </a>
             </div>
           </form>
+          <div className="mt-6">
+                <p className="text-center text-gray-600 mb-4">Or log in using:</p>
+                <div className="">
+                    <button className="social-login-button"
+                        onClick={() => handlesociallogin('google')}
+                    >
+                        <img src={GoogleLogo} alt="Google" className="social-login" />
+                    </button>
+                    <button className="social-login-button"
+                        onClick={() => handlesociallogin('facebook')}
+                    >
+                        <img src={FbLogo} alt="Facebook" className="social-login" />
+                    </button>
+                    <button className="social-login-button"
+                       onClick={() => handlesociallogin('github')}
+                    >
+                        <img src={GithubLogo} alt="GitHub" className="social-login" />
+                    </button>
+                </div>
+            </div>
         </div>
       )}
     </div>
