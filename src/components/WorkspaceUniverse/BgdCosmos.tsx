@@ -243,15 +243,9 @@ const BgdCosmos = ({ workspaceRef }: BgdCosmosProps) => {
     };
 
   }, [workspaceRef]);
-  if (!userId) {
-    return (
-      <div className="login-message">
-        <p>Please log in to view the cosmos.</p>
-      </div>
-    );
-  }
-else{
+ 
+
   return <div id="ThreeCosmos" ref={workspaceRef}></div>;
-}
+
 };
 export default BgdCosmos;

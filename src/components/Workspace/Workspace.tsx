@@ -10,6 +10,7 @@ import WikiDatesCurrent from 'components/Wikipedia/WikiDatesCurrent';
 import WikiDatesTable from 'components/Wikipedia/WikiDatesTable';
 import BgdVideo from 'components/WorkspaceUniverse/BgdVideo';
 import BgdGalaxy from 'components/WorkspaceUniverse/BgdGalaxy';
+import { useUser } from 'contexts/UserContext';
 
 const Workspace = () => {
   const {
@@ -21,7 +22,9 @@ const Workspace = () => {
     setTv2Show,
     wsPixiShow, setWsPixiShow, 
   } = useContext(ContextApp);
-
+  const {userId} = useUser();
+  if(userId !== null){
+  localStorage.setItem('useridfromtimespace',userId);}
   const { handleWikiNameChange, wikiDatesShow, setWikiDatesShow } =
     useContext(ContextWikipedia);
   const workspaceRef = useRef(null); // Define workspaceRef here
@@ -61,7 +64,8 @@ const Workspace = () => {
               {wikiDatesShow  && <WikiDatesCurrent />}                                     {/*//DEVWikipedia */}
               {wikiDatesShow  && <WikiDatesTable />} 
               <Timeview />
-              {<WorkspaceTime />}   
+              {userId && <WorkspaceTime />}
+              {!userId && <div><h1>You have to be logged in to access the cosmos view</h1></div>}
             </TimeBoxPositionProvider>
           </PastBarDataProvider>
         </FpsProvider>

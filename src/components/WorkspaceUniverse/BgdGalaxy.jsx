@@ -269,7 +269,7 @@ const BgdGalaxy = ({ workspaceRef }) => {
 
   return (
     <>
-      {(coordCamera && userId) && (
+      {coordCamera  && (
       <div className="ThreeGalaxy">
         x: {cameraPosition.x.toFixed(2)}, y: {cameraPosition.y.toFixed(2)}, z: {cameraPosition.z.toFixed(2)}
       </div>

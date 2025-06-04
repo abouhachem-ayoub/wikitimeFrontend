@@ -355,10 +355,8 @@ const handlesociallogin= async (authProvider:string) => {
     }
     else if(authProvider=='facebook'){
     const provider = new FacebookAuthProvider();
-    localStorage.setItem('starting','strting');
     signInWithPopup(auth, provider)
     .then((result) => {
-    localStorage.setItem('part2','part2');
     const credential = FacebookAuthProvider.credentialFromResult(result);
     const token = credential?.accessToken;
     const user = result.user;
