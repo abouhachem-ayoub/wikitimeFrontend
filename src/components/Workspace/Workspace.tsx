@@ -38,7 +38,7 @@ const Workspace = () => {
   useEffect(() => {setWikiBtnsShow(false)}, []);                                     //DEVWikipedia show wiki buttons
   useEffect(() => {setInfopanelShow('timepaneltable')}, []);                         //DEVChart
   useEffect(() => {setTv2Show(true);}, []);                                          //DEVTimeline show wiki buttons
-  useEffect(() => {setWsPixiShow(userLoggedIn)}, []);                                        //DEVTimeline show wiki buttons
+  useEffect(() => {setWsPixiShow()}, []);                                        //DEVTimeline show wiki buttons
   useEffect(() => {setInfopanelShow("timelinetable");}, []); 
   useEffect(() => {
     setTv2Show(true);
@@ -54,8 +54,8 @@ const Workspace = () => {
       <div className="workspace-background">
         {wsBackgd === 2 && (
           <canvas ref={workspaceRef} className="workspace-canvas"></canvas>)}
-          {wsBackgd === 1  && <BgdVideo />}                                            {/*//DEVWorkspaceUniverse */}
-          {wsBackgd === 2  && <BgdGalaxy workspaceRef={workspaceRef} />}               {/*//DEVWorkspaceUniverse */}
+          {(wsBackgd === 1 && userId)  ?  <BgdVideo /> : <div><h1>You are not logged in</h1></div>}                                            {/*//DEVWorkspaceUniverse */}
+          {(wsBackgd === 2 && userId)  ? <BgdGalaxy workspaceRef={workspaceRef} /> : <div><h1>You are not logged in</h1></div>}               {/*//DEVWorkspaceUniverse */}
           {/*wsBackgd === 3  && <BgdCosmos workspaceRef={workspaceRef}/>*/}                {/*//DEVWorkspaceUniverse */}
         
       </div>
@@ -67,8 +67,7 @@ const Workspace = () => {
               {wikiDatesShow  && <WikiDatesCurrent />}                                     {/*//DEVWikipedia */}
               {wikiDatesShow  && <WikiDatesTable />} 
               <Timeview />
-              {userId && <WorkspaceTime />}
-              {!userId && <div><h1>You have to be logged in to access the cosmos view</h1></div>}
+              {<WorkspaceTime />}
             </TimeBoxPositionProvider>
           </PastBarDataProvider>
         </FpsProvider>
