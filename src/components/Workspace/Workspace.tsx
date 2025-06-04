@@ -22,9 +22,12 @@ const Workspace = () => {
     setTv2Show,
     wsPixiShow, setWsPixiShow, 
   } = useContext(ContextApp);
-  const {userId} = useUser();
+  const {userId,setUserId} = useUser();
+  let userLoggedIn = false
   if(userId !== null){
-  localStorage.setItem('useridfromtimespace',userId);}
+  localStorage.setItem('useridfromtimespace',userId);
+  userLoggedIn= true;
+}
   const { handleWikiNameChange, wikiDatesShow, setWikiDatesShow } =
     useContext(ContextWikipedia);
   const workspaceRef = useRef(null); // Define workspaceRef here
@@ -35,7 +38,7 @@ const Workspace = () => {
   useEffect(() => {setWikiBtnsShow(false)}, []);                                     //DEVWikipedia show wiki buttons
   useEffect(() => {setInfopanelShow('timepaneltable')}, []);                         //DEVChart
   useEffect(() => {setTv2Show(true);}, []);                                          //DEVTimeline show wiki buttons
-  useEffect(() => {setWsPixiShow(true)}, []);                                        //DEVTimeline show wiki buttons
+  useEffect(() => {setWsPixiShow(userLoggedIn)}, []);                                        //DEVTimeline show wiki buttons
   useEffect(() => {setInfopanelShow("timelinetable");}, []); 
   useEffect(() => {
     setTv2Show(true);
