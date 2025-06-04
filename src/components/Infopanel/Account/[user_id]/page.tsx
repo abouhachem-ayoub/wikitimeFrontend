@@ -20,6 +20,34 @@ const ProfilePage = ({ params }: { params: { user_id: string }}) => {
   const [pseudoExists,setPseudoExists] = useState(false);
   const [loading,setLoading] = useState(false);
   const token = localStorage.getItem('token');
+
+  const handleDeleteAccount = async () => {
+    if (!window.confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
+      return;
+    }
+  
+    try {
+      const response = await fetch(import.meta.env.VITE_API_BASE_URL + "api/auth/deleteaccount", {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Content-Type": "application/json",
+        },
+      });
+  
+      if (!response.ok) {
+        const data = await response.json();
+        throw new Error(data.message || "Failed to delete account");
+      }
+  
+      alert("Your account has been deleted. You will be logged out.");
+      localStorage.removeItem("token");
+      localStorage.removeItem("userid");
+      localStorage.removeItem("user");
+      window.location.href = "/"; // Redirect to the homepage or login page
+    } catch (error: any) {
+      alert(error.message || "An error occurred while deleting your account.");
+    }}
 const handleSubmit = async (e : React.FormEvent<HTMLFormElement>)=>{
   e.preventDefault();
   const previousUser = user;
@@ -288,6 +316,15 @@ catch(error){
                         Cancel
                 </button>
                   </form>
+                  <div>
+    {/* Other profile content */}
+    <button
+      onClick={handleDeleteAccount}
+      className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded mt-4"
+    >
+      Delete My Account
+    </button>
+  </div>
         </div>
       ) : (
         <p className="text-yellow-500">
@@ -324,6 +361,15 @@ catch(error){
         <h1>Set up a password to protect your account</h1>
         <form action="">
         </form>
+        <div>
+    {/* Other profile content */}
+    <button
+      onClick={handleDeleteAccount}
+      className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded mt-4"
+    >
+      Delete My Account
+    </button>
+  </div>
       </div> }
       </div>
   );
