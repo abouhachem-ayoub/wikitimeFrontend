@@ -392,6 +392,26 @@ const Login: React.FC = () => {
               Login
             </button>
           </form>
+          <div className="mt-6">
+                <p className="text-center text-gray-600 mb-4">Or log in using:</p>
+                <div className="">
+                    <button className="social-login-button"
+                        onClick={() => handlesociallogin('google')}
+                    >
+                        <img src={GoogleLogo} alt="Google" className="social-login" />
+                    </button>
+                    <button className="social-login-button"
+                        onClick={() => handlesociallogin('facebook')}
+                    >
+                        <img src={FbLogo} alt="Facebook" className="social-login" />
+                    </button>
+                    <button className="social-login-button"
+                       onClick={() => handlesociallogin('github')}
+                    >
+                        <img src={GithubLogo} alt="GitHub" className="social-login" />
+                    </button>
+                </div>
+            </div>
         </div>
       ) : forgottenPassword ? (
         <div>
@@ -477,26 +497,6 @@ const Login: React.FC = () => {
               </a>
             </div>
           </form>
-          <div className="mt-6">
-                <p className="text-center text-gray-600 mb-4">Or log in using:</p>
-                <div className="">
-                    <button className="social-login-button"
-                        onClick={() => handlesociallogin('google')}
-                    >
-                        <img src={GoogleLogo} alt="Google" className="social-login" />
-                    </button>
-                    <button className="social-login-button"
-                        onClick={() => handlesociallogin('facebook')}
-                    >
-                        <img src={FbLogo} alt="Facebook" className="social-login" />
-                    </button>
-                    <button className="social-login-button"
-                       onClick={() => handlesociallogin('github')}
-                    >
-                        <img src={GithubLogo} alt="GitHub" className="social-login" />
-                    </button>
-                </div>
-            </div>
         </div>
       )}
     </div>
