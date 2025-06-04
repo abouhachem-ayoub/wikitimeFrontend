@@ -49,8 +49,9 @@ const Workspace = () => {
   }, []); //DEVTimeline
                                       //DEVWikipedia show wiki buttons
   useEffect(()=>{
-      toast.error('you have to be logged in to view the cosmos')
-  },[])
+    if(!userId){
+      toast.error('you have to be logged in to view the cosmos')}
+  },[userId])
 
   return (
     <div className="workspace-container">
@@ -58,7 +59,7 @@ const Workspace = () => {
         {wsBackgd === 2 && (
           <canvas ref={workspaceRef} className="workspace-canvas"></canvas>)}
           {(wsBackgd === 1 && userId)  ?  <BgdVideo /> : <div ><Toaster/></div>}                                            {/*//DEVWorkspaceUniverse */}
-          {(wsBackgd === 2 && userId)  ? <BgdGalaxy workspaceRef={workspaceRef} /> : <div><Toaster/></div>}               {/*//DEVWorkspaceUniverse */}
+          {(wsBackgd === 2 && userId)  ? <BgdGalaxy workspaceRef={workspaceRef}/> : <div><Toaster/></div>}               {/*//DEVWorkspaceUniverse */}
           {/*wsBackgd === 3  && <BgdCosmos workspaceRef={workspaceRef}/>*/}                {/*//DEVWorkspaceUniverse */}
         
       </div>
