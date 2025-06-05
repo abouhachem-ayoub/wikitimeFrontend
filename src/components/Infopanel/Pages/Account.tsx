@@ -11,7 +11,12 @@ const Account: React.FC = () => {
   const toggleForm = () => {
     setIsRegistering(!isRegistering);
   };
-
+  const handleLoginSuccess = async (userId: string, token: string, user: string) => {
+    await setUserId(userId); // Update the context
+    await localStorage.setItem('userId', userId || '');
+    await localStorage.setItem('token', token);
+    await localStorage.setItem('user', user || 'nothing');
+  };
   const logout = async () => {
     await localStorage.removeItem('token'); // Clear token
     setUserId(null); // Clear userId in context
@@ -60,7 +65,7 @@ const Account: React.FC = () => {
           <button onClick={toggleForm}>Sign-Up</button>
         </div>
       )}
-      {!userId && (isRegistering ? <Login /> : <RegisterForm toggleForm={toggleForm} />)}
+      {!userId && (isRegistering ? <Login /> : <RegisterForm toggleForm={toggleForm} onLoginSuccess={handleLoginSuccess} />)}
       {userId && (
         <div>
           <button onClick={logout}>Sign out</button>
