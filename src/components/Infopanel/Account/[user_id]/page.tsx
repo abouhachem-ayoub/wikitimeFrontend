@@ -369,6 +369,7 @@ catch(error){
     >
       Delete My Account
     </button>
+    <div className="modal-z-index">
     <ConfirmDeleteModal
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
@@ -377,6 +378,7 @@ catch(error){
           handleDeleteAccount(password);
         }}
       />
+      </div>
   </div>
       </div> }
       </div>
