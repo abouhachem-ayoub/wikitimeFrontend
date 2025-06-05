@@ -327,11 +327,25 @@ catch(error){
                   <div>
     {/* Other profile content */}
     <button
-      onClick={()=> setIsModalOpen(true)}
+      onClick={()=>{setIsModalOpen(true);localStorage.setItem("isModalOpen", "true");
+      }}
       className="bg-red-500"
     >
       Delete My Account
     </button>
+    <div className="modal-z-index">
+    <ConfirmDeleteModal
+        isOpen={isModalOpen}
+        onClose={() => {setIsModalOpen(false)
+          localStorage.setItem("isModalOpen", "false");
+         }}
+        onConfirm={(password) => {
+          setIsModalOpen(false);
+          localStorage.setItem("isModalOpen", "false");
+          handleDeleteAccount(password);
+        }}
+      />
+      </div>
   </div>
         </div>
       ) : (
