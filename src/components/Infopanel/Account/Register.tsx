@@ -1,4 +1,5 @@
 'use client';
+import '../../../styles/infopanel.scss';
 import {ChangeEvent, FormEvent, useState,useEffect} from 'react';
 import toast, { Toaster } from 'react-hot-toast';
 import PhoneInput from 'react-phone-input-2';

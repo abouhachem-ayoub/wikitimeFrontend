@@ -1,3 +1,4 @@
+import '../../../styles/infopanel.scss';
 import React, { useEffect, useState } from 'react';
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import toast, { Toaster } from 'react-hot-toast';

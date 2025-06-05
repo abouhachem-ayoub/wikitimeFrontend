@@ -3,6 +3,7 @@ import Login from '../Account/Login';
 import ProfilePage from '../Account/[user_id]/page';
 import RegisterForm from '../Account/Register';
 import { useUser } from 'contexts/UserContext';
+import '../../../styles/infopanel.scss';
 
 const Account: React.FC = () => {
   const [isRegistering, setIsRegistering] = useState(true);
