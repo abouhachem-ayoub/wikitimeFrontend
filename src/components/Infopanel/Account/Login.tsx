@@ -157,6 +157,7 @@ const Login: React.FC = () => {
       });
       let  data = await response.json();
       if (!response.ok) {
+        toast.error(data.message || "Something went wrong", { position: "bottom-center" });
           throw new Error(data.message || "Something went wrong");
         }
           localStorage.setItem("token", data.token);
@@ -171,6 +172,7 @@ const Login: React.FC = () => {
           });
           data = await response.json();
           if (!response.ok) {
+            toast.error(data.message || "Something went wrong", { position: "bottom-center" });
               throw new Error(data.message || "Something went wrong");
             }
               localStorage.setItem("token", data.token);
@@ -196,6 +198,7 @@ const Login: React.FC = () => {
                   });
                   const data = await response.json();
                   if (!response.ok) {
+                    toast.error(data.message || "Something went wrong", { position: "bottom-center" });
                       throw new Error(data.message || "Something went wrong");
                     }
                       localStorage.setItem("token", data.token);
@@ -253,6 +256,7 @@ const Login: React.FC = () => {
       });
       const data = await response.json();
       if (!response.ok) {
+        toast.error(data.message || "Something went wrong", { position: "bottom-center" });
         throw new Error(data.message || "Password reset failed");
       }
       toast.success("Password reset link sent to your email!");
@@ -281,6 +285,7 @@ const Login: React.FC = () => {
       });
       const data = await response.json();
       if (!response.ok) {
+        toast.error(data.message || "Something went wrong", { position: "bottom-center" });
         throw new Error(data.message || "Password reset failed");
       }
       if (data.redirectUrl) {
@@ -307,6 +312,7 @@ const Login: React.FC = () => {
       });
       const data = await response.json();
       if (!response.ok) {
+        toast.error(data.message || "Something went wrong", { position: "bottom-center" });
         throw new Error(data.message || "Login failed");
       }
       //localStorage.setItem("token", data.token);
