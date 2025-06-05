@@ -25,6 +25,7 @@ const ProfilePage = ({ params }: { params: { user_id: string }}) => {
   const token = localStorage.getItem('token');
 
   const handleDeleteAccount = async (password:string) => {
+    console.log("Password entered:", password);
     try {
       const response = await fetch(import.meta.env.VITE_API_BASE_URL + "api/auth/deleteaccount", {
         method: "DELETE",
@@ -100,6 +101,13 @@ catch(error){
               console.log(error);
           }
       }
+
+      useEffect(() => {
+        const storedState = localStorage.getItem("isModalOpen");
+        if (storedState === "true") {
+          setIsModalOpen(true);
+        }
+      }, []);
 
        useEffect(() => {
              const handler = setTimeout(() => {
@@ -364,7 +372,8 @@ catch(error){
         <div>
     {/* Other profile content */}
     <button
-      onClick={()=>{setIsModalOpen(true)}}
+      onClick={()=>{setIsModalOpen(true);localStorage.setItem("isModalOpen", "true");
+      }}
       className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded mt-4"
     >
       Delete My Account
@@ -372,10 +381,12 @@ catch(error){
     <div className="modal-z-index">
     <ConfirmDeleteModal
         isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        onClose={() => {setIsModalOpen(false)
+          localStorage.setItem("isModalOpen", "false");
+         }}
         onConfirm={(password) => {
           setIsModalOpen(false);
-          localStorage.setItem('ismodalopen',isModalOpen.toString())
+          localStorage.setItem("isModalOpen", "false");
           handleDeleteAccount(password);
         }}
       />
