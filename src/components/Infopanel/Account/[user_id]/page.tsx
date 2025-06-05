@@ -4,7 +4,9 @@ import 'react-phone-input-2/lib/style.css';
 import { FiEdit } from "react-icons/fi";
 import toast,{Toaster} from "react-hot-toast";
 import { useUser } from "contexts/UserContext";
+import ConfirmDeleteModal from "../confirmDeleteModal";
 const ProfilePage = ({ params }: { params: { user_id: string }}) => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [user, setUser] = useState<{ email?: string|undefined; emailVerified?: boolean,firstName:string|undefined,lastName:string|undefined,pseudo:string|undefined,password?:string,phone:string|undefined} | null>(null);
   const {userId,setUserId} = useUser()
   const [error, setError] = useState<string | null>(null);
@@ -21,11 +23,7 @@ const ProfilePage = ({ params }: { params: { user_id: string }}) => {
   const [loading,setLoading] = useState(false);
   const token = localStorage.getItem('token');
 
-  const handleDeleteAccount = async () => {
-    if (!window.confirm("Are you sure you want to delete your account? This action cannot be undone.")) {
-      return;
-    }
-  
+  const handleDeleteAccount = async (password:string) => {
     try {
       const response = await fetch(import.meta.env.VITE_API_BASE_URL + "api/auth/deleteaccount", {
         method: "DELETE",
@@ -33,6 +31,7 @@ const ProfilePage = ({ params }: { params: { user_id: string }}) => {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
           "Content-Type": "application/json",
         },
+        body: JSON.stringify({ password, token: localStorage.getItem("token") }),
       });
   
       if (!response.ok) {
@@ -319,7 +318,7 @@ catch(error){
                   <div>
     {/* Other profile content */}
     <button
-      onClick={handleDeleteAccount}
+      onClick={()=> setIsModalOpen(true)}
       className="bg-red-500"
     >
       Delete My Account
@@ -364,11 +363,19 @@ catch(error){
         <div>
     {/* Other profile content */}
     <button
-      onClick={handleDeleteAccount}
+      onClick={()=>{setIsModalOpen(true)}}
       className="bg-red-500 hover:bg-red-600 text-white py-2 px-4 rounded mt-4"
     >
       Delete My Account
     </button>
+    <ConfirmDeleteModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        onConfirm={(password) => {
+          setIsModalOpen(false);
+          handleDeleteAccount(password);
+        }}
+      />
   </div>
       </div> }
       </div>
