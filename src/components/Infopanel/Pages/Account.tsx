@@ -24,7 +24,7 @@ const Account: React.FC = () => {
     window.dispatchEvent(new Event('storage')); // Notify other tabs
   };
 
-  useEffect(() => {
+  /*useEffect(() => {
     const checkToken = async () => {
       const token = localStorage.getItem('token');
       if (!token) {
@@ -56,7 +56,7 @@ const Account: React.FC = () => {
 
     checkToken();
   }, []);
-
+*/
   return (
     <div>
       {!userId && (
