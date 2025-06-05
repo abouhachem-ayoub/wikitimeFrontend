@@ -49,7 +49,7 @@ const RegisterForm = ({ toggleForm }: { toggleForm: () => void }) => {
     const [passwordErrorMessage,setPasswordErrorMessage] = useState('');
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    const { setUserId } = useUser(); // Access the context's setUserId function
+    const { userId, setUserId } = useUser(); // Access the context's setUserId function
     useEffect(() => {
         const handler = setTimeout(() => {
             setDebouncedPseudo(pseudo);
@@ -291,7 +291,7 @@ const registerwithsocials = async(formData:any)=>{
             setUserId(data.user_id); // Set userId in context
             toast.success("Login successful!");
             localStorage.setItem('token', data.token); 
-            localStorage.setItem('userid',data.user_id||'nothing');
+            localStorage.setItem('useridfromcontext',userId||'nothing');
             localStorage.setItem('user',data.user||'nothin')
         }
         catch(error){
@@ -314,7 +314,7 @@ const registerwithsocials = async(formData:any)=>{
                     window.dispatchEvent(new Event("storage"));
                     setUserId(data.user_id); // Set userId in context
                     toast.success("Login successful!");
-                    localStorage.setItem('userid',data.user_id||'nothing');
+                    localStorage.setItem('useridfromcontext',userId||'nothing');
                     localStorage.setItem('user',data.user||'nothin')
                     toast.success("Registration successful! You can now log in.");
                     }
