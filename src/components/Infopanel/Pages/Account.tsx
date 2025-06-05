@@ -23,40 +23,39 @@ const Account: React.FC = () => {
     setIsRegistering(true);
     window.dispatchEvent(new Event('storage')); // Notify other tabs
   };
+useEffect(() => {
+  const checkToken = async () => {
+    const token = localStorage.getItem('token');
+    if (!token) {
+      console.log('No token found, logging out...');
+      logout();
+      return;
+    }
 
-  /*useEffect(() => {
-    const checkToken = async () => {
-      const token = localStorage.getItem('token');
-      if (!token) {
-        // No token found, log the user out
-        logout();
-        return;
-      }
+    try {
+      // Decode or validate the token (e.g., using a backend API or JWT library)
+      const response = await fetch(import.meta.env.VITE_API_BASE_URL + 'api/auth/decodetoken', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      });
 
-      try {
-        // Decode or validate the token (e.g., using a backend API or JWT library)
-        const response = await fetch(import.meta.env.VITE_API_BASE_URL + 'api/auth/decodetoken', {
-          method: 'POST',
-          headers: {
-            Authorization: `Bearer ${token}`,
-            'Content-Type': 'application/json',
-          },
-        });
-
-        if (!response.ok) {
-          // Token is invalid or expired
-          logout();
-          
-        }
-      } catch (error) {
-        console.error('Error validating token:', error);
+      if (!response.ok) {
+        console.log('Token validation failed, logging out...');
         logout();
       }
-    };
-
-    checkToken();
-  }, []);
-*/
+    } catch (error) {
+      console.error('Error validating token:', error);
+      logout();
+    }
+  };
+    // Run the token check only when the userId or token changes
+    if (userId) {
+      checkToken();
+    }
+  }, [userId]);
   return (
     <div>
       {!userId && (
