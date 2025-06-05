@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import '../../../styles/infopanel.scss';
+import '../../../../styles/infopanel.scss';
 import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css';
 import { FiEdit } from "react-icons/fi";
