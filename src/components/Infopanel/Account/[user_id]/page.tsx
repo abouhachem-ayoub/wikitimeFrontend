@@ -375,6 +375,7 @@ catch(error){
         onClose={() => setIsModalOpen(false)}
         onConfirm={(password) => {
           setIsModalOpen(false);
+          localStorage.setItem('ismodalopen',isModalOpen.toString())
           handleDeleteAccount(password);
         }}
       />
