@@ -157,9 +157,8 @@ const Login: React.FC = () => {
       });
       let  data = await response.json();
       if (!response.ok) {
-   // Show the message returned by the backend
-   toast.error(data.message || "Something went wrong", { position: "bottom-center" });
-   return;        }
+          throw new Error(data.message || "Something went wrong");
+        }
           localStorage.setItem("token", data.token);
           window.dispatchEvent(new Event("storage"));
           toast.success("Registration successful!");
@@ -172,9 +171,8 @@ const Login: React.FC = () => {
           });
           data = await response.json();
           if (!response.ok) {
-   // Show the message returned by the backend
-   toast.error(data.message || "Something went wrong", { position: "bottom-center" });
-   return;            }
+              throw new Error(data.message || "Something went wrong");
+            }
               localStorage.setItem("token", data.token);
               window.dispatchEvent(new Event("storage"));
               toast.success("Registration successful! You can now log in.");
@@ -198,9 +196,8 @@ const Login: React.FC = () => {
                   });
                   const data = await response.json();
                   if (!response.ok) {
-   // Show the message returned by the backend
-   toast.error(data.message || "Something went wrong", { position: "bottom-center" });
-   return;                    }
+                      throw new Error(data.message || "Something went wrong");
+                    }
                       localStorage.setItem("token", data.token);
                       window.dispatchEvent(new Event("storage"));
                       setUserId(data.user_id); // Set userId in context
@@ -256,9 +253,7 @@ const Login: React.FC = () => {
       });
       const data = await response.json();
       if (!response.ok) {
-           // Show the message returned by the backend
-      toast.error(data.message || "Something went wrong", { position: "bottom-center" });
-      return;
+        throw new Error(data.message || "Password reset failed");
       }
       toast.success("Password reset link sent to your email!");
       localStorage.setItem(cooldownKey, now.toString()); // Store the timestamp of the attempt
@@ -286,9 +281,7 @@ const Login: React.FC = () => {
       });
       const data = await response.json();
       if (!response.ok) {
-           // Show the message returned by the backend
-      toast.error(data.message || "Something went wrong", { position: "bottom-center" });
-      return;
+        throw new Error(data.message || "Password reset failed");
       }
       if (data.redirectUrl) {
         toast.success("Password reset successful! You can now log in.");
@@ -314,9 +307,7 @@ const Login: React.FC = () => {
       });
       const data = await response.json();
       if (!response.ok) {
-           // Show the message returned by the backend
-      toast.error(data.message || "Something went wrong", { position: "bottom-center" });
-      return;
+        throw new Error(data.message || "Login failed");
       }
       //localStorage.setItem("token", data.token);
       //window.dispatchEvent(new Event("storage"));

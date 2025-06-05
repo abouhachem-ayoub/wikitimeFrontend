@@ -12,7 +12,6 @@ import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore/lite';
 import {getAuth, signInWithPopup, GoogleAuthProvider,FacebookAuthProvider,GithubAuthProvider} from "firebase/auth";
 import { useUser } from 'contexts/UserContext';
-const [deletionMessage,setDeletionMessage] = useState('');
 const firebaseConfig = {
     apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
     authDomain: import.meta.env.VITE_AUTH_DOMAIN,
@@ -209,9 +208,8 @@ const RegisterForm = ({ toggleForm, onLoginSuccess }: { toggleForm: () => void; 
                     });
                     const data = await response.json();
                     if (!response.ok) {
-   // Show the message returned by the backend
-   toast.error(data.message || "Something went wrong", { position: "bottom-center" });
-   return;                      }
+                        throw new Error(data.message || "Something went wrong");
+                      }
                         localStorage.setItem("token", data.token);
                         window.dispatchEvent(new Event("storage"));
                         toggleForm();
@@ -271,9 +269,7 @@ const registerwithsocials = async(formData:any)=>{
     });
     let  data = await response.json();
     if (!response.ok) {
-    // Show the message returned by the backend
-      toast.error(data.message || "Something went wrong", { position: "bottom-center" });
-      return;
+        throw new Error(data.message || "Something went wrong");
       }
         localStorage.setItem("token", data.token);
         window.dispatchEvent(new Event("storage"));
@@ -287,9 +283,7 @@ const registerwithsocials = async(formData:any)=>{
         });
         data = await response.json();
         if (!response.ok) {
-               // Show the message returned by the backend
-        toast.error(data.message || "Something went wrong", { position: "bottom-center" });
-        return;
+            throw new Error(data.message || "Something went wrong");
           }
           console.log('Setting userId:', data.user_id);
           onLoginSuccess(data.user_id, data.token, data.user); // Notify the parent component
@@ -309,9 +303,8 @@ const registerwithsocials = async(formData:any)=>{
                 });
                 const data = await response.json();
                 if (!response.ok) {
-   // Show the message returned by the backend
-   toast.error(data.message || "Something went wrong", { position: "bottom-center" });
-   return;                  }
+                    throw new Error(data.message || "Something went wrong");
+                  }
                   console.log('Setting userId:', data.user_id);
                   onLoginSuccess(data.user_id, data.token, data.user); // Notify the parent component
                   toast.success("Login successful!");
