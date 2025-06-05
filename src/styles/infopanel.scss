@@ -342,3 +342,26 @@ button .edit-info-cancel {
     cursor: not-allowed;
   }
 }
+
+button .bg-red-500 {
+  margin:20px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #fff;
+  background-color: #ff6030;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+
+  &:hover {
+    background-color: #fd7040;
+  }
+
+  &:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+  }
+}
+
