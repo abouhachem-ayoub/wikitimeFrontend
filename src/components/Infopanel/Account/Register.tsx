@@ -285,14 +285,12 @@ const registerwithsocials = async(formData:any)=>{
         if (!response.ok) {
             throw new Error(data.message || "Something went wrong");
           }
-            localStorage.setItem("token", data.token);
-            window.dispatchEvent(new Event("storage"));
-            toast.success("Registration successful! You can now log in.");
-            setUserId(data.user_id); // Set userId in context
-            toast.success("Login successful!");
-            localStorage.setItem('token', data.token); 
-            localStorage.setItem('useridfromcontext',userId||'nothing');
-            localStorage.setItem('user',data.user||'nothin')
+          console.log('Setting userId:', data.user_id);
+          setUserId(data.user_id); // Set userId in context
+          localStorage.setItem('userId', data.user_id || '');
+          localStorage.setItem('token', data.token);
+          localStorage.setItem('user', data.user || 'nothing');
+          toast.success("Login successful!");
         }
         catch(error){
                 console.log(error)
@@ -310,14 +308,13 @@ const registerwithsocials = async(formData:any)=>{
                 if (!response.ok) {
                     throw new Error(data.message || "Something went wrong");
                   }
-                    localStorage.setItem("token", data.token);
-                    window.dispatchEvent(new Event("storage"));
-                    setUserId(data.user_id); // Set userId in context
-                    toast.success("Login successful!");
-                    localStorage.setItem('useridfromcontext',userId||'nothing');
-                    localStorage.setItem('user',data.user||'nothin')
-                    toast.success("Registration successful! You can now log in.");
-                    }
+                console.log('Setting userId:', data.user_id);
+                setUserId(data.user_id); // Set userId in context
+                localStorage.setItem('userId', data.user_id || '');
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('user', data.user || 'nothing');
+                toast.success("Login successful!");
+                                    }
         catch(error){
                 console.log(error);
         }
