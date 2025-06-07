@@ -112,7 +112,7 @@ const RegisterForm = ({ toggleForm, onLoginSuccess }: { toggleForm: () => void; 
                     const data = await response.json(); 
 
                     if (data.exists) {
-                        setEmailErrorMessage(debouncedformData.email+'\talready exists, login instead');
+                        setEmailErrorMessage(debouncedformData.email+'\talready exists; login instead');
                         setEmailExists(true);
                     } else {
                         setEmailErrorMessage(debouncedformData.email+'\t is available');

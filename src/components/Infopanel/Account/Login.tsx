@@ -387,6 +387,7 @@ const Login: React.FC = () => {
             </div>
             <div className="mb-4 text-right">
               <a
+                href = '#'
                 onClick={() => setForgottenPassword(true)}
                 className="text-sm text-blue-500 hover:underline cursor-pointer"
               >
@@ -448,6 +449,7 @@ const Login: React.FC = () => {
             </button>
             <div className="mt-4 text-right">
               <a
+                href="#"
                 onClick={() => setForgottenPassword(false)}
                 className="text-sm text-blue-500 hover:underline cursor-pointer"
               >
@@ -498,6 +500,7 @@ const Login: React.FC = () => {
             </button>
             <div className="mt-4 text-right">
               <a
+                href="#"
                 onClick={() => setResetPassword(false)}
                 className="text-sm text-blue-500 hover:underline cursor-pointer"
               >
