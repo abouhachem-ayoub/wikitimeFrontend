@@ -290,13 +290,13 @@ const Login: React.FC = () => {
         toast.error(data.message || "Something went wrong", { position: "bottom-center" });
         throw new Error(data.message || "Password reset failed");
       }
-      if (data.redirectUrl) {
-        toast.success("Password reset successful! You can now log in.");
-        setTimeout(() => {
-          window.location.href = data.redirectUrl;
-        }, 200);
-    }
-      setResetPassword(false); // Switch back to login form
+        localStorage.setItem('token', data.token); // Save token if needed
+        setUserId(data.user_id); // Set userId in context
+        toast.success("Password reset successful! You will be now logged in...");
+        setResetPassword(false); // Switch back to login form
+        setUserId(data.user_id); // Set userId in context
+
+
     } catch (error: any) {
       toast.error(error.message || "An error occurred");
     }
