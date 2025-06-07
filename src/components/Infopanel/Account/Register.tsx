@@ -407,7 +407,6 @@ const handlesociallogin= async (authProvider:string) => {
     return (
         <div className="min-w-md max-w-lg mx-auto bg-white shadow-md rounded px-8 py-6"> 
             <Toaster/>
-            <h2 className="text-2xl font-bold text-gray-800 mb-4">Sign Up</h2>
             <form method='post' onSubmit={handleSubmit}>
             <div className="mb-4">
                     <label htmlFor="firstName" className="required block text-gray-700 font-medium mb-2">
