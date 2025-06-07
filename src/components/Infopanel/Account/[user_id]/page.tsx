@@ -57,6 +57,11 @@ const handleSubmit = async (e : React.FormEvent<HTMLFormElement>)=>{
     ...formData,
   }));
    try {
+    if(pseudoExists && user?.pseudo !== formData.pseudo){
+      toast.error('Pseudo already exists, please choose another one');
+      setUser(previousUser);
+      return;
+    }
     const response = await fetch(import.meta.env.VITE_API_BASE_URL+"api/auth/edituserinfo", {
     method: "POST",
     headers: {
