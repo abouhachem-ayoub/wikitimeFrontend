@@ -389,7 +389,6 @@ catch(error){
         <form action="">
         </form>
         <div>
-    {/* Other profile content */}
     <button
       onClick={()=>{setIsModalOpen(true);localStorage.setItem("isModalOpen", "true");
       }}

@@ -63,8 +63,8 @@ const Account: React.FC = () => {
     <div>
       {!userId && (
         <div>
-          <button onClick={toggleForm}>Login</button>
-          <button onClick={toggleForm}>Sign-Up</button>
+          {isRegistering ?<div><p>Already have an account? <a href='#' onClick={toggleForm}>sign in</a>instead</p></div> : <div><p>Don't have an account? <a href = '#' onClick={toggleForm}>sign up</a>instead</p></div>}
+          <h1>{isRegistering ? 'Sign Up' : 'Login'}</h1>
         </div>
       )}
       {!userId && (isRegistering ? <Login /> : <RegisterForm toggleForm={toggleForm} onLoginSuccess={handleLoginSuccess} />)}
