@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useEffect,useState } from 'react';
 import { ContextApp } from 'contexts/ContextApp';
 import { ContextWikipedia } from 'contexts/ContextWikipedia';
 import { useTranslation } from 'react-i18next'; //localization
@@ -67,7 +67,9 @@ import sourceLogo09 from      '../../../assets/source_contents/logo_scholarpedia
 import sourceLogo10 from      '../../../assets/source_contents/logo_unesco.svg';           //https://www.unesco.org
 import sourceLogo11 from      '../../../assets/source_contents/logo_wikipedia.svg';        //https://www.wikipedia.org
 import sourceLogo12 from      '../../../assets/source_contents/logo_worldhistory.svg';     //https://www.worldhistory.org
-const {userId,setUserId} = useUser(); // userId is used to determine the type of account (teacher, pro, user)
+const [accountLogo, setAccountLogo] = useState(UIaccountPro); // Default logo
+const {userId,setUserId} = useUser(); 
+// userId is used to determine the type of account (teacher, pro, user)
 interface ButtonsListProps {
   call: string;
 }
@@ -92,11 +94,19 @@ const ButtonsList = ({ call }: ButtonsListProps) => {
     setWikiDatesShow,
     setQueryBoxShow,
   } = useContext(ContextWikipedia);
+  useEffect(() => {
+    // Update the logo based on whether userId is set or null
+    if (userId) {
+      setAccountLogo(UIaccountUser); // Logo for logged-in users
+    } else {
+      setAccountLogo(UIaccountPro); // Logo for guests
+    }
+  }, [userId]);
 
   const ButtonsList = [
 // Toolbar
 //  [call/caption      , tooltip from loc     , image          ,txt,img, V , H , functionName             , parameter]
-    ['account'         , 'account_normal'     , userId?UIaccountUser:UIaccountPro  , 0 , 0 , 4 , 1 , 'setInfopanelShow'       , 'account'],
+    ['account'         , 'account_normal'     , accountLogo , 0 , 0 , 4 , 1 , 'setInfopanelShow'       , 'account'],
 
     ['wikibtns_show'   , 'wikibtns_show'      , UIwsDebugbtn   , 0 , 0 , 4 , 3 , 'ToggleWikiBtnsShow'     , ''],
     ['search'          , 'search_show'        , UIsearch       , 0 , 0 , 4 , 2 , 'TogglequeryBoxShow'     , ''],
