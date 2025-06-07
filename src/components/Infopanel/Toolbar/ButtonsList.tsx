@@ -246,7 +246,7 @@ const ButtonsList = ({ call }: ButtonsListProps) => {
 
   return (
     <div>
-      <button dtooltip={loc(fTooltip)} className={classTxt} onClick={handleClick}>
+      <button data-tooltip={loc(fTooltip)} className={classTxt} onClick={handleClick}>
         {/* if image is undefined then display caption */}
         {image ? <img alt={loc(fTooltip)} className={classImg} src={image}  /> : caption}
       </button>
