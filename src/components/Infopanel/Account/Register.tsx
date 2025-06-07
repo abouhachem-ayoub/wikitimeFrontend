@@ -498,7 +498,7 @@ const handlesociallogin= async (authProvider:string) => {
                         minLength={8}
                     />
                        <span className="border border-gray-300 rounded" title="show/hide"  onClick={handleToggle}>
-                       {(type=="password")? (<FiEye className='inline-block mt-[15px]'/>):(<FiEyeOff className='inline-block mt-[15px]'/>)}
+                       {(type=="password")? (<FiEye className='eye-style'/>):(<FiEyeOff className='eye-style'/>)}
                        </span>
                        </div>
                        {passwordErrorMessage &&
