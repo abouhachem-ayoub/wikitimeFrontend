@@ -244,7 +244,7 @@ const Login: React.FC = () => {
     const lastAttempt = localStorage.getItem(cooldownKey);
     const now = Date.now();
     if (lastAttempt && now - parseInt(lastAttempt, 10) < cooldownTime) {
-      let remainsInSeconds = ((now - parseInt(lastAttempt, 10))/60000).toFixed(0);
+      let remainsInSeconds = ((cooldownTime - (now - parseInt(lastAttempt, 10)))/60000).toFixed(0);
       toast.error("Please wait"+remainsInSeconds+" seconds before trying again.");
       return;
     }
