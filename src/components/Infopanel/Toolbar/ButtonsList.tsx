@@ -67,15 +67,15 @@ import sourceLogo09 from      '../../../assets/source_contents/logo_scholarpedia
 import sourceLogo10 from      '../../../assets/source_contents/logo_unesco.svg';           //https://www.unesco.org
 import sourceLogo11 from      '../../../assets/source_contents/logo_wikipedia.svg';        //https://www.wikipedia.org
 import sourceLogo12 from      '../../../assets/source_contents/logo_worldhistory.svg';     //https://www.worldhistory.org
-const [accountLogo, setAccountLogo] = useState(UIaccountPro); // Default logo
-const {userId,setUserId} = useUser(); 
+
 // userId is used to determine the type of account (teacher, pro, user)
 interface ButtonsListProps {
   call: string;
 }
 
 const ButtonsList = ({ call }: ButtonsListProps) => {
-
+const [accountLogo, setAccountLogo] = useState(UIaccountPro); // Default logo
+const {userId,setUserId} = useUser(); 
   const { t: loc } = useTranslation();
   const { 
     setInfopanelShow, isVertical, setIsVertical,
