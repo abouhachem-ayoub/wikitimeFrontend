@@ -9,6 +9,7 @@ type User = {
   email: string;
   emailVerified?: string | null;
   id: string;
+  password?: string | null; // Optional field for password
 };
 type ProfileHeaderProps = {
   user: User | null;

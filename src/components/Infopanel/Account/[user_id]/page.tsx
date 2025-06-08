@@ -104,6 +104,7 @@ const ProfilePage = () => {
     <div className="profile-page">
       <ProfileHeader user = {user}/>
       <ProfileDropdown
+        user = {user}
         onViewInfo={() => setIsViewInfoOpen(true)}
         onSetPassword={() => setIsSetPasswordOpen(true)}
         onEditPassword={() => setIsEditPasswordOpen(true)}
@@ -111,7 +112,7 @@ const ProfilePage = () => {
         onSignOut={handleSignOut}
         onEditInfo={() => setIsEditInfoOpen(true)}
       />
-      <ViewAccountInfo isOpen={isViewInfoOpen} onClose={() => setIsViewInfoOpen(false)} />
+      <ViewAccountInfo user={user} isOpen={isViewInfoOpen} onClose={() => setIsViewInfoOpen(false)} />
       <SetPasswordModal isOpen={isSetPasswordOpen} onClose={() => setIsSetPasswordOpen(false)} />
       <EditPasswordModal isOpen={isEditPasswordOpen} onClose={() => setIsEditPasswordOpen(false)} />
       <EditInfoModal isOpen={isEditInfoOpen} onClose={() => setIsEditInfoOpen(false)} />

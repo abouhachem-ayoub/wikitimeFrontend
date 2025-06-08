@@ -458,3 +458,10 @@ button .bg-red-500 {
   display:inline-block;
   margin-top : 15px
 }
+.profile-image{
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #ccc;
+}

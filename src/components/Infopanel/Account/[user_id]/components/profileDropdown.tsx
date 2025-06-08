@@ -1,6 +1,15 @@
 import React, { useState } from "react";
 import { FiUser } from "react-icons/fi";
-
+type User = {
+  pseudo: string;
+  firstName: string;
+  lastName: string;
+  phone: string;
+  email: string;
+  emailVerified?: string | null;
+  id: string;
+  password?: string | null; // Optional field for password
+};
 interface ProfileDropdownProps {
   onViewInfo: () => void;
   onSetPassword: () => void;
@@ -8,9 +17,11 @@ interface ProfileDropdownProps {
   onDelete: () => void;
   onSignOut: () => void;
   onEditInfo: () => void;
+  user?: User | null;
 }
 
 const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
+  user,
   onViewInfo,
   onSetPassword,
   onEditPassword,
@@ -30,8 +41,8 @@ const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
       {isOpen && (
         <ul className="dropdown-menu">
           <li onClick={onViewInfo}>View Account Info</li>
-          <li onClick={onSetPassword}>Set Your Password</li>
-          <li onClick={onEditPassword}>Edit Your Password</li>
+          {!user?.password &&<li onClick={onSetPassword}>Set Your Password</li>}
+          {user?.password && <li onClick={onEditPassword}>Edit Your Password</li>}
           <li onClick={onDelete}>Delete Your Account</li>
           <li onClick ={onEditInfo} >Edit you account info</li>
           <li onClick={onSignOut}>Sign Out</li>
