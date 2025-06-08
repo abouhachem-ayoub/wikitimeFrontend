@@ -1,6 +1,7 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import PhoneInput from "react-phone-input-2";
 import { useUser } from "contexts/UserContext";
+
 type User = {
   pseudo: string;
   firstName: string;
@@ -10,6 +11,7 @@ type User = {
   emailVerified?: string | null;
   id: string;
 };
+
 interface EditInfoModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -17,15 +19,17 @@ interface EditInfoModalProps {
   onSave: (updatedUserInfo: Partial<User>) => void; // Callback to save changes
 }
 
-const EditInfoModal = ({ isOpen, onClose,user,onSave }:EditInfoModalProps) => {
-  const {userId} = useUser();
+const EditInfoModal: React.FC<EditInfoModalProps> = ({ isOpen, onClose, user, onSave }) => {
   const [formData, setFormData] = useState({
-    firstName: user?.firstName || "",
-    lastName: user?.lastName|| "",
-    pseudo: user?.pseudo || "",
-    phone: user?.phone || "",
+    firstName: "",
+    lastName: "",
+    pseudo: "",
+    phone: "",
   });
-  const [phone,setPhone] = useState(user?.phone || '');
+
+  const [phone, setPhone] = useState("");
+
+  // Update formData when the modal is opened or the user prop changes
   useEffect(() => {
     if (isOpen && user) {
       setFormData({
@@ -38,7 +42,6 @@ const EditInfoModal = ({ isOpen, onClose,user,onSave }:EditInfoModalProps) => {
     }
   }, [isOpen, user]);
 
-
   const handlePhoneChange = (value: string) => {
     setPhone(value); // Update the phone state
     setFormData((prevFormData) => ({
@@ -46,6 +49,7 @@ const EditInfoModal = ({ isOpen, onClose,user,onSave }:EditInfoModalProps) => {
       phone: value, // Use the value directly from the onChange handler
     }));
   };
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -56,6 +60,7 @@ const EditInfoModal = ({ isOpen, onClose,user,onSave }:EditInfoModalProps) => {
     onSave(formData); // Pass the updated data to the parent
     onClose(); // Close the modal
   };
+
   if (!isOpen) return null;
 
   return (
@@ -84,12 +89,12 @@ const EditInfoModal = ({ isOpen, onClose,user,onSave }:EditInfoModalProps) => {
             value={formData.pseudo}
             onChange={handleInputChange}
           />
-             <PhoneInput
-                enableSearch={true}
-                country={'us'}
-                value={formData.phone}
-                onChange={handlePhoneChange}
-                    />
+          <PhoneInput
+            enableSearch={true}
+            country={"us"}
+            value={formData.phone}
+            onChange={handlePhoneChange}
+          />
           <button type="submit">Save</button>
           <button type="button" onClick={onClose}>
             Cancel
