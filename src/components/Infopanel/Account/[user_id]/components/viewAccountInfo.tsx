@@ -16,13 +16,9 @@ interface ViewAccountInfoProps {
 }
 
 const ViewAccountInfo: React.FC<ViewAccountInfoProps> = ({ user, isOpen, onClose, }) => {
-  const [userInfo, setUserInfo] = useState<User | null>(null);
-
-  // Update userInfo whenever the user prop or its attributes change
-
+  const [userInfo, setUserInfo] = useState<User | null>(user);
+  
   if (!isOpen) return null;
-
-
   return (
     <div className="modal-overlay">
       <div className="modal-content">

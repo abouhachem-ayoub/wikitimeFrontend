@@ -86,7 +86,7 @@ const ProfilePage = () => {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(updatedUserInfo),
+        body: JSON.stringify({...updatedUserInfo,userid:userId}),
       });
 
       if (!response.ok) {
@@ -131,7 +131,7 @@ const ProfilePage = () => {
     <div className="profile-page">
       <ProfileHeader user = {user}/>
       <ProfileDropdown
-      user = {user}
+        user = {user}
         onViewInfo={() => setIsViewInfoOpen(true)}
         onSetPassword={() => setIsSetPasswordOpen(true)}
         onEditPassword={() => setIsEditPasswordOpen(true)}
