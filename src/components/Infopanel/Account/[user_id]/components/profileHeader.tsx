@@ -15,8 +15,8 @@ type ProfileHeaderProps = {
   user: User | null;
 };
 
-const ProfileHeader = ({ user }: ProfileHeaderProps) =>
-{  const { userId,setUserId } = useUser();
+const ProfileHeader = ({ user }: ProfileHeaderProps) =>{  
+  const { userId,setUserId } = useUser();
 useEffect(() => {
   if (userId) {
     setUserId(userId);

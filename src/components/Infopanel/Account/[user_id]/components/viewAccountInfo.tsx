@@ -1,4 +1,5 @@
 import React,{useState,useEffect} from "react";
+import { useUser } from "contexts/UserContext";
 type User = {
   pseudo: string;
   firstName: string;
@@ -17,7 +18,12 @@ interface ViewAccountInfoProps {
 
 const ViewAccountInfo: React.FC<ViewAccountInfoProps> = ({ user, isOpen, onClose, }) => {
   const [userInfo, setUserInfo] = useState<User | null>(user);
-  
+  const {userId} = useUser()
+  useEffect(() => {
+    if (userId) {
+      setUserInfo(user);
+    }
+  }, [userId,user,user?.id]);
   if (!isOpen) return null;
   return (
     <div className="modal-overlay">
