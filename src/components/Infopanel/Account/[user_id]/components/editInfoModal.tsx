@@ -56,7 +56,7 @@ const EditInfoModal = ({ isOpen, onClose,user }:EditInfoModalProps) => {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({...formData,userid:user?.id}),
       });
 
       if (!response.ok) {
