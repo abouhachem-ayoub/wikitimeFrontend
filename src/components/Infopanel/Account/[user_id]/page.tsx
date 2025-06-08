@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import ProfileHeader from "./profileHeader";
-import ProfileDropdown from "./profileDropdown";
-import ViewAccountInfo from "./viewAccountInfo";
-import SetPasswordModal from "./setPasswordModal";
-import EditPasswordModal from "./editPasswordModal";
-import ConfirmDeleteModal from "../confirmDeleteModal";
+import  { useState } from "react";
+import ProfileHeader from "./components/profileHeader";
+import ProfileDropdown from "./components/profileDropdown";
+import ViewAccountInfo from "./components/viewAccountInfo";
+import SetPasswordModal from "./components/setPasswordModal";
+import EditPasswordModal from "./components/editPasswordModal";
+import ConfirmDeleteModal from "./components/confirmDeleteModal";
 import { useUser } from "contexts/UserContext";
 
 const ProfilePage = () => {

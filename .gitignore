@@ -41,5 +41,5 @@ dist-ssr
 *.sln
 #Swapfiles(e.g.,forVim)
 *.sw?
-
+backup*
 #LockFiles---------------------------------------------------------
