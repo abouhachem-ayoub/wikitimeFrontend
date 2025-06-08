@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import '../../../../../styles/infopanel.scss'; // Adjust the path as necessary
-
 interface ConfirmDeleteModalProps {
   isOpen: boolean;
   onClose: () => void;
   onConfirm: (password: string) => void;
 }
 
-const ConfirmDeleteModal: React.FC<ConfirmDeleteModalProps> = ({ isOpen, onClose, onConfirm }) => {
+const ConfirmDeleteModal: React.FC<ConfirmDeleteModalProps> = ({ isOpen, onClose, onConfirm}) => {
   const [password, setPassword] = useState("");
 
   if (!isOpen) return null;

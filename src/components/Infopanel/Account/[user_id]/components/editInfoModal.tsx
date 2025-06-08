@@ -1,18 +1,35 @@
 import React, { useState } from "react";
-
+import PhoneInput from "react-phone-input-2";
+type User = {
+  pseudo: string;
+  firstName: string;
+  lastName: string;
+  phone: string;
+  email: string;
+  emailVerified?: string | null;
+  id: string;
+};
 interface EditInfoModalProps {
   isOpen: boolean;
   onClose: () => void;
+  user?: User | null; // Optional user prop
 }
 
-const EditInfoModal: React.FC<EditInfoModalProps> = ({ isOpen, onClose }) => {
+const EditInfoModal: React.FC<EditInfoModalProps> = ({ isOpen, onClose,user }) => {
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    pseudo: "",
-    phone: "",
+    firstName: user?.firstName || "",
+    lastName: user?.lastName|| "",
+    pseudo: user?.pseudo || "",
+    phone: user?.phone || "",
   });
-
+  const [phone,setPhone] = useState(user?.phone || '');
+  const handlePhoneChange = (value: string) => {
+    setPhone(value); // Update the phone state
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      phone: value, // Use the value directly from the onChange handler
+    }));
+  };
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -69,13 +86,12 @@ const EditInfoModal: React.FC<EditInfoModalProps> = ({ isOpen, onClose }) => {
             value={formData.pseudo}
             onChange={handleInputChange}
           />
-          <input
-            type="text"
-            name="phone"
-            placeholder="Phone"
-            value={formData.phone}
-            onChange={handleInputChange}
-          />
+             <PhoneInput
+                enableSearch={true}
+                country={'us'}
+                value={user?.phone}
+                onChange={handlePhoneChange}
+                    />
           <button type="submit">Save</button>
           <button type="button" onClick={onClose}>
             Cancel

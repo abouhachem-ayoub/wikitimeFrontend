@@ -1,8 +1,17 @@
 import React, { useState } from "react";
-
+type User = {
+  pseudo: string;
+  firstName: string;
+  lastName: string;
+  phone: string;
+  email: string;
+  emailVerified?: string | null;
+  id: string;
+};
 interface EditPasswordModalProps {
   isOpen: boolean;
   onClose: () => void;
+  user?: User | null; // Optional user prop
 }
 
 export const EditPasswordModal: React.FC<EditPasswordModalProps> = ({ isOpen, onClose }) => {

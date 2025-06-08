@@ -71,7 +71,6 @@ const Account: React.FC = () => {
       {!userId && (isRegistering ? <Login /> : <RegisterForm toggleForm={toggleForm} onLoginSuccess={handleLoginSuccess} />)}
       {userId && (
         <div>
-          <button onClick={logout}>Sign out</button>
           <ProfilePage />
         </div>
       )}
