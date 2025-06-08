@@ -1,4 +1,4 @@
-import React from "react";
+import {useEffect} from "react";
 import { useUser } from "contexts/UserContext";
 
 type User = {
@@ -16,7 +16,12 @@ type ProfileHeaderProps = {
 };
 
 const ProfileHeader = ({ user }: ProfileHeaderProps) =>
-{  const { userId } = useUser();
+{  const { userId,setUserId } = useUser();
+useEffect(() => {
+  if (userId) {
+    setUserId(userId);
+  }
+}, [userId]);
   return (
     <div className="profile-header">
       <img
