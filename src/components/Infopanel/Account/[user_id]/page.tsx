@@ -54,6 +54,7 @@ const ProfilePage = () => {
     if (userId) {
       fetchUserInfo(userId).then((userInfo) => {
         if (userInfo) {
+          localStorage.setItem("user", JSON.stringify(userInfo)); // Store user info in localStorage
           setUser(userInfo);
           setUserId(userInfo.id); // Update userId in context if needed
           console.log("Fetched User Info:", userInfo);
