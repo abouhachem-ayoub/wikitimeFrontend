@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import PhoneInput from "react-phone-input-2";
 import { useUser } from "contexts/UserContext";
+import { use } from "i18next";
 
 type User = {
   pseudo: string;
@@ -20,11 +21,12 @@ interface EditInfoModalProps {
 }
 
 const EditInfoModal: React.FC<EditInfoModalProps> = ({ isOpen, onClose, user, onSave }) => {
+  const { userId } = useUser();
   const [formData, setFormData] = useState({
-    firstName: "",
-    lastName: "",
-    pseudo: "",
-    phone: "",
+    firstName: user?.firstName || "",
+    lastName:  user?.lastName || "",
+    pseudo: user?.pseudo || "",
+    phone: user?.phone || "",
   });
 
   const [phone, setPhone] = useState("");
