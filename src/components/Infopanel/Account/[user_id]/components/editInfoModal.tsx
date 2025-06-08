@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import PhoneInput from "react-phone-input-2";
 type User = {
   pseudo: string;
@@ -23,6 +23,18 @@ const EditInfoModal = ({ isOpen, onClose,user }:EditInfoModalProps) => {
     phone: user?.phone || "",
   });
   const [phone,setPhone] = useState(user?.phone || '');
+  useEffect(() => {
+    if (user) {
+      setFormData({
+        firstName: user.firstName || "",
+        lastName: user.lastName || "",
+        pseudo: user.pseudo || "",
+        phone: user.phone || "",
+      });
+      setPhone(user.phone || "");
+    }
+  }, [user]);
+
   const handlePhoneChange = (value: string) => {
     setPhone(value); // Update the phone state
     setFormData((prevFormData) => ({
