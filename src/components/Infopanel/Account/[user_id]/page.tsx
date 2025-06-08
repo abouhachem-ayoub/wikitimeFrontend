@@ -3,7 +3,7 @@ import ProfileHeader from "./components/profileHeader";
 import ProfileDropdown from "./components/profileDropdown";
 import ViewAccountInfo from "./components/viewAccountInfo";
 import SetPasswordModal from "./components/setPasswordModal";
-import EditPasswordModal from "./components/editPasswordModal";
+import {EditPasswordModal} from "./components/editPasswordModal";
 import ConfirmDeleteModal from "./components/confirmDeleteModal";
 import { useUser } from "contexts/UserContext";
 
