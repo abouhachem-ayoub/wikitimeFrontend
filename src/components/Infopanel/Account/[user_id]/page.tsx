@@ -7,8 +7,6 @@ import SetPasswordModal from "./components/setPasswordModal";
 import {EditPasswordModal} from "./components/editPasswordModal";
 import ConfirmDeleteModal from "./components/confirmDeleteModal";
 import { useUser } from "contexts/UserContext";
-import { userInfo } from "os";
-
 
 
 const ProfilePage = () => {
@@ -51,19 +49,25 @@ const ProfilePage = () => {
   };
 
   useEffect(() => {
-    if (userId) {
-      fetchUserInfo(userId).then((userInfo) => {
-        if (userInfo) {
-          localStorage.setItem("userINFO", JSON.stringify(userInfo)); // Store user info in localStorage
-          setUser(userInfo);
-          setUserId(userInfo.id); // Update userId in context if needed
-          console.log("Fetched User Info:", userInfo);
+    const fetchAndSetUserInfo = async () => {
+      if (userId) {
+        try {
+          const userInfo = await fetchUserInfo(userId); // Await the async function
+          if (userInfo) {
+            localStorage.setItem("userINFO", JSON.stringify(userInfo)); // Store user info in localStorage
+            setUser(userInfo); // Update the user state
+            console.log("Fetched User Info:", userInfo);
+          }
+        } catch (error) {
+          console.error("Error fetching user info:", error);
         }
-      });
-    } else {
-      console.error("User ID is not set.");
-    }
-  }, []);
+      } else {
+        console.error("User ID is not set.");
+      }
+    };
+  
+    fetchAndSetUserInfo(); // Call the async function
+  }, [userId]); // Dependency array ensures this runs when userId changes
 
   const handleDeleteAccount = async (password: string) => {
     try {
