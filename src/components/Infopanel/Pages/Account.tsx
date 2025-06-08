@@ -72,7 +72,7 @@ const Account: React.FC = () => {
       {userId && (
         <div>
           <button onClick={logout}>Sign out</button>
-          <ProfilePage params={{ user_id: userId }} />
+          <ProfilePage />
         </div>
       )}
     </div>
