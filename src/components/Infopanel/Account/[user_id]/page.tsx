@@ -7,7 +7,15 @@ import SetPasswordModal from "./components/setPasswordModal";
 import {EditPasswordModal} from "./components/editPasswordModal";
 import ConfirmDeleteModal from "./components/confirmDeleteModal";
 import { useUser } from "contexts/UserContext";
-
+type User = {
+  pseudo: string;
+  firstName: string;
+  lastName: string;
+  phone: string;
+  email: string;
+  emailVerified?: string | null;
+  id: string;
+};
 
 const ProfilePage = () => {
   const { userId, setUserId } = useUser();
@@ -16,7 +24,7 @@ const ProfilePage = () => {
   const [isEditPasswordOpen, setIsEditPasswordOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isEditInfoOpen, setIsEditInfoOpen] = useState(false);
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<User|null>(null);
     const handleSignOut = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("userid");
@@ -52,7 +60,7 @@ const ProfilePage = () => {
     const fetchAndSetUserInfo = async () => {
       if (userId) {
         try {
-          const userInfo = await fetchUserInfo(userId); // Await the async function
+          const userInfo:User = await fetchUserInfo(userId); // Await the async function
           if (userInfo) {
             localStorage.setItem("userINFO", JSON.stringify(userInfo)); // Store user info in localStorage
             setUser(userInfo); // Update the user state

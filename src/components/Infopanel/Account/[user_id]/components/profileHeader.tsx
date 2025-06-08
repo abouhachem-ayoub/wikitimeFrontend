@@ -1,5 +1,6 @@
 import React from "react";
 import { useUser } from "contexts/UserContext";
+
 type User = {
   pseudo: string;
   firstName: string;
@@ -9,16 +10,16 @@ type User = {
   emailVerified?: string | null;
   id: string;
 };
-interface ProfileHeaderProps {
-  user: User;
-}
+type ProfileHeaderProps = {
+  user: User | null;
+};
 
-const ProfileHeader :React.FC<ProfileHeaderProps>=({user}) => {
-  const { userId } = useUser();
+const ProfileHeader = ({ user }: ProfileHeaderProps) =>
+{  const { userId } = useUser();
   return (
     <div className="profile-header">
       <img
-        src={`https://api.dicebear.com/6.x/initials/svg?seed=${user.pseudo || "Guest"}`}
+        src={`https://api.dicebear.com/6.x/initials/svg?seed=${user?.pseudo || "Guest"}`}
         alt="Profile"
         className="profile-image"
       />
