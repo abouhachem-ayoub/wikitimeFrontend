@@ -33,7 +33,7 @@ const EditInfoModal = ({ isOpen, onClose,user }:EditInfoModalProps) => {
       });
       setPhone(user.phone || "");
     }
-  }, [user]);
+  }, [user,user?.firstName,user?.lastName,user?.phone,user?.pseudo]);
 
   const handlePhoneChange = (value: string) => {
     setPhone(value); // Update the phone state

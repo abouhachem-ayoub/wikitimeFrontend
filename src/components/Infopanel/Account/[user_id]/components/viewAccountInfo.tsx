@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 type User = {
   pseudo: string;
   firstName: string;
@@ -16,6 +16,14 @@ interface ViewAccountInfoProps {
 }
 
 const ViewAccountInfo: React.FC<ViewAccountInfoProps> = ({ user, isOpen, onClose, }) => {
+  const [userInfo, setUserInfo] = useState<User | null>(null);
+
+  // Update userInfo whenever the user prop or its attributes change
+  useEffect(() => {
+    if (user) {
+      setUserInfo(user);
+    }
+  }, [user,user?.firstName,user?.lastName,user?.pseudo,user?.phone]);
   if (!isOpen) return null;
 
 
@@ -23,11 +31,11 @@ const ViewAccountInfo: React.FC<ViewAccountInfoProps> = ({ user, isOpen, onClose
     <div className="modal-overlay">
       <div className="modal-content">
         <h2>Account Information</h2>
-        <p>Email: {user?.email}</p>
-        <p>First Name: {user?.firstName}</p>
-        <p>Last Name: {user?.lastName}</p>
-        <p>Pseudo: {user?.pseudo}</p>
-        <p>Phone: {user?.phone}</p>
+        <p>Email: {userInfo?.email}</p>
+        <p>First Name: {userInfo?.firstName}</p>
+        <p>Last Name: {userInfo?.lastName}</p>
+        <p>Pseudo: {userInfo?.pseudo}</p>
+        <p>Phone: {"+"+userInfo?.phone}</p>
         <button onClick={onClose}>Close</button>
       </div>
     </div>
