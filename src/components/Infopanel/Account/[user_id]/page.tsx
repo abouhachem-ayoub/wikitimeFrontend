@@ -14,6 +14,7 @@ const ProfilePage = () => {
   const [isSetPasswordOpen, setIsSetPasswordOpen] = useState(false);
   const [isEditPasswordOpen, setIsEditPasswordOpen] = useState(false);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isEditInfoOpen, setIsEditInfoOpen] = useState(false);
 
   const handleSignOut = () => {
     localStorage.removeItem("token");
@@ -55,10 +56,12 @@ const ProfilePage = () => {
         onEditPassword={() => setIsEditPasswordOpen(true)}
         onDelete={() => setIsDeleteModalOpen(true)}
         onSignOut={handleSignOut}
+        onEditInfo={() => setIsEditInfoOpen(true)}
       />
       <ViewAccountInfo isOpen={isViewInfoOpen} onClose={() => setIsViewInfoOpen(false)} />
       <SetPasswordModal isOpen={isSetPasswordOpen} onClose={() => setIsSetPasswordOpen(false)} />
       <EditPasswordModal isOpen={isEditPasswordOpen} onClose={() => setIsEditPasswordOpen(false)} />
+      <EditInfoModal isOpen={isEditInfoOpen} onClose={() => setIsEditInfoOpen(false)} />
       <ConfirmDeleteModal
         isOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}

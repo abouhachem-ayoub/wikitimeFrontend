@@ -6,6 +6,7 @@ interface ProfileDropdownProps {
   onEditPassword: () => void;
   onDelete: () => void;
   onSignOut: () => void;
+  onEditInfo: () => void;
 }
 
 const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
@@ -14,6 +15,7 @@ const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
   onEditPassword,
   onDelete,
   onSignOut,
+  onEditInfo
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -28,6 +30,7 @@ const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
           <li onClick={onSetPassword}>Set Your Password</li>
           <li onClick={onEditPassword}>Edit Your Password</li>
           <li onClick={onDelete}>Delete Your Account</li>
+          <li onClick ={onEditInfo} >Edit you account info</li>
           <li onClick={onSignOut}>Sign Out</li>
         </ul>
       )}
