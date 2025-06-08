@@ -15,7 +15,7 @@ interface EditInfoModalProps {
   user?: User | null; // Optional user prop
 }
 
-const EditInfoModal: React.FC<EditInfoModalProps> = ({ isOpen, onClose,user }) => {
+const EditInfoModal = ({ isOpen, onClose,user }:EditInfoModalProps) => {
   const [formData, setFormData] = useState({
     firstName: user?.firstName || "",
     lastName: user?.lastName|| "",
