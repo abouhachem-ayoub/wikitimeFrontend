@@ -29,7 +29,7 @@ const ProfilePage = () => {
 
   const fetchUserInfo = async (userId: string) => {
     try {
-      const response = await fetch("/api/auth/getuserinfo", {
+      const response = await fetch(import.meta.env.VITE_API_BASE_URL+"/api/auth/getuserinfo", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -54,7 +54,7 @@ const ProfilePage = () => {
     if (userId) {
       fetchUserInfo(userId).then((userInfo) => {
         if (userInfo) {
-          localStorage.setItem("user", JSON.stringify(userInfo)); // Store user info in localStorage
+          localStorage.setItem("userINFO", JSON.stringify(userInfo)); // Store user info in localStorage
           setUser(userInfo);
           setUserId(userInfo.id); // Update userId in context if needed
           console.log("Fetched User Info:", userInfo);
