@@ -23,7 +23,7 @@ const ProfileHeader = ({ user }: ProfileHeaderProps) =>
         alt="Profile"
         className="profile-image"
       />
-      <h2 className="profile-name">{userId ? `Welcome, ${userId}` : "Welcome, Guest"}</h2>
+      <h2 className="profile-name">{userId ? `Welcome, ${user?.pseudo}` : "Welcome, Guest"}</h2>
     </div>
   );
 };

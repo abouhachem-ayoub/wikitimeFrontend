@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { FiUser } from "react-icons/fi";
 
 interface ProfileDropdownProps {
   onViewInfo: () => void;
@@ -22,7 +23,9 @@ const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
   return (
     <div className="profile-dropdown">
       <button onClick={() => setIsOpen(!isOpen)} className="dropdown-button">
-        Menu
+        <FiUser className="icon" />
+        <span className="username">Profile</span>
+        <span className="caret">{isOpen ? "▲" : "▼"}</span>
       </button>
       {isOpen && (
         <ul className="dropdown-menu">
