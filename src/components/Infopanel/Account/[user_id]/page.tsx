@@ -2,6 +2,7 @@ import  { useState } from "react";
 import ProfileHeader from "./components/profileHeader";
 import ProfileDropdown from "./components/profileDropdown";
 import ViewAccountInfo from "./components/viewAccountInfo";
+import EditInfoModal from "./components/editInfoModal";
 import SetPasswordModal from "./components/setPasswordModal";
 import {EditPasswordModal} from "./components/editPasswordModal";
 import ConfirmDeleteModal from "./components/confirmDeleteModal";
