@@ -63,7 +63,7 @@ const ProfilePage = () => {
     } else {
       console.error("User ID is not set.");
     }
-  }, [userId]);
+  }, []);
 
   const handleDeleteAccount = async (password: string) => {
     try {
