@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import '../../../styles/infopanel.scss';
+import '../../../../../styles/infopanel.scss'; // Adjust the path as necessary
 
 interface ConfirmDeleteModalProps {
   isOpen: boolean;
