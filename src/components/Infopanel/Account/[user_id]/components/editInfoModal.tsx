@@ -32,7 +32,7 @@ const EditInfoModal = ({ isOpen, onClose,user,onSave }:EditInfoModalProps) => {
         firstName: user.firstName || "",
         lastName: user.lastName || "",
         pseudo: user.pseudo || "",
-        phone: user.phone || "",
+        phone: phone || "",
       });
       setPhone(user.phone || "");
     }
@@ -97,7 +97,7 @@ const EditInfoModal = ({ isOpen, onClose,user,onSave }:EditInfoModalProps) => {
              <PhoneInput
                 enableSearch={true}
                 country={'us'}
-                value={user?.phone}
+                value={formData.phone}
                 onChange={handlePhoneChange}
                     />
           <button type="submit">Save</button>
