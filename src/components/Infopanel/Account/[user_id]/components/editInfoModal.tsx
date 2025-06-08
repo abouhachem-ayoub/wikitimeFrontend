@@ -18,6 +18,7 @@ interface EditInfoModalProps {
 }
 
 const EditInfoModal = ({ isOpen, onClose,user,onSave }:EditInfoModalProps) => {
+  const {userId} = useUser();
   const [formData, setFormData] = useState({
     firstName: user?.firstName || "",
     lastName: user?.lastName|| "",
@@ -25,7 +26,6 @@ const EditInfoModal = ({ isOpen, onClose,user,onSave }:EditInfoModalProps) => {
     phone: user?.phone || "",
   });
   const [phone,setPhone] = useState(user?.phone || '');
-  const {userId} = useUser();
   useEffect(() => {
     if (user) {
       setFormData({
@@ -55,17 +55,6 @@ const EditInfoModal = ({ isOpen, onClose,user,onSave }:EditInfoModalProps) => {
     onSave(formData); // Pass the updated data to the parent
     onClose(); // Close the modal
   };
-  useEffect(() => {
-    if (userId) {
-      setFormData({
-        firstName:user?.firstName||'',
-        lastName:user?.lastName||'',
-        pseudo:user?.pseudo||'',
-        phone:user?.phone||""
-      });
-      setPhone(user?.phone||"");
-    }
-  }, [userId,user,user?.id]);
   if (!isOpen) return null;
 
   return (
