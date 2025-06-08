@@ -21,7 +21,7 @@ useEffect(() => {
   if (userId) {
     setUserId(userId);
   }
-}, [userId]);
+}, [userId,user,user?.id]);
   return (
     <div className="profile-header">
       <img
