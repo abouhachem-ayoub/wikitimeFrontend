@@ -39,6 +39,7 @@ const EditInfoModal: React.FC<EditInfoModalProps> = ({ isOpen, onClose, user, on
         phone: user.phone || "",
       });
       setPhone(user.phone || "");
+      localStorage.setItem("userINFfromedit", JSON.stringify(user)); // Store user info in localStorage
     }
   }, [isOpen, user]);
 
