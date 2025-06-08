@@ -19,11 +19,7 @@ const ViewAccountInfo: React.FC<ViewAccountInfoProps> = ({ user, isOpen, onClose
   const [userInfo, setUserInfo] = useState<User | null>(null);
 
   // Update userInfo whenever the user prop or its attributes change
-  useEffect(() => {
-    if (user) {
-      setUserInfo(user);
-    }
-  }, [user,user?.firstName,user?.lastName,user?.pseudo,user?.phone]);
+
   if (!isOpen) return null;
 
 

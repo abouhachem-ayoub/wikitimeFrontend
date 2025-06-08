@@ -76,7 +76,34 @@ const ProfilePage = () => {
   
     fetchAndSetUserInfo(); // Call the async function
   }, [userId]); // Dependency array ensures this runs when userId changes
+  
+  
+  const handleEditUserInfo = async (updatedUserInfo: Partial<User>) => {
+    try {
+      const response = await fetch(import.meta.env.VITE_API_BASE_URL + "api/auth/edituserinfo", {
+        method: "POST",
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedUserInfo),
+      });
 
+      if (!response.ok) {
+        throw new Error("Failed to update user info");
+      }
+
+      const updatedUser: User = { 
+        ...user!, 
+        ...updatedUserInfo 
+      }; // Ensure all required fields are present
+      setUser(updatedUser); // Update the user state
+      localStorage.setItem("userINFO", JSON.stringify(updatedUser)); // Update localStorage
+      alert("Your information has been updated.");
+    } catch (error: any) {
+      alert(error.message || "An error occurred while updating your information.");
+    }
+  };
   const handleDeleteAccount = async (password: string) => {
     try {
       const response = await fetch(import.meta.env.VITE_API_BASE_URL + "api/auth/deleteaccount", {
@@ -104,7 +131,7 @@ const ProfilePage = () => {
     <div className="profile-page">
       <ProfileHeader user = {user}/>
       <ProfileDropdown
-        user = {user}
+      user = {user}
         onViewInfo={() => setIsViewInfoOpen(true)}
         onSetPassword={() => setIsSetPasswordOpen(true)}
         onEditPassword={() => setIsEditPasswordOpen(true)}
@@ -115,7 +142,7 @@ const ProfilePage = () => {
       <ViewAccountInfo user={user} isOpen={isViewInfoOpen} onClose={() => setIsViewInfoOpen(false)} />
       <SetPasswordModal isOpen={isSetPasswordOpen} onClose={() => setIsSetPasswordOpen(false)} />
       <EditPasswordModal isOpen={isEditPasswordOpen} onClose={() => setIsEditPasswordOpen(false)} />
-      <EditInfoModal isOpen={isEditInfoOpen} onClose={() => setIsEditInfoOpen(false)} user = {user}/>
+      <EditInfoModal isOpen={isEditInfoOpen} onClose={() => setIsEditInfoOpen(false)} onSave={handleEditUserInfo} />
       <ConfirmDeleteModal
         isOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}

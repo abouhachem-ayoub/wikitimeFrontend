@@ -13,9 +13,10 @@ interface EditInfoModalProps {
   isOpen: boolean;
   onClose: () => void;
   user?: User | null; // Optional user prop
+  onSave: (updatedUserInfo: Partial<User>) => void; // Callback to save changes
 }
 
-const EditInfoModal = ({ isOpen, onClose,user }:EditInfoModalProps) => {
+const EditInfoModal = ({ isOpen, onClose,user,onSave }:EditInfoModalProps) => {
   const [formData, setFormData] = useState({
     firstName: user?.firstName || "",
     lastName: user?.lastName|| "",
@@ -47,27 +48,10 @@ const EditInfoModal = ({ isOpen, onClose,user }:EditInfoModalProps) => {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    try {
-      const response = await fetch(import.meta.env.VITE_API_BASE_URL + "api/auth/edituserinfo", {
-        method: "POST",
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem("token")}`,
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({...formData,userid:user?.id}),
-      });
-
-      if (!response.ok) {
-        throw new Error("Failed to update user info");
-      }
-
-      alert("Your information has been updated.");
-      onClose();
-    } catch (error: any) {
-      alert(error.message || "An error occurred while updating your information.");
-    }
+    onSave(formData); // Pass the updated data to the parent
+    onClose(); // Close the modal
   };
 
   if (!isOpen) return null;
