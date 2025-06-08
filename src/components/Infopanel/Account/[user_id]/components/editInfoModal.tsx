@@ -27,16 +27,17 @@ const EditInfoModal = ({ isOpen, onClose,user,onSave }:EditInfoModalProps) => {
   });
   const [phone,setPhone] = useState(user?.phone || '');
   useEffect(() => {
-    if (user) {
+    if (isOpen && user) {
       setFormData({
         firstName: user.firstName || "",
         lastName: user.lastName || "",
         pseudo: user.pseudo || "",
-        phone: phone || "",
+        phone: user.phone || "",
       });
       setPhone(user.phone || "");
     }
-  }, [user,user?.firstName,user?.lastName,user?.phone,user?.pseudo]);
+  }, [isOpen, user]);
+
 
   const handlePhoneChange = (value: string) => {
     setPhone(value); // Update the phone state
