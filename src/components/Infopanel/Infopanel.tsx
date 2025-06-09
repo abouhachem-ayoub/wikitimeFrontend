@@ -21,6 +21,13 @@ const Infopanel: React.FC = () => {
     infopanelShow, setInfopanelShow,
     timePanelData,
   } = useContext(ContextApp);
+  const params = new URLSearchParams(window.location.search);
+    const action = params.get("action"); // e.g., ?action=resetPassword or ?action=verifyEmail
+    useEffect(() => {
+    if (action === "resetPassword" || action === "verifyEmail") {
+      setInfopanelShow("account"); // Automatically show the account panel
+    }
+  }, []);
 
   useEffect(() => {if (wikiUrl !== '') {setInfopanelShow('wikipedia');}}, [wikiUrl]);
 

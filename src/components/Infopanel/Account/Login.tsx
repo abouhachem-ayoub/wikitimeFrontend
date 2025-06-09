@@ -18,13 +18,15 @@ const firebaseConfig = {
   appId: import.meta.env.VITE_APP_ID,
   measurementId: import.meta.env.VITE_MEASUREMENT_ID
 };
-const firebaseapp = initializeApp(firebaseConfig);
 const auth = getAuth();
 const Login: React.FC = () => {
   const [forgottenPassword, setForgottenPassword] = useState(false);
   const [resetPassword, setResetPassword] = useState(false); // New state for reset password form
   const [formData, setFormData] = useState({ email: '', password: '', confirmPassword: '' });
   const [type, setType] = useState('password');
+  const [type2, setType2] = useState('password');
+  const [type3, setType3] = useState('password');
+  
   const params = new URLSearchParams(window.location.search);
   const resetpasswordtoken = params.get('token');
   const { setUserId } = useUser();
@@ -338,6 +340,12 @@ const Login: React.FC = () => {
   const handleToggle = () => {
     setType(type === 'password' ? 'text' : 'password');
   };
+  const handleToggle2 = () => {
+    setType(type2 === 'password' ? 'text' : 'password');
+  };
+  const handleToggle3 = () => {
+    setType(type3 === 'password' ? 'text' : 'password');
+  };
 
   return (
     <div>
@@ -466,6 +474,7 @@ const Login: React.FC = () => {
               <label htmlFor="password" className="block text-gray-700 font-medium mb-2">
                 New Password
               </label>
+              <div className='mb-4 flex'>
               <input
                 name="password"
                 type="password"
@@ -476,11 +485,20 @@ const Login: React.FC = () => {
                 value={formData.password}
                 onChange={handleInputChange}
               />
+                  <span
+                  className="border border-gray-300 rounded cursor-pointer"
+                  title="show/hide"
+                  onClick={handleToggle2}
+                >
+                  {type2 === "password" ? <FiEye className="custom-class" /> : <FiEyeOff className="custom-class" />}
+                </span>
+            </div>
             </div>
             <div className="mb-4">
               <label htmlFor="confirmPassword" className="block text-gray-700 font-medium mb-2">
                 Confirm Password
               </label>
+              <div className='mb-4 flex'>
               <input
                 name="confirmPassword"
                 type="password"
@@ -491,6 +509,14 @@ const Login: React.FC = () => {
                 value={formData.confirmPassword}
                 onChange={handleInputChange}
               />
+                  <span
+                  className="border border-gray-300 rounded cursor-pointer"
+                  title="show/hide"
+                  onClick={handleToggle3}
+                >
+                  {type3 === "password" ? <FiEye className="custom-class" /> : <FiEyeOff className="custom-class" />}
+                </span>
+                </div>
             </div>
             <button
               type="submit"
