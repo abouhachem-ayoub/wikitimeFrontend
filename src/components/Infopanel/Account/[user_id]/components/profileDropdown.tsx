@@ -51,7 +51,10 @@ const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
       {isOpen && (
         <ul className="dropdown-menu">
           {emailVerified === null ? (
-            <li onClick={onVerifyEmail}>Verify Your Email</li>
+            <ul>
+            <li className="disabled">Your Email Is Not Verified</li>
+            <li onClick={onVerifyEmail}>Click To Receive Verification Email</li>
+            </ul>
           ) : (
             <>
               <li onClick={onViewInfo}>View Account Info</li>
