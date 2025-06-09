@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { FiEye, FiEyeOff } from "react-icons/fi";
 type User = {
   pseudo: string;
   firstName: string;
@@ -18,6 +19,12 @@ export const EditPasswordModal: React.FC<EditPasswordModalProps> = ({ isOpen, on
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [newPassword2, setNewPassword2] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPassword2, setShowPassword2] = useState(false);
+  const [showPassword3, setShowPassword3] = useState(false);
+  const [type, setType] = useState("password");
+  const [type2, setType2] = useState("password");
+  const [type3, setType3] = useState("password");
 
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -74,24 +81,87 @@ export const EditPasswordModal: React.FC<EditPasswordModalProps> = ({ isOpen, on
       <div className="modal-content">
         <h2>Edit Your Password</h2>
         <form onSubmit={handleSubmit}>
+          <div>
           <input
-            type="password"
+            type={type}
+            required
             placeholder="Enter current password"
             value={currentPassword}
             onChange={(e) => setCurrentPassword(e.target.value)}
           />
+          {            showPassword ? (
+            <FiEye
+              className="password-icon"
+              onClick={() => {
+                setShowPassword(false);
+                setType("password");
+              }}
+            />
+          ) : (
+            <FiEyeOff
+              className="password-icon"
+              onClick={() => {
+                setShowPassword(true);
+                setType("text");
+              }}
+            />
+          )}
+        
+          </div>
+          <div>
           <input
-            type="password"
+            type={type2}
+            required
+            minLength={8}
             placeholder="Enter new password"
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
           />
+          {            showPassword2 ? (
+            <FiEye
+              className="password-icon"
+              onClick={() => {
+                setShowPassword2(false);
+                setType2("password");
+              }}
+            />
+          ) : (
+            <FiEyeOff
+              className="password-icon"
+              onClick={() => {
+                setShowPassword2(true);
+                setType2("text");
+              }}
+            />
+          )}
+          </div>
+          <div>
           <input
-            type="password"
+            type={type3}
+            required
+            minLength={8}
             placeholder="Confirm new password"
             value={newPassword2}
             onChange={(e) => setNewPassword2(e.target.value)}
           />
+          {            showPassword3 ? (
+            <FiEye
+              className="password-icon"
+              onClick={() => {
+                setShowPassword3(false);
+                setType3("password");
+              }}
+            />
+          ) : (
+            <FiEyeOff
+              className="password-icon"
+              onClick={() => {
+                setShowPassword3(true);
+                setType3("text");
+              }}
+            />
+          )}
+          </div>
           <button type="submit">Update Password</button>
           <button type="button" onClick={onClose}>
             Cancel
