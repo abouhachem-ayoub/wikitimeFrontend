@@ -7,7 +7,9 @@ interface ProfileDropdownProps {
   onDelete: () => void;
   onSignOut: () => void;
   onEditInfo: () => void;
-  hasPassword?: boolean; // Optional prop to track if the user has a password
+  hasPassword?: boolean;
+  onVerifyEmail: () => void;
+  emailVerified?: string | null;
 }
 
 const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
@@ -17,7 +19,9 @@ const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
   onEditPassword,
   onDelete,
   onSignOut,
-  onEditInfo
+  onEditInfo,
+  onVerifyEmail,
+  emailVerified
 }) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -46,12 +50,18 @@ const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
       </button>
       {isOpen && (
         <ul className="dropdown-menu">
-          <li onClick={onViewInfo}>View Account Info</li>
-          {!hasPassword &&<li onClick={onSetPassword}>Set Your Password</li>}
-          {hasPassword && <li onClick={onEditPassword}>Edit Your Password</li>}
-          <li onClick={onDelete}>Delete Your Account</li>
-          <li onClick ={onEditInfo} >Edit you account info</li>
-          <li onClick={onSignOut}>Sign Out</li>
+          {emailVerified === null ? (
+            <li onClick={onVerifyEmail}>Verify Your Email</li>
+          ) : (
+            <>
+              <li onClick={onViewInfo}>View Account Info</li>
+              {!hasPassword && <li onClick={onSetPassword}>Set Your Password</li>}
+              {hasPassword && <li onClick={onEditPassword}>Edit Your Password</li>}
+              <li onClick={onDelete}>Delete Your Account</li>
+              <li onClick={onEditInfo}>Edit Your Account Info</li>
+              <li onClick={onSignOut}>Sign Out</li>
+            </>
+          )}
         </ul>
       )}
     </div>

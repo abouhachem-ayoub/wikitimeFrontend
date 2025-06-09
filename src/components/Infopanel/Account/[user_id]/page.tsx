@@ -30,6 +30,8 @@ const ProfilePage = () => {
   const [isEditInfoOpen, setIsEditInfoOpen] = useState(false);
   const [user, setUser] = useState<User|null>(null);
   const [hasPassword, setHasPassword] = useState(!!user?.password);
+  const [lastEmailSentTime, setLastEmailSentTime] = useState<number | null>(null); // Track the last email sent time
+
    // Track if the user has a password
     const handleSignOut = () => {
     localStorage.removeItem("token");
@@ -37,6 +39,36 @@ const ProfilePage = () => {
     localStorage.removeItem("user");
     setUserId(null);
   };
+  const handleVerifyEmail = async () => {
+    const currentTime = Date.now();
+    // Check if the cooldown period has elapsed
+    if (lastEmailSentTime && currentTime - lastEmailSentTime < 5 * 60 * 1000) {
+      const remainingTime = Math.ceil((5 * 60 * 1000 - (currentTime - lastEmailSentTime)) / 1000);
+  alert(`Please wait ${remainingTime} seconds before sending another verification email.`);
+  return;
+}
+
+try {
+  const response = await fetch(import.meta.env.VITE_API_BASE_URL + "api/auth/verifyemail", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ userId: user?.id }),
+  });
+
+  if (!response.ok) {
+    const data = await response.json();
+    throw new Error(data.message || "Failed to verify email");
+  }
+
+  alert("A verification email has been sent to your email address.");
+  setLastEmailSentTime(currentTime); // Update the last email sent time
+} catch (error: any) {
+  alert(error.message || "An error occurred while verifying your email.");
+}
+};
   const handleSetPasswordSuccess = () => {
     setHasPassword(true);
   }
@@ -193,6 +225,8 @@ const ProfilePage = () => {
         onDelete={() => setIsDeleteModalOpen(true)}
         onSignOut={handleSignOut}
         onEditInfo={() => setIsEditInfoOpen(true)}
+        onVerifyEmail={handleVerifyEmail}
+        emailVerified={user?.emailVerified}
       />
       <ViewAccountInfo user={user} isOpen={isViewInfoOpen} onClose={() => setIsViewInfoOpen(false)} />
       <SetPasswordModal isOpen={isSetPasswordOpen} onClose={() => setIsSetPasswordOpen(false)}  onSuccess={handleSetPasswordSuccess} />
