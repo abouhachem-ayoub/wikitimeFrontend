@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { FiUser } from "react-icons/fi";
 type User = {
   pseudo: string;
@@ -30,6 +30,26 @@ const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
   onEditInfo
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const [hasPassword, setHasPassword] = useState(user?.password ? true:false); // State to track if the user has a password
+  useEffect(() => {
+    if (user?.password) {
+      setHasPassword(true); // Update state when the password is set
+    }
+  }, [user?.password]);
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (!target.closest(".profile-dropdown")) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
 
   return (
     <div className="profile-dropdown">
@@ -41,8 +61,8 @@ const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
       {isOpen && (
         <ul className="dropdown-menu">
           <li onClick={onViewInfo}>View Account Info</li>
-          {!user?.password &&<li onClick={onSetPassword}>Set Your Password</li>}
-          {user?.password && <li onClick={onEditPassword}>Edit Your Password</li>}
+          {!hasPassword &&<li onClick={onSetPassword}>Set Your Password</li>}
+          {hasPassword && <li onClick={onEditPassword}>Edit Your Password</li>}
           <li onClick={onDelete}>Delete Your Account</li>
           <li onClick ={onEditInfo} >Edit you account info</li>
           <li onClick={onSignOut}>Sign Out</li>
