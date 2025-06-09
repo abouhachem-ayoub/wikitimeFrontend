@@ -3,7 +3,7 @@ import '../../../../../styles/infopanel.scss'; // Adjust the path as necessary
 interface ConfirmDeleteModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onConfirm: (data: { password?: string; pseudo?: string; confirmPhrase?: boolean }) => void;
+  onConfirm: (data: { password?: string; pseudo?: string; confirmPhrase?: string }) => void;
   hasPassword: boolean; // Indicates if the user has a password set
   pseudo: string; 
 }
@@ -20,7 +20,7 @@ const ConfirmDeleteModal: React.FC<ConfirmDeleteModalProps> = ({ isOpen, onClose
     } else {
       // Check if the pseudo and confirmation phrase are correct
       if (typedPseudo === pseudo && confirmationPhrase.toLowerCase() === "delete my account") {
-        onConfirm({ pseudo: typedPseudo, confirmPhrase: true });
+        onConfirm({ pseudo: typedPseudo, confirmPhrase: 'delete my account' });
       } else {
         alert("Please type your pseudo and the confirmation phrase correctly.");
       }

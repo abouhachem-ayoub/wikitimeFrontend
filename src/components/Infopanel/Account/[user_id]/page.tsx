@@ -155,7 +155,7 @@ const ProfilePage = () => {
         return;
       }
       if (confirmPhrase !== "delete my account") {
-        alert("Confirmation phrase is incorrect. Please type 'DELETE' to confirm.");
+        alert("Confirmation phrase is incorrect. Please type 'delete my account' to confirm.");
         return;
       }
       try {
@@ -201,7 +201,7 @@ const ProfilePage = () => {
       <ConfirmDeleteModal
         isOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
-        onConfirm={(data) => handleDeleteAccount}
+        onConfirm={(data) => handleDeleteAccount(data as ConfirmDeleteData)}
         pseudo ={user?.pseudo || ""}
         hasPassword={hasPassword}
       />
