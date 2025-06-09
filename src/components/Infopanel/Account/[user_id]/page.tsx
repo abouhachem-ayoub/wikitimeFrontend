@@ -49,7 +49,7 @@ const ProfilePage = () => {
 }
 
 try {
-  const response = await fetch(import.meta.env.VITE_API_BASE_URL + "api/auth/verifyemail", {
+  const response = await fetch(import.meta.env.VITE_API_BASE_URL + "api/auth/verify-email", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
