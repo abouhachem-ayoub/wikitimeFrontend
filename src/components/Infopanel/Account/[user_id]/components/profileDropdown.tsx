@@ -1,15 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { FiUser } from "react-icons/fi";
-type User = {
-  pseudo: string;
-  firstName: string;
-  lastName: string;
-  phone: string;
-  email: string;
-  emailVerified?: string | null;
-  id: string;
-  password?: string | null; // Optional field for password
-};
 interface ProfileDropdownProps {
   onViewInfo: () => void;
   onSetPassword: () => void;
@@ -17,11 +7,11 @@ interface ProfileDropdownProps {
   onDelete: () => void;
   onSignOut: () => void;
   onEditInfo: () => void;
-  user?: User | null;
+  hasPassword?: boolean; // Optional prop to track if the user has a password
 }
 
 const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
-  user,
+  hasPassword,
   onViewInfo,
   onSetPassword,
   onEditPassword,
@@ -30,12 +20,8 @@ const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
   onEditInfo
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [hasPassword, setHasPassword] = useState(user?.password ? true:false); // State to track if the user has a password
-  useEffect(() => {
-    if (user?.password) {
-      setHasPassword(true); // Update state when the password is set
-    }
-  }, [user?.password,isOpen]);
+
+  
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as HTMLElement;

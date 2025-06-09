@@ -15,6 +15,7 @@ type User = {
   email: string;
   emailVerified?: string | null;
   id: string;
+  password?: string | null; // Optional field for password
 };
 
 const ProfilePage = () => {
@@ -25,14 +26,17 @@ const ProfilePage = () => {
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [isEditInfoOpen, setIsEditInfoOpen] = useState(false);
   const [user, setUser] = useState<User|null>(null);
+  const [hasPassword, setHasPassword] = useState(!!user?.password);
+   // Track if the user has a password
     const handleSignOut = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("userid");
     localStorage.removeItem("user");
     setUserId(null);
-    window.location.href = "/"; // Redirect to login page
   };
-
+  const handleSetPasswordSuccess = () => {
+    setHasPassword(true);
+  }
   const fetchUserInfo = async (userId: string) => {
     try {
       const response = await fetch(import.meta.env.VITE_API_BASE_URL+"api/auth/getuserinfo", {
@@ -77,6 +81,8 @@ const ProfilePage = () => {
     fetchAndSetUserInfo(); // Call the async function
   }, [userId]); // Dependency array ensures this runs when userId changes
   
+
+
   
   const handleEditUserInfo = async (updatedUserInfo: Partial<User>) => {
     try {
@@ -131,7 +137,7 @@ const ProfilePage = () => {
     <div className="profile-page">
       <ProfileHeader user = {user}/>
       <ProfileDropdown
-        user = {user}
+        hasPassword={hasPassword}
         onViewInfo={() => setIsViewInfoOpen(true)}
         onSetPassword={() => setIsSetPasswordOpen(true)}
         onEditPassword={() => setIsEditPasswordOpen(true)}
@@ -140,7 +146,7 @@ const ProfilePage = () => {
         onEditInfo={() => setIsEditInfoOpen(true)}
       />
       <ViewAccountInfo user={user} isOpen={isViewInfoOpen} onClose={() => setIsViewInfoOpen(false)} />
-      <SetPasswordModal isOpen={isSetPasswordOpen} onClose={() => setIsSetPasswordOpen(false)} />
+      <SetPasswordModal isOpen={isSetPasswordOpen} onClose={() => setIsSetPasswordOpen(false)}  onSuccess={handleSetPasswordSuccess} />
       <EditPasswordModal isOpen={isEditPasswordOpen} onClose={() => setIsEditPasswordOpen(false)} />
       <EditInfoModal isOpen={isEditInfoOpen} onClose={() => setIsEditInfoOpen(false)} onSave={handleEditUserInfo} user={user} />
       <ConfirmDeleteModal

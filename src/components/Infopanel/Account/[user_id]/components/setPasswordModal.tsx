@@ -5,9 +5,10 @@ import { useUser } from "contexts/UserContext";
 interface SetPasswordModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onSuccess :() => void; // Optional callback for success
 }
 
-const SetPasswordModal: React.FC<SetPasswordModalProps> = ({ isOpen, onClose }) => {
+const SetPasswordModal: React.FC<SetPasswordModalProps> = ({ isOpen, onClose, onSuccess}) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -48,6 +49,7 @@ const SetPasswordModal: React.FC<SetPasswordModalProps> = ({ isOpen, onClose }) 
       }
 
       alert("Password set successfully.");
+      onSuccess();
       onClose();
     } catch (error: any) {
       alert(error.message || "An error occurred while setting your password.");
