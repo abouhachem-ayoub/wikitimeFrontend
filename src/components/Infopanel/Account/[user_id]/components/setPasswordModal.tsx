@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-//import {fiEye, FiEyeOff} from "react-icons/fi";
+import {FiEye, FiEyeOff} from "react-icons/fi";
 
 interface SetPasswordModalProps {
   isOpen: boolean;
@@ -9,7 +9,10 @@ interface SetPasswordModalProps {
 const SetPasswordModal: React.FC<SetPasswordModalProps> = ({ isOpen, onClose }) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const[type, setType] = useState("password");
+  const[type2, setType2] = useState("password");
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if(!password || password.trim() === "") {
@@ -56,20 +59,60 @@ const SetPasswordModal: React.FC<SetPasswordModalProps> = ({ isOpen, onClose }) 
       <div className="modal-content">
         <h2>Set Your Password</h2>
         <form onSubmit={handleSubmit}>
+          <div className="mb-4 flex">
           <input
             required
-            type="password"
+            type={type}
             placeholder="Enter new password"
             value={password}
+            minLength={8}
             onChange={(e) => setPassword(e.target.value)}
           />
+          {showPassword ? (
+            <FiEye
+              className="password-icon"
+              onClick={() => {
+                setShowPassword(false);
+                setType("password");
+              }}
+            />
+          ) : (
+            <FiEyeOff
+              className="password-icon"
+              onClick={() => {
+                setShowPassword(true);
+                setType("text");
+              }}
+            />
+          )}
+          </div>
+          <div className="mb-4 flex">
             <input
             required
-            type="password"
+            type={type2}
+            minLength={8}
             placeholder="Confirm new password"
             value={confirmPassword}
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
+          {showConfirmPassword ? (
+            <FiEye
+              className="password-icon"
+              onClick={() => {
+                setShowConfirmPassword(false);
+                setType2("password");
+              }}
+            />
+          ) : (
+            <FiEyeOff
+              className="password-icon"
+              onClick={() => {
+                setShowConfirmPassword(true);
+                setType2("text");
+              }}
+            />
+          )}
+          </div>
           <button type="submit">Set Password</button>
           <button type="button" onClick={onClose}>
             Cancel

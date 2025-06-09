@@ -81,7 +81,7 @@ export const EditPasswordModal: React.FC<EditPasswordModalProps> = ({ isOpen, on
       <div className="modal-content">
         <h2>Edit Your Password</h2>
         <form onSubmit={handleSubmit}>
-          <div>
+          <div className="mb-4 flex">
           <input
             type={type}
             required
@@ -108,7 +108,7 @@ export const EditPasswordModal: React.FC<EditPasswordModalProps> = ({ isOpen, on
           )}
         
           </div>
-          <div>
+          <div className="mb-4 flex">
           <input
             type={type2}
             required
@@ -135,7 +135,7 @@ export const EditPasswordModal: React.FC<EditPasswordModalProps> = ({ isOpen, on
             />
           )}
           </div>
-          <div>
+          <div className="mb-4 flex">
           <input
             type={type3}
             required
