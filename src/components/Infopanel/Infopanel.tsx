@@ -29,7 +29,7 @@ const Infopanel: React.FC = () => {
     }
   }, [setInfopanelShow, action]);
 
-  //useEffect(() => {if (wikiUrl !== '') {setInfopanelShow('wikipedia');}}, [wikiUrl]);
+  useEffect(() => {if (wikiUrl !== '' && !action) {setInfopanelShow('wikipedia');}}, [wikiUrl]);
 
   return (
     <div className={'infopanel-container'}>

@@ -36,8 +36,26 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
   // Chart timePanel
   const [timePanelData, setTimePanelData] = useState<any[]>([]); // TimePanel data
   const [infopanelShow, setInfopanelShow] = useState<string>("");
+  const [actionParam, setActionParam] = useState<string | null>(null); // Track the action parameter
 
   //console.log('ContextApp split:', split.toFixed(1), 'splitV:', splitV.toFixed(1),  'splitH:', splitH.toFixed(1));
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const action = params.get("action");
+
+    if (action === "resetPassword" || action === "verifyEmail") {
+      setActionParam(action);
+      if (isVertical) {
+        setSplitV(40); // Set Infopanel to take 40% of the screen height
+      } else {
+        setSplitH(40); // Set Infopanel to take 40% of the screen width
+      }
+      setInfopanelShow("account"); // Automatically show the account panel
+    } else {
+      setActionParam(null);
+    }
+  }, [isVertical]);
+
   useEffect(() => {
     root.style.setProperty('--color-IPNavbar', isVertical ? 'var(--color-IPNavbar-vertical)' : 'var(--color-IPNavbar-horizontal)');
     root.style.setProperty('--value-TBflex', isVertical ? 'var(--value-TBflex-vertical)' : 'var(--value-TBflex-horizontal)');
