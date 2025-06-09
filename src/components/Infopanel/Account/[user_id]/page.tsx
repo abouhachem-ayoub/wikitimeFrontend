@@ -7,6 +7,9 @@ import SetPasswordModal from "./components/setPasswordModal";
 import {EditPasswordModal} from "./components/editPasswordModal";
 import ConfirmDeleteModal from "./components/confirmDeleteModal";
 import { useUser } from "contexts/UserContext";
+type ConfirmDeleteData =
+  | { password: string } // When the user has a password
+  | { pseudo: string; confirmPhrase: string }; // When the user does not have a password
 type User = {
   pseudo: string;
   firstName: string;
@@ -110,7 +113,17 @@ const ProfilePage = () => {
       alert(error.message || "An error occurred while updating your information.");
     }
   };
-  const handleDeleteAccount = async (password: string) => {
+  const handleDeleteAccount = async (data:ConfirmDeleteData) => {
+    if(data.hasOwnProperty("password")) {
+      const { password } = data as { password: string };
+      if (!password) {
+        alert("Please enter your password to confirm account deletion.");
+        return;
+      }
+    if (password.length < 8) {
+      alert("Password must be at least 8 characters long.");
+      return;
+    }
     try {
       const response = await fetch(import.meta.env.VITE_API_BASE_URL + "api/auth/deleteaccount", {
         method: "DELETE",
@@ -130,7 +143,43 @@ const ProfilePage = () => {
       handleSignOut();
     } catch (error: any) {
       alert(error.message || "An error occurred while deleting your account.");
+    }}
+    else {
+      const { pseudo, confirmPhrase } = data as { pseudo: string; confirmPhrase: string };
+      if (!pseudo || !confirmPhrase) {
+        alert("Please enter your pseudo and the confirmation phrase to delete your account.");
+        return;
+      }
+      if (pseudo !== user?.pseudo) {
+        alert("Pseudo does not match. Please try again.");
+        return;
+      }
+      if (confirmPhrase !== "delete my account") {
+        alert("Confirmation phrase is incorrect. Please type 'DELETE' to confirm.");
+        return;
+      }
+      try {
+        const response = await fetch(import.meta.env.VITE_API_BASE_URL + "api/auth/deleteaccount", {
+          method: "DELETE",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ pseudo, confirmPhrase }),
+        });
+
+        if (!response.ok) {
+          const data = await response.json();
+          throw new Error(data.message || "Failed to delete account");
+        }
+
+        alert("Your account has been deleted. You will be logged out.");
+        handleSignOut();
+      } catch (error: any) {
+        alert(error.message || "An error occurred while deleting your account.");
+      }
     }
+
   };
 
   return (
@@ -152,7 +201,9 @@ const ProfilePage = () => {
       <ConfirmDeleteModal
         isOpen={isDeleteModalOpen}
         onClose={() => setIsDeleteModalOpen(false)}
-        onConfirm={handleDeleteAccount}
+        onConfirm={(data) => handleDeleteAccount}
+        pseudo ={user?.pseudo || ""}
+        hasPassword={hasPassword}
       />
     </div>
   );

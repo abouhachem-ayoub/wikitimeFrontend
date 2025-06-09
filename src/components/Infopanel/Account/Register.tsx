@@ -465,7 +465,7 @@ const handlesociallogin= async (authProvider:string) => {
                         Email
                     </label>
                     <input
-                        maxLength={50}
+                        maxLength={100}
                         type="email"
                         id="email"
                         name='email'
