@@ -48,7 +48,7 @@ export const AppProvider = ({ children }: { children: ReactNode }) => {
       if (isVertical) {
         setSplitV(40); // Set Infopanel to take 40% of the screen height
       } else {
-        setSplitH(40); // Set Infopanel to take 40% of the screen width
+        setSplitH(60); // Set Infopanel to take 40% of the screen width
       }
       setInfopanelShow("account"); // Automatically show the account panel
     } else {

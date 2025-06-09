@@ -36,7 +36,7 @@ const RegisterForm = ({ toggleForm, onLoginSuccess }: { toggleForm: () => void; 
     const [emailExists, setEmailExists] = useState(false);
     const [passwordErrorMessage,setPasswordErrorMessage] = useState('');
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    //const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     const { userId, setUserId } = useUser(); // Access the context's setUserId function
     useEffect(() => {
         const handler = setTimeout(() => {
@@ -127,10 +127,10 @@ const RegisterForm = ({ toggleForm, onLoginSuccess }: { toggleForm: () => void; 
 
     useEffect(() => {
         const checkPassword = () => {
-            if(!passwordRegex.test(debouncedformData.password) ){
+            /*if(!passwordRegex.test(debouncedformData.password) ){
                 setPasswordErrorMessage('Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character');
-            }
-            else if (debouncedformData.password.length == 0){
+            }*/
+            if (debouncedformData.password.length == 0){
                 setPasswordErrorMessage('')      
             }
             else if(debouncedformData.password.length > 0 && debouncedformData.password.length < 8 && debouncedformData.password !== debouncedformData.password2){
