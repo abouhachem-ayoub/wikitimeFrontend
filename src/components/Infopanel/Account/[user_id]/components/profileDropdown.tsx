@@ -35,7 +35,7 @@ const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
     if (user?.password) {
       setHasPassword(true); // Update state when the password is set
     }
-  }, [user?.password]);
+  }, [user?.password,isOpen]);
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       const target = event.target as HTMLElement;
