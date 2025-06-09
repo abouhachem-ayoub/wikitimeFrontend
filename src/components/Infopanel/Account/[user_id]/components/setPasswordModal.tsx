@@ -70,7 +70,7 @@ const SetPasswordModal: React.FC<SetPasswordModalProps> = ({ isOpen, onClose }) 
           />
           {showPassword ? (
             <FiEye
-              className="password-icon"
+              className="custom-class"
               onClick={() => {
                 setShowPassword(false);
                 setType("password");
@@ -78,7 +78,7 @@ const SetPasswordModal: React.FC<SetPasswordModalProps> = ({ isOpen, onClose }) 
             />
           ) : (
             <FiEyeOff
-              className="password-icon"
+              className="custom-class"
               onClick={() => {
                 setShowPassword(true);
                 setType("text");
@@ -97,7 +97,7 @@ const SetPasswordModal: React.FC<SetPasswordModalProps> = ({ isOpen, onClose }) 
           />
           {showConfirmPassword ? (
             <FiEye
-              className="password-icon"
+              className="custom-class"
               onClick={() => {
                 setShowConfirmPassword(false);
                 setType2("password");
@@ -105,7 +105,7 @@ const SetPasswordModal: React.FC<SetPasswordModalProps> = ({ isOpen, onClose }) 
             />
           ) : (
             <FiEyeOff
-              className="password-icon"
+              className="custom-class"
               onClick={() => {
                 setShowConfirmPassword(true);
                 setType2("text");

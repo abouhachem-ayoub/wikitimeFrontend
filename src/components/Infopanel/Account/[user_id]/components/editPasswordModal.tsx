@@ -91,7 +91,7 @@ export const EditPasswordModal: React.FC<EditPasswordModalProps> = ({ isOpen, on
           />
           {            showPassword ? (
             <FiEye
-              className="password-icon"
+              className="custom-class"
               onClick={() => {
                 setShowPassword(false);
                 setType("password");
@@ -99,7 +99,7 @@ export const EditPasswordModal: React.FC<EditPasswordModalProps> = ({ isOpen, on
             />
           ) : (
             <FiEyeOff
-              className="password-icon"
+              className="custom-class"
               onClick={() => {
                 setShowPassword(true);
                 setType("text");
@@ -119,7 +119,7 @@ export const EditPasswordModal: React.FC<EditPasswordModalProps> = ({ isOpen, on
           />
           {            showPassword2 ? (
             <FiEye
-              className="password-icon"
+              className="custom-class"
               onClick={() => {
                 setShowPassword2(false);
                 setType2("password");
@@ -127,7 +127,7 @@ export const EditPasswordModal: React.FC<EditPasswordModalProps> = ({ isOpen, on
             />
           ) : (
             <FiEyeOff
-              className="password-icon"
+              className="custom-class"
               onClick={() => {
                 setShowPassword2(true);
                 setType2("text");
@@ -146,7 +146,7 @@ export const EditPasswordModal: React.FC<EditPasswordModalProps> = ({ isOpen, on
           />
           {            showPassword3 ? (
             <FiEye
-              className="password-icon"
+              className="custom-class"
               onClick={() => {
                 setShowPassword3(false);
                 setType3("password");
@@ -154,7 +154,7 @@ export const EditPasswordModal: React.FC<EditPasswordModalProps> = ({ isOpen, on
             />
           ) : (
             <FiEyeOff
-              className="password-icon"
+              className="custom-class"
               onClick={() => {
                 setShowPassword3(true);
                 setType3("text");
