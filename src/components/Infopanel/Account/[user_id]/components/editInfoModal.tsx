@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import PhoneInput from "react-phone-input-2";
 import { useUser } from "contexts/UserContext";
-import { use } from "i18next";
 
 type User = {
   pseudo: string;
@@ -75,6 +74,7 @@ const EditInfoModal: React.FC<EditInfoModalProps> = ({ isOpen, onClose, user, on
             type="text"
             name="firstName"
             placeholder="First Name"
+            required
             value={formData.firstName}
             onChange={handleInputChange}
           />
@@ -83,9 +83,12 @@ const EditInfoModal: React.FC<EditInfoModalProps> = ({ isOpen, onClose, user, on
             name="lastName"
             placeholder="Last Name"
             value={formData.lastName}
+            required
             onChange={handleInputChange}
           />
           <input
+            required
+            minLength={5}
             type="text"
             name="pseudo"
             placeholder="Pseudo"

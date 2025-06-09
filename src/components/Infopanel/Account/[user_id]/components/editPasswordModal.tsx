@@ -17,9 +17,35 @@ interface EditPasswordModalProps {
 export const EditPasswordModal: React.FC<EditPasswordModalProps> = ({ isOpen, onClose }) => {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
+  const [newPassword2, setNewPassword2] = useState("");
+
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if(!currentPassword || !newPassword || !newPassword2) {
+      alert("Please fill in all fields.");
+      return;
+    }
+    if (newPassword !== newPassword2) {
+      alert("New passwords do not match.");
+      return;
+    }
+    if (newPassword.length < 8) {
+      alert("New password must be at least 8 characters long.");
+      return;
+    }
+    if (currentPassword === newPassword) {
+      alert("New password cannot be the same as the current password.");
+      return;
+    }
+    if (newPassword !== newPassword2) {
+      alert("New password and confirmation do not match.");
+      return;
+    }
+    if (newPassword2.length < 8) {
+      alert("Confirmation password must be at least 8 characters long.");
+      return;
+    }
     try {
       const response = await fetch(import.meta.env.VITE_API_BASE_URL + "api/auth/editpassword", {
         method: "POST",
@@ -59,6 +85,12 @@ export const EditPasswordModal: React.FC<EditPasswordModalProps> = ({ isOpen, on
             placeholder="Enter new password"
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
+          />
+          <input
+            type="password"
+            placeholder="Confirm new password"
+            value={newPassword2}
+            onChange={(e) => setNewPassword2(e.target.value)}
           />
           <button type="submit">Update Password</button>
           <button type="button" onClick={onClose}>
