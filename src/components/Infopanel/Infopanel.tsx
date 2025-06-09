@@ -27,7 +27,7 @@ const Infopanel: React.FC = () => {
     if (action === "resetPassword" || action === "verifyEmail") {
       setInfopanelShow("account"); // Automatically show the account panel
     }
-  }, []);
+  }, [setInfopanelShow, action]);
 
   useEffect(() => {if (wikiUrl !== '') {setInfopanelShow('wikipedia');}}, [wikiUrl]);
 
