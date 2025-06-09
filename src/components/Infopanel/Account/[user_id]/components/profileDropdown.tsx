@@ -39,7 +39,14 @@ const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const action = params.get("action");
 
+    if (action === "verifyEmail") {
+      alert("Your email has been successfully verified!");
+    }
+  }, []);
 
   return (
     <div className="profile-dropdown">
