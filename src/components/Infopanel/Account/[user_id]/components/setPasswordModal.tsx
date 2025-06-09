@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {FiEye, FiEyeOff} from "react-icons/fi";
+import { useUser } from "contexts/UserContext";
 
 interface SetPasswordModalProps {
   isOpen: boolean;
@@ -13,6 +14,7 @@ const SetPasswordModal: React.FC<SetPasswordModalProps> = ({ isOpen, onClose }) 
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const[type, setType] = useState("password");
   const[type2, setType2] = useState("password");
+  const { userId } = useUser();
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if(!password || password.trim() === "") {
@@ -38,7 +40,7 @@ const SetPasswordModal: React.FC<SetPasswordModalProps> = ({ isOpen, onClose }) 
           Authorization: `Bearer ${localStorage.getItem("token")}`,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ password }),
+        body: JSON.stringify({ password:password, userId:userId }),
       });
 
       if (!response.ok) {
@@ -70,7 +72,7 @@ const SetPasswordModal: React.FC<SetPasswordModalProps> = ({ isOpen, onClose }) 
           />
           {showPassword ? (
             <FiEye
-              className="custom-class"
+              className="custom-class2"
               onClick={() => {
                 setShowPassword(false);
                 setType("password");
@@ -78,7 +80,7 @@ const SetPasswordModal: React.FC<SetPasswordModalProps> = ({ isOpen, onClose }) 
             />
           ) : (
             <FiEyeOff
-              className="custom-class"
+              className="custom-class2"
               onClick={() => {
                 setShowPassword(true);
                 setType("text");
@@ -97,7 +99,7 @@ const SetPasswordModal: React.FC<SetPasswordModalProps> = ({ isOpen, onClose }) 
           />
           {showConfirmPassword ? (
             <FiEye
-              className="custom-class"
+              className="custom-class2"
               onClick={() => {
                 setShowConfirmPassword(false);
                 setType2("password");
@@ -105,7 +107,7 @@ const SetPasswordModal: React.FC<SetPasswordModalProps> = ({ isOpen, onClose }) 
             />
           ) : (
             <FiEyeOff
-              className="custom-class"
+              className="custom-class2"
               onClick={() => {
                 setShowConfirmPassword(true);
                 setType2("text");

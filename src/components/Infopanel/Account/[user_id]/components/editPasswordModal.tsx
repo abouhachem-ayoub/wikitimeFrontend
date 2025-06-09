@@ -1,18 +1,9 @@
 import React, { useState } from "react";
 import { FiEye, FiEyeOff } from "react-icons/fi";
-type User = {
-  pseudo: string;
-  firstName: string;
-  lastName: string;
-  phone: string;
-  email: string;
-  emailVerified?: string | null;
-  id: string;
-};
+import { useUser } from "contexts/UserContext";
 interface EditPasswordModalProps {
   isOpen: boolean;
   onClose: () => void;
-  user?: User | null; // Optional user prop
 }
 
 export const EditPasswordModal: React.FC<EditPasswordModalProps> = ({ isOpen, onClose }) => {
@@ -25,7 +16,7 @@ export const EditPasswordModal: React.FC<EditPasswordModalProps> = ({ isOpen, on
   const [type, setType] = useState("password");
   const [type2, setType2] = useState("password");
   const [type3, setType3] = useState("password");
-
+  const { userId } = useUser();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -60,7 +51,7 @@ export const EditPasswordModal: React.FC<EditPasswordModalProps> = ({ isOpen, on
           Authorization: `Bearer ${localStorage.getItem("token")}`,
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ currentPassword, newPassword }),
+        body: JSON.stringify({ currentPassword : currentPassword, newPassword : newPassword, userId: userId }),
       });
 
       if (!response.ok) {
@@ -91,7 +82,7 @@ export const EditPasswordModal: React.FC<EditPasswordModalProps> = ({ isOpen, on
           />
           {            showPassword ? (
             <FiEye
-              className="custom-class"
+              className="custom-class2"
               onClick={() => {
                 setShowPassword(false);
                 setType("password");
@@ -99,7 +90,7 @@ export const EditPasswordModal: React.FC<EditPasswordModalProps> = ({ isOpen, on
             />
           ) : (
             <FiEyeOff
-              className="custom-class"
+              className="custom-class2"
               onClick={() => {
                 setShowPassword(true);
                 setType("text");
@@ -119,7 +110,7 @@ export const EditPasswordModal: React.FC<EditPasswordModalProps> = ({ isOpen, on
           />
           {            showPassword2 ? (
             <FiEye
-              className="custom-class"
+              className="custom-class2"
               onClick={() => {
                 setShowPassword2(false);
                 setType2("password");
@@ -127,7 +118,7 @@ export const EditPasswordModal: React.FC<EditPasswordModalProps> = ({ isOpen, on
             />
           ) : (
             <FiEyeOff
-              className="custom-class"
+              className="custom-class2"
               onClick={() => {
                 setShowPassword2(true);
                 setType2("text");
@@ -146,7 +137,7 @@ export const EditPasswordModal: React.FC<EditPasswordModalProps> = ({ isOpen, on
           />
           {            showPassword3 ? (
             <FiEye
-              className="custom-class"
+              className="custom-class2"
               onClick={() => {
                 setShowPassword3(false);
                 setType3("password");
@@ -154,7 +145,7 @@ export const EditPasswordModal: React.FC<EditPasswordModalProps> = ({ isOpen, on
             />
           ) : (
             <FiEyeOff
-              className="custom-class"
+              className="custom-class2"
               onClick={() => {
                 setShowPassword3(true);
                 setType3("text");
