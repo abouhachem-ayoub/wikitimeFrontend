@@ -59,17 +59,17 @@ const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
         <ul className="dropdown-menu">
           {emailVerified === null ? (
             <ul>
-            <li><a href = '' className="disabled">Your Email Is Not Verified</a></li>
-            <li><a href = '' onClick={onVerifyEmail}>Click To Receive Verification Email</a></li>
+            <li><a href = '#' className="disabled">Your Email Is Not Verified</a></li>
+            <li><a href = '#' onClick={onVerifyEmail}>Click To Receive Verification Email</a></li>
             </ul>
           ) : (
             <>
-              <li><a href = '' onClick={onViewInfo}>View Account Info</a></li>
-              {!hasPassword && <li><a href = '' onClick={onSetPassword}>Set Your Password</a></li>}
-              {hasPassword && <li><a href = '' onClick={onEditPassword}>Edit Your Password</a></li>}
-              <li><a href = '' onClick={onDelete}>Delete Your Account</a></li>
-              <li><a href = '' onClick={onEditInfo}>Edit Your Account Info</a></li>
-              <li><a href = '' onClick={onSignOut}>Sign Out</a></li>
+              <li><a href = '#' onClick={onViewInfo}>View Account Info</a></li>
+              {!hasPassword && <li><a href = '#' onClick={onSetPassword}>Set Your Password</a></li>}
+              {hasPassword && <li><a href = '#' onClick={onEditPassword}>Edit Your Password</a></li>}
+              <li><a href = '#' onClick={onDelete}>Delete Your Account</a></li>
+              <li><a href = '#' onClick={onEditInfo}>Edit Your Account Info</a></li>
+              <li><a href = '#' onClick={onSignOut}>Sign Out</a></li>
             </>
           )}
         </ul>
