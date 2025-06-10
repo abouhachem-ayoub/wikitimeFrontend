@@ -1,4 +1,4 @@
-import {useEffect} from "react";
+import {useEffect,useState} from "react";
 import { useUser } from "contexts/UserContext";
 
 type User = {
@@ -17,19 +17,30 @@ type ProfileHeaderProps = {
 
 const ProfileHeader = ({ user }: ProfileHeaderProps) =>{  
   const { userId,setUserId } = useUser();
-useEffect(() => {
+  const [isLoading, setIsLoading] = useState(true);
+  useEffect(() => {
+    if (user) {
+      setIsLoading(false); // Stop loading once user data is available
+    }
+  }, [user]);
+  useEffect(() => {
   if (userId) {
     setUserId(userId);
   }
 }, [userId,user,user?.id]);
   return (
     <div className="profile-header">
+      {isLoading ? (
+        <div className="loading-indicator">Loading...</div> // Show loading indicator
+      ):( <div className="profile-header-content">
       <img
         src={`https://api.dicebear.com/6.x/initials/svg?seed=${user?.pseudo || "Guest"}`}
         alt="Profile"
         className="profile-image"
       />
       <h2 className="profile-name">{userId ? `Welcome, ${user?.pseudo}` : "Welcome, Guest"}</h2>
+      </div>
+      )}
     </div>
   );
 };
