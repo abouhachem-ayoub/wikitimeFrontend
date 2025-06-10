@@ -45,6 +45,7 @@ const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
 
     if (action === "verifyEmail") {
       alert("Your email has been successfully verified!");
+      window.location.href = '/';
     }
   }, []);
 
