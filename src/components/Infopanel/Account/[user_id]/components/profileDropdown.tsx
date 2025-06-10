@@ -45,9 +45,17 @@ const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
 
     if (action === "verifyEmail") {
       alert("Your email has been successfully verified!");
-      window.location.href = '/';
     }
   }, []);
+  const handleVerifyEmail = () => {
+    if (emailVerified !== null) {
+      alert("Your email is already verified!");
+      return;
+    }
+
+    onVerifyEmail(); // Call the provided handler to send the verification email
+  };
+
 
   return (
     <div className="profile-dropdown">
@@ -61,7 +69,7 @@ const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
           {emailVerified === null ? (
             <ul>
             <li><a href = '#' className="disabled">Your Email Is Not Verified</a></li>
-            <li><a href = '#' onClick={onVerifyEmail}>Click To Receive Verification Email</a></li>
+            <li><a href = '#' onClick={handleVerifyEmail}>Click To Receive Verification Email</a></li>
             </ul>
           ) : (
             <>
