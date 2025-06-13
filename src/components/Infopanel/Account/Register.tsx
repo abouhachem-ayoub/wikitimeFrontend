@@ -355,7 +355,8 @@ const handlesociallogin= async (authProvider:string) => {
         pseudo: user.displayName || '',
       };
     console.log('token',token);
-      console.log(socialFormData);
+    localStorage.setItem('scoialformdata',JSON.stringify(socialFormData));
+    localStorage.setItem('fbemail',socialFormData.email);
     registerwithsocials(socialFormData);
   }).catch((error) => {
     const errorCode = error.code;
