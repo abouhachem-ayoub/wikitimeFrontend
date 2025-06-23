@@ -12,7 +12,7 @@ import GithubLogo from '../../../assets/social-login/github-logo.png'
 import {getAuth, signInWithPopup, GoogleAuthProvider,FacebookAuthProvider,GithubAuthProvider} from "firebase/auth";
 import { useUser } from 'contexts/UserContext';
 const auth = getAuth();
-const debug_mode:string = (import.meta.env.DEBUG_MODE).toLowerCase();
+const debug_mode:string = (import.meta.env.DEBUG_MODE);
 const defaultFormData = {
     email:'',
     password:'',

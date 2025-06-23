@@ -17,7 +17,7 @@ export const EditPasswordModal: React.FC<EditPasswordModalProps> = ({ isOpen, on
   const [type2, setType2] = useState("password");
   const [type3, setType3] = useState("password");
   const { userId } = useUser();
-  const debug_mode = (import.meta.env.VITE_DEBUG_MODE).toLowerCase(); // Check if debug mode is enabled
+  const debug_mode = (import.meta.env.VITE_DEBUG_MODE); // Check if debug mode is enabled
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if(!currentPassword || !newPassword || !newPassword2) {

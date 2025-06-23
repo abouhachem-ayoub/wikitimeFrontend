@@ -15,7 +15,7 @@ const SetPasswordModal: React.FC<SetPasswordModalProps> = ({ isOpen, onClose, on
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const[type, setType] = useState("password");
   const[type2, setType2] = useState("password");
-  const debug_mode = (import.meta.env.VITE_DEBUG_MODE).toLowerCase(); // Check if debug mode is enabled
+  const debug_mode = (import.meta.env.VITE_DEBUG_MODE); // Check if debug mode is enabled
   const { userId } = useUser();
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

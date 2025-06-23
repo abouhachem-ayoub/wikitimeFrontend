@@ -29,7 +29,7 @@ const EditInfoModal: React.FC<EditInfoModalProps> = ({ isOpen, onClose, user, on
   });
 
   const [phone, setPhone] = useState("");
-  const debug_mode = (import.meta.env.VITE_DEBUG_MODE).toLowerCase(); // Check if debug mode is enabled
+  const debug_mode = (import.meta.env.VITE_DEBUG_MODE); // Check if debug mode is enabled
   // Update formData when the modal is opened or the user prop changes
   useEffect(() => {
     if (isOpen && user) {

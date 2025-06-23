@@ -15,7 +15,7 @@ interface ViewAccountInfoProps {
   onClose: () => void;
   user: User | null;
 }
-  const debug_mode = (import.meta.env.VITE_DEBUG_MODE).toLowerCase(); // Check if debug mode is enabled
+  const debug_mode = (import.meta.env.VITE_DEBUG_MODE); // Check if debug mode is enabled
   const ViewAccountInfo: React.FC<ViewAccountInfoProps> = ({ user, isOpen, onClose, }) => {
   const [userInfo, setUserInfo] = useState<User | null>(user);
   const {userId} = useUser()

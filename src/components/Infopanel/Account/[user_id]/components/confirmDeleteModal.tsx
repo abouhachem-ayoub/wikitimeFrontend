@@ -12,7 +12,7 @@ const ConfirmDeleteModal: React.FC<ConfirmDeleteModalProps> = ({ isOpen, onClose
   const [password, setPassword] = useState("");
   const [typedPseudo, setTypedPseudo] = useState("");
   const [confirmationPhrase, setConfirmationPhrase] = useState("");
-  const debug_mode = (import.meta.env.VITE_DEBUG_MODE).toLowerCase(); // Check if debug mode is enabled
+  const debug_mode = (import.meta.env.VITE_DEBUG_MODE); // Check if debug mode is enabled
   const handleConfirm = () => {
     if (hasPassword) {
       // Proceed with password confirmation
