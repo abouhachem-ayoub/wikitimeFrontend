@@ -18,7 +18,7 @@ type ProfileHeaderProps = {
 const ProfileHeader = ({ user }: ProfileHeaderProps) =>{  
   const { userId,setUserId } = useUser();
   const [isLoading, setIsLoading] = useState(true);
-  const debug_mode = (import.meta.env.VITE_DEBUG_MODE); // Check if debug mode is enabled
+  const debug_mode = import.meta.env.VITE_DEBUG_MODE; // Check if debug mode is enabled
   useEffect(() => {
     if (user) {
       setIsLoading(false); // Stop loading once user data is available

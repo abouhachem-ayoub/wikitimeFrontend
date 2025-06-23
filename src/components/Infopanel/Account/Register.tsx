@@ -12,7 +12,6 @@ import GithubLogo from '../../../assets/social-login/github-logo.png'
 import {getAuth, signInWithPopup, GoogleAuthProvider,FacebookAuthProvider,GithubAuthProvider} from "firebase/auth";
 import { useUser } from 'contexts/UserContext';
 const auth = getAuth();
-const debug_mode:string = (import.meta.env.VITE_DEBUG_MODE);
 const defaultFormData = {
     email:'',
     password:'',
@@ -38,7 +37,9 @@ const RegisterForm = ({ toggleForm, onLoginSuccess }: { toggleForm: () => void; 
     const [passwordErrorMessage,setPasswordErrorMessage] = useState('');
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     //const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
-    const { userId, setUserId } = useUser(); // Access the context's setUserId function
+    const { userId, setUserId } = useUser();
+    const debug_mode=import.meta.env.VITE_DEBUG_MODE;
+    // Access the context's setUserId function
     useEffect(() => {
         const handler = setTimeout(() => {
             setDebouncedPseudo(pseudo);

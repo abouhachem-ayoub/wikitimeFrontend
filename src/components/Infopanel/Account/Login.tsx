@@ -27,7 +27,6 @@ const firebaseConfig = {
   measurementId: import.meta.env.VITE_MEASUREMENT_ID
 };
 const auth = getAuth();
-const debug_mode:string=(import.meta.env.VITE_DEBUG_MODE);
 const Login: React.FC = () => {
   const [forgottenPassword, setForgottenPassword] = useState(false);
   const [resetPassword, setResetPassword] = useState(false); // New state for reset password form
@@ -35,7 +34,8 @@ const Login: React.FC = () => {
   const [type, setType] = useState('password');
   const [type2, setType2] = useState('password');
   const [type3, setType3] = useState('password');
-  
+  const debug_mode=import.meta.env.VITE_DEBUG_MODE;
+
   const params = new URLSearchParams(window.location.search);
   const resetpasswordtoken = params.get('token');
   const { setUserId } = useUser();
