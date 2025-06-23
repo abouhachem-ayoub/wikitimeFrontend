@@ -32,8 +32,8 @@ const ConfirmDeleteModal: React.FC<ConfirmDeleteModalProps> = ({ isOpen, onClose
 
   return (
     <div className="modal-overlay">
-      {debug_mode === "true" && (<p>Confirm Delete Modal from user_id/components/confirmDeleteModal.tsx</p>)}
       <div className="modal-content">
+      {debug_mode === "true" && (<p>Confirm Delete Modal from user_id/components/confirmDeleteModal.tsx</p>)}
         <h2 className="modal title">Confirm Account Deletion</h2>
         <p className="modal-description">
         {hasPassword

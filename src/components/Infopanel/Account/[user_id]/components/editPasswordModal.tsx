@@ -69,8 +69,9 @@ export const EditPasswordModal: React.FC<EditPasswordModalProps> = ({ isOpen, on
 
   return (
     <div className="modal-overlay">
-      {debug_mode === "true" && (<p>Edit Password Modal from user_id/components/editPasswordModal.tsx</p>)}
       <div className="modal-content">
+      {debug_mode === "true" && (<p>Edit Password Modal from user_id/components/editPasswordModal.tsx</p>)}
+
         <h2>Edit Your Password</h2>
         <form onSubmit={handleSubmit}>
           <div className="mb-4 flex">

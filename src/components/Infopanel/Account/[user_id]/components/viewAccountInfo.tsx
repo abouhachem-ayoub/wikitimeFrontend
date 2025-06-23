@@ -27,8 +27,9 @@ interface ViewAccountInfoProps {
   if (!isOpen) return null;
   return (
     <div className="modal-overlay">
-      {debug_mode === "true" && (<p>User Info from user_id/componenets/viewAccountInfo.tsx</p>)}
       <div className="modal-content">
+      {debug_mode === "true" && (<p>User Info from user_id/componenets/viewAccountInfo.tsx</p>)}
+
         <h2>Account Information</h2>
         <p>Email: {userInfo?.email}</p>
         <p>First Name: {userInfo?.firstName}</p>

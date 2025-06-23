@@ -67,8 +67,8 @@ const EditInfoModal: React.FC<EditInfoModalProps> = ({ isOpen, onClose, user, on
 
   return (
     <div className="modal-overlay">
-      {debug_mode === "true" && (<p>Edit Info Modal from user_id/components/editInfoModal.tsx</p>)}
       <div className="modal-content">
+      {debug_mode === "true" && (<p>Edit Info Modal from user_id/components/editInfoModal.tsx</p>)}
         <h2>Edit Your Info</h2>
         <form onSubmit={handleSubmit}>
           <input
