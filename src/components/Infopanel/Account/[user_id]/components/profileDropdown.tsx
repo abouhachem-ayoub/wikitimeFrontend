@@ -70,7 +70,7 @@ const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
             <ul>
             <li>Your Email Is Not Verified</li>
             <li><button className="secondary-button" onClick={handleVerifyEmail}>Click To Receive Verification Email</button></li>
-            <li><a href = '#' onClick={onSignOut}>Sign Out</a></li>
+            <li><button className="secondary-button" onClick={onSignOut}>Sign Out</button></li>
             </ul>
           ) : (
             <>
