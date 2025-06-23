@@ -12,6 +12,7 @@ import GithubLogo from '../../../assets/social-login/github-logo.png'
 import {getAuth, signInWithPopup, GoogleAuthProvider,FacebookAuthProvider,GithubAuthProvider} from "firebase/auth";
 import { useUser } from 'contexts/UserContext';
 const auth = getAuth();
+const debug_mode:string = (import.meta.env.DEBUG_MODE).toLowerCase();
 const defaultFormData = {
     email:'',
     password:'',
@@ -408,6 +409,7 @@ const handlesociallogin= async (authProvider:string) => {
     return (
         <div className="min-w-md max-w-lg mx-auto bg-white shadow-md rounded px-8 py-6"> 
             <Toaster/>
+            {debug_mode==='true' && <p>Sign up page Register.tsx</p>}
             <form method='post' onSubmit={handleSubmit}>
             <div className="mb-4">
                     <label htmlFor="firstName" className="required block text-gray-700 font-medium mb-2">

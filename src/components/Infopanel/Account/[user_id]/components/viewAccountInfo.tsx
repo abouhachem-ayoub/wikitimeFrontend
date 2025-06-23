@@ -15,8 +15,8 @@ interface ViewAccountInfoProps {
   onClose: () => void;
   user: User | null;
 }
-
-const ViewAccountInfo: React.FC<ViewAccountInfoProps> = ({ user, isOpen, onClose, }) => {
+  const debug_mode = (import.meta.env.VITE_DEBUG_MODE).toLowerCase(); // Check if debug mode is enabled
+  const ViewAccountInfo: React.FC<ViewAccountInfoProps> = ({ user, isOpen, onClose, }) => {
   const [userInfo, setUserInfo] = useState<User | null>(user);
   const {userId} = useUser()
   useEffect(() => {
@@ -27,6 +27,7 @@ const ViewAccountInfo: React.FC<ViewAccountInfoProps> = ({ user, isOpen, onClose
   if (!isOpen) return null;
   return (
     <div className="modal-overlay">
+      {debug_mode === "true" && (<p>User Info from user_id/componenets/viewAccountInfo.tsx</p>)}
       <div className="modal-content">
         <h2>Account Information</h2>
         <p>Email: {userInfo?.email}</p>

@@ -17,7 +17,7 @@ export const EditPasswordModal: React.FC<EditPasswordModalProps> = ({ isOpen, on
   const [type2, setType2] = useState("password");
   const [type3, setType3] = useState("password");
   const { userId } = useUser();
-
+  const debug_mode = (import.meta.env.VITE_DEBUG_MODE).toLowerCase(); // Check if debug mode is enabled
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if(!currentPassword || !newPassword || !newPassword2) {
@@ -69,6 +69,7 @@ export const EditPasswordModal: React.FC<EditPasswordModalProps> = ({ isOpen, on
 
   return (
     <div className="modal-overlay">
+      {debug_mode === "true" && (<p>Edit Password Modal from user_id/components/editPasswordModal.tsx</p>)}
       <div className="modal-content">
         <h2>Edit Your Password</h2>
         <form onSubmit={handleSubmit}>

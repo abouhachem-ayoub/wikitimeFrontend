@@ -29,7 +29,7 @@ const EditInfoModal: React.FC<EditInfoModalProps> = ({ isOpen, onClose, user, on
   });
 
   const [phone, setPhone] = useState("");
-
+  const debug_mode = (import.meta.env.VITE_DEBUG_MODE).toLowerCase(); // Check if debug mode is enabled
   // Update formData when the modal is opened or the user prop changes
   useEffect(() => {
     if (isOpen && user) {
@@ -67,6 +67,7 @@ const EditInfoModal: React.FC<EditInfoModalProps> = ({ isOpen, onClose, user, on
 
   return (
     <div className="modal-overlay">
+      {debug_mode === "true" && (<p>Edit Info Modal from user_id/components/editInfoModal.tsx</p>)}
       <div className="modal-content">
         <h2>Edit Your Info</h2>
         <form onSubmit={handleSubmit}>

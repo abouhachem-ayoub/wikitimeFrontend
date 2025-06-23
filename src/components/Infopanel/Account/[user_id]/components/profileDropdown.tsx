@@ -68,17 +68,18 @@ const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
         <ul className="dropdown-menu">
           {emailVerified === null ? (
             <ul>
-            <li><a href = '#' className="disabled">Your Email Is Not Verified</a></li>
-            <li><a href = '#' onClick={handleVerifyEmail}>Click To Receive Verification Email</a></li>
+            <li>Your Email Is Not Verified</li>
+            <li><button className="secondary-button" onClick={handleVerifyEmail}>Click To Receive Verification Email</button></li>
+            <li><a href = '#' onClick={onSignOut}>Sign Out</a></li>
             </ul>
           ) : (
             <>
-              <li><a href = '#' onClick={onViewInfo}>View Account Info</a></li>
-              {!hasPassword && <li><a href = '#' onClick={onSetPassword}>Set Your Password</a></li>}
-              {hasPassword && <li><a href = '#' onClick={onEditPassword}>Edit Your Password</a></li>}
-              <li><a href = '#' onClick={onDelete}>Delete Your Account</a></li>
-              <li><a href = '#' onClick={onEditInfo}>Edit Your Account Info</a></li>
-              <li><a href = '#' onClick={onSignOut}>Sign Out</a></li>
+              <li><button className="secondary-button" onClick={onViewInfo}>View Account Info</button></li>
+              {!hasPassword && <li><button className="secondary-button" onClick={onSetPassword}>Set Your Password</button></li>}
+              {hasPassword && <li><button className="secondary-button" onClick={onEditPassword}>Edit Your Password</button></li>}
+              <li><button className='secondary-button' onClick={onDelete}>Delete Your Account</button></li>
+              <li><button className="secondary-button" onClick={onEditInfo}>Edit Your Account Info</button></li>
+              <li><button className="secondary-button" onClick={onSignOut}>Sign Out</button></li>
             </>
           )}
         </ul>

@@ -15,6 +15,7 @@ const SetPasswordModal: React.FC<SetPasswordModalProps> = ({ isOpen, onClose, on
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const[type, setType] = useState("password");
   const[type2, setType2] = useState("password");
+  const debug_mode = (import.meta.env.VITE_DEBUG_MODE).toLowerCase(); // Check if debug mode is enabled
   const { userId } = useUser();
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -60,6 +61,7 @@ const SetPasswordModal: React.FC<SetPasswordModalProps> = ({ isOpen, onClose, on
 
   return (
     <div className="modal-overlay">
+      {debug_mode === "true" && (<p>Set Password Modal from user_id/components/setPasswordModal.tsx</p>)}
       <div className="modal-content">
         <h2>Set Your Password</h2>
         <form onSubmit={handleSubmit}>

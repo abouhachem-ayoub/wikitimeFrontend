@@ -31,7 +31,7 @@ const ProfilePage = () => {
   const [user, setUser] = useState<User|null>(null);
   const [hasPassword, setHasPassword] = useState(!!user?.password);
   const [lastEmailSentTime, setLastEmailSentTime] = useState<number | null>(null); // Track the last email sent time
-
+  const debug_mode= (import.meta.env.VITE_DEBUG_MODE).toLowerCase(); // Check if debug mode is enabled
    // Track if the user has a password
     const handleSignOut = () => {
     localStorage.removeItem("token");
@@ -216,6 +216,7 @@ try {
 
   return (
     <div className="profile-page">
+      {debug_mode === "true" && (<p>User's profile page at user_id/page.tsx</p>)}
       <ProfileHeader user = {user}/>
       <ProfileDropdown
         hasPassword={hasPassword}

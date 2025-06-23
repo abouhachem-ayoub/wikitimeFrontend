@@ -27,6 +27,7 @@ const firebaseConfig = {
   measurementId: import.meta.env.VITE_MEASUREMENT_ID
 };
 const auth = getAuth();
+const debug_mode:string=(import.meta.env.DEBUG_MODE).toLowerCase();
 const Login: React.FC = () => {
   const [forgottenPassword, setForgottenPassword] = useState(false);
   const [resetPassword, setResetPassword] = useState(false); // New state for reset password form
@@ -358,9 +359,15 @@ const Login: React.FC = () => {
   return (
     <div>
       <Toaster />
+      {debug_mode === 'true' && (
+        <p>Login Page at Login.tsx</p>
+      )}
       {!forgottenPassword && !resetPassword ? (
         <div>
           {/* Login Form */}
+          {debug_mode === 'true' && (
+        <p>Login Form</p>
+      )}
           <form method="post" onSubmit={handleSubmit}>
             <div className="mb-4">
               <label htmlFor="email" className="block text-gray-700 font-medium mb-2">
@@ -441,6 +448,9 @@ const Login: React.FC = () => {
       ) : forgottenPassword ? (
         <div>
           {/* Forgotten Password Form */}
+          {debug_mode === 'true' && (
+        <p>Forgotten Password Form</p>
+      )}
           <form method="post" onSubmit={handleForgottenPassword}>
             <div className="mb-4">
               <label htmlFor="email" className="block text-gray-700 font-medium mb-2">
@@ -477,6 +487,9 @@ const Login: React.FC = () => {
       ) : (
         <div>
           {/* Reset Password Form */}
+          {debug_mode === 'true' && (
+        <p>Reset Password Form</p>
+      )}
           <form method="post" onSubmit={handleResetPassword}>
             <div className="mb-4">
               <label htmlFor="password" className="block text-gray-700 font-medium mb-2">

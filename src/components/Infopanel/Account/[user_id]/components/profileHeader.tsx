@@ -18,6 +18,7 @@ type ProfileHeaderProps = {
 const ProfileHeader = ({ user }: ProfileHeaderProps) =>{  
   const { userId,setUserId } = useUser();
   const [isLoading, setIsLoading] = useState(true);
+  const debug_mode = (import.meta.env.VITE_DEBUG_MODE).toLowerCase(); // Check if debug mode is enabled
   useEffect(() => {
     if (user) {
       setIsLoading(false); // Stop loading once user data is available
@@ -33,6 +34,7 @@ const ProfileHeader = ({ user }: ProfileHeaderProps) =>{
       {isLoading ? (
         <div className="loading-indicator">Loading...</div> // Show loading indicator
       ):( <div className="profile-header-content">
+      {debug_mode === "true" && (<p>Profile Header from user_id/components/profileHeader.tsx</p>)}
       <img
         src={`https://api.dicebear.com/6.x/initials/svg?seed=${user?.pseudo || "Guest"}`}
         alt="Profile"
