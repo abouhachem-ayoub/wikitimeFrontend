@@ -266,7 +266,7 @@ const Login: React.FC = () => {
       toast.success("Password reset email sent! Check your inbox.");
       setForgottenPassword(false); // Switch back to login form
   } catch (error: any) {
-      const url = `${import.meta.env.FRONT_END}/reset-password?email=${encodeURIComponent(formData.email)}`;
+      const url = `${import.meta.env.VITE_FRONT_END}/reset-password?email=${encodeURIComponent(formData.email)}`;
       toast.error(JSON.stringify(error.message)+JSON.stringify(url)|| "An error occurred while sending the reset email.",);
   }
     /*try {
