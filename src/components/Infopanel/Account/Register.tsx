@@ -9,9 +9,8 @@ import { FiEyeOff } from "react-icons/fi";
 import FbLogo from '../../../assets/social-login/facebook-logo.png'
 import GoogleLogo from '../../../assets/social-login/google-logo.png'
 import GithubLogo from '../../../assets/social-login/github-logo.png'
-import {getAuth, signInWithPopup, GoogleAuthProvider,FacebookAuthProvider,GithubAuthProvider} from "firebase/auth";
+import {getAuth, signInWithPopup, GoogleAuthProvider,FacebookAuthProvider,GithubAuthProvider,createUserWithEmailAndPassword} from "firebase/auth";
 import { useUser } from 'contexts/UserContext';
-const auth = getAuth();
 const defaultFormData = {
     email:'',
     password:'',
@@ -38,6 +37,7 @@ const RegisterForm = ({ toggleForm, onLoginSuccess }: { toggleForm: () => void; 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     //const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     const { userId, setUserId } = useUser();
+    const auth = getAuth();
     const debug_mode=import.meta.env.VITE_DEBUG_MODE;
     // Access the context's setUserId function
     useEffect(() => {
@@ -189,6 +189,7 @@ const RegisterForm = ({ toggleForm, onLoginSuccess }: { toggleForm: () => void; 
         try{
             if(!pseudoExists && !emailExists && passwordErrorMessage === '' && formData.password === formData.password2){
                 setLoading(true);
+                    const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
                     const response = await fetch(import.meta.env.VITE_API_BASE_URL+"api/auth/register", {
                         method: "POST",
                         headers: {

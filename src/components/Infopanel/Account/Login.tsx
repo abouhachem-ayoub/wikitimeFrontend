@@ -7,25 +7,9 @@ import FbLogo from '../../../assets/social-login/facebook-logo.png'
 import GoogleLogo from '../../../assets/social-login/google-logo.png'
 import GithubLogo from '../../../assets/social-login/github-logo.png'
 import {getAuth, signInWithPopup, GoogleAuthProvider,FacebookAuthProvider,GithubAuthProvider} from "firebase/auth";
-import { initializeApp } from 'firebase/app';
-const firebaseApp = initializeApp({
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_APP_ID,
-  measurementId: import.meta.env.VITE_MEASUREMENT_ID
-});
-const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
-  authDomain: import.meta.env.VITE_AUTH_DOMAIN,
-  projectId: import.meta.env.VITE_PROJECT_ID,
-  storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
-  messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
-  appId: import.meta.env.VITE_APP_ID,
-  measurementId: import.meta.env.VITE_MEASUREMENT_ID
-};
+import { sendPasswordResetEmail } from "firebase/auth";
+import { confirmPasswordReset, updatePassword } from "firebase/auth";
+
 const auth = getAuth();
 const Login: React.FC = () => {
   const [forgottenPassword, setForgottenPassword] = useState(false);
@@ -34,10 +18,11 @@ const Login: React.FC = () => {
   const [type, setType] = useState('password');
   const [type2, setType2] = useState('password');
   const [type3, setType3] = useState('password');
+  const [oobCode, setOobCode] = useState<string | null>(null);
   const debug_mode=import.meta.env.VITE_DEBUG_MODE;
 
   const params = new URLSearchParams(window.location.search);
-  const resetpasswordtoken = params.get('token');
+  const resetpasswordtoken = params.get('oobCode');
   const { setUserId } = useUser();
 
   const handlesociallogin= async (authProvider:string) => {
@@ -234,7 +219,7 @@ const Login: React.FC = () => {
   }, []);
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
-    if (params.get('resetPassword') === 'true') {
+    if (params.get('oobCode') !==null ) {
       setResetPassword(true);
     }
   }, []);
@@ -260,6 +245,17 @@ const Login: React.FC = () => {
       return;
     }
     try {
+      const actionCodeSettings = {
+        url: `${import.meta.env.FRONT_END}/reset-password?email=${encodeURIComponent(formData.email)}`,
+        handleCodeInApp: true, // Ensures the link redirects to your app
+      };
+      await sendPasswordResetEmail(auth, formData.email,actionCodeSettings);
+      toast.success("Password reset email sent! Check your inbox.");
+      setForgottenPassword(false); // Switch back to login form
+  } catch (error: any) {
+      toast.error(error.message || "An error occurred while sending the reset email.");
+  }
+    /*try {
       const response = await fetch(import.meta.env.VITE_API_BASE_URL+"api/auth/resetPassword", {
         method: "POST",
         headers: {
@@ -277,24 +273,32 @@ const Login: React.FC = () => {
       setForgottenPassword(false); // Switch back to login form
     } catch (error: any) {
       toast.error(error.message || "An error occurred");
-    }
+    }*/
   };
 
   const handleResetPassword = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log(resetpasswordtoken);
     console.log(formData.password);
+    const params = new URLSearchParams(window.location.search);
+    setOobCode(params.get('oobCode') || null);
+    const email = params.get('email');
     if (formData.password !== formData.confirmPassword) {
       toast.error("Passwords do not match!");
       return;
     }
+    if (!oobCode || !email) {
+      alert("Invalid or missing reset token.");
+      return;
+    }
     try {
+      await confirmPasswordReset(auth, oobCode, formData.password);
       const response = await fetch(import.meta.env.VITE_API_BASE_URL+"api/auth/setnewpassword", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ password: formData.password, token:resetpasswordtoken}),
+        body: JSON.stringify({ password: formData.password, token:resetpasswordtoken,email:email}),
       });
       const data = await response.json();
       if (!response.ok) {
@@ -306,8 +310,6 @@ const Login: React.FC = () => {
         toast.success("Password reset successful! You will be now logged in...");
         setResetPassword(false); // Switch back to login form
         setUserId(data.user_id); // Set userId in context
-
-
     } catch (error: any) {
       toast.error(error.message || "An error occurred");
     }
@@ -328,8 +330,6 @@ const Login: React.FC = () => {
         toast.error(data.message || "Something went wrong", { position: "bottom-center" });
         throw new Error(data.message || "Login failed");
       }
-      //localStorage.setItem("token", data.token);
-      //window.dispatchEvent(new Event("storage"));
       console.log('user data',data);
       setUserId(data.user_id); // Set userId in context
       toast.success("Login successful!");
@@ -350,10 +350,10 @@ const Login: React.FC = () => {
     setType(type === 'password' ? 'text' : 'password');
   };
   const handleToggle2 = () => {
-    setType(type2 === 'password' ? 'text' : 'password');
+    setType2(type2 === 'password' ? 'text' : 'password');
   };
   const handleToggle3 = () => {
-    setType(type3 === 'password' ? 'text' : 'password');
+    setType3(type3 === 'password' ? 'text' : 'password');
   };
 
   return (

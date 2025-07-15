@@ -37,8 +37,8 @@ const ConfirmDeleteModal: React.FC<ConfirmDeleteModalProps> = ({ isOpen, onClose
         <h2 className="modal title">Confirm Account Deletion</h2>
         <p className="modal-description">
         {hasPassword
-            ? "Please enter your password to confirm account deletion. This action cannot be undone."
-            : "Please type your pseudo and the words 'delete my account' to confirm account deletion. This action cannot be undone."}
+            ? "Please enter your password to confirm account deletion.Upon deleting your account, you can log back in for the next month, after a month passes, your account will be deleted permenantly."
+            : "Please type your pseudo and the words 'delete my account' to confirm account deletion. Upon deleting your account, you can log back in for the next month, after a month passes, your account will be deleted permenantly.."}
             </p>
             {hasPassword ? (
           // Password confirmation form
