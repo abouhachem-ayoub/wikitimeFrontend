@@ -234,6 +234,7 @@ const Login: React.FC = () => {
     const params = new URLSearchParams(window.location.search);
     if (params.get('oobCode') !==null ) {
       setResetPassword(true);
+      setOobCode(params.get('oobCode'));
     }
   }, []);
   useEffect(() => {
@@ -293,7 +294,7 @@ const Login: React.FC = () => {
   const handleResetPassword = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const params = new URLSearchParams(window.location.search);
-    setOobCode(params.get('oobCode') || null);
+    setOobCode(params.get('oobCode'));
     const continueUrl = params.get("continueUrl");
     let email = null;
     if (continueUrl) {
