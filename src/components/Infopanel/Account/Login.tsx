@@ -266,7 +266,8 @@ const Login: React.FC = () => {
       toast.success("Password reset email sent! Check your inbox.");
       setForgottenPassword(false); // Switch back to login form
   } catch (error: any) {
-      toast.error(error.message || "An error occurred while sending the reset email.");
+      const url = `${import.meta.env.FRONT_END}/reset-password?email=${encodeURIComponent(formData.email)}`;
+      toast.error(JSON.stringify(error.message)+JSON.stringify(url)|| "An error occurred while sending the reset email.",);
   }
     /*try {
       const response = await fetch(import.meta.env.VITE_API_BASE_URL+"api/auth/resetPassword", {
