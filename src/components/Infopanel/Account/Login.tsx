@@ -12,13 +12,13 @@ import { confirmPasswordReset, updatePassword } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 const firebaseConfig = {
-  apiKey: "AIzaSyD39LEESXdEI4TqYqe6GkOckniEvyreT24",
-  authDomain: "wikitime-5c79c.firebaseapp.com",
-  projectId: "wikitime-5c79c",
-  storageBucket: "wikitime-5c79c.firebasestorage.app",
-  messagingSenderId: "8265594847",
-  appId: "1:8265594847:web:42e888da8cc4e46001f66a",
-  measurementId: "G-Z583FT67FG"
+  apiKey: import.meta.env.VITE_FIREBASE_API_KAY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIREBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
 };
 
 // Initialize Firebase
@@ -317,7 +317,7 @@ const Login: React.FC = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ password: formData.password, token:resetpasswordtoken,email:email}),
+        body: JSON.stringify({ password: formData.password, token:oobCode,email:email}),
       });
       const data = await response.json();
       if (!response.ok) {
