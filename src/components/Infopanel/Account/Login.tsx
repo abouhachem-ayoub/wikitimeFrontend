@@ -259,7 +259,7 @@ const Login: React.FC = () => {
     }
     try {
       const actionCodeSettings = {
-        url: import.meta.env.VITE_FRONT_END+`/reset-password?email=${encodeURIComponent(formData.email)}`,
+        url: import.meta.env.VITE_FRONT_END+`?email=${encodeURIComponent(formData.email)}`,
         handleCodeInApp: true, // Ensures the link redirects to your app
       };
       await sendPasswordResetEmail(auth, formData.email,actionCodeSettings);
