@@ -9,7 +9,20 @@ import GithubLogo from '../../../assets/social-login/github-logo.png'
 import {getAuth, signInWithPopup, GoogleAuthProvider,FacebookAuthProvider,GithubAuthProvider} from "firebase/auth";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { confirmPasswordReset, updatePassword } from "firebase/auth";
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+const firebaseConfig = {
+  apiKey: "AIzaSyD39LEESXdEI4TqYqe6GkOckniEvyreT24",
+  authDomain: "wikitime-5c79c.firebaseapp.com",
+  projectId: "wikitime-5c79c",
+  storageBucket: "wikitime-5c79c.firebasestorage.app",
+  messagingSenderId: "8265594847",
+  appId: "1:8265594847:web:42e888da8cc4e46001f66a",
+  measurementId: "G-Z583FT67FG"
+};
 
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
 const auth = getAuth();
 const Login: React.FC = () => {
   const [forgottenPassword, setForgottenPassword] = useState(false);
