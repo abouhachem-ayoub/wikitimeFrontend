@@ -292,11 +292,15 @@ const Login: React.FC = () => {
 
   const handleResetPassword = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(resetpasswordtoken);
-    console.log(formData.password);
     const params = new URLSearchParams(window.location.search);
     setOobCode(params.get('oobCode') || null);
-    const email = params.get('email');
+    const continueUrl = params.get("continueUrl");
+    let email = null;
+    if (continueUrl) {
+      const continueParams = new URLSearchParams(continueUrl.split("?")[1]);
+      console.log("email:", continueParams.get("email"));
+      email = continueParams.get("email")||null;
+    }
     if (formData.password !== formData.confirmPassword) {
       toast.error("Passwords do not match!");
       return;
