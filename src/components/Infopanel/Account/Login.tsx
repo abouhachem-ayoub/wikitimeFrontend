@@ -23,7 +23,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
-const auth = getAuth();
+const auth = getAuth(app);
 const Login: React.FC = () => {
   const [forgottenPassword, setForgottenPassword] = useState(false);
   const [resetPassword, setResetPassword] = useState(false); // New state for reset password form
@@ -302,7 +302,7 @@ const Login: React.FC = () => {
       return;
     }
     if (!oobCode || !email) {
-      alert("Invalid or missing reset token.");
+      toast.error("Invalid or missing reset token."+oobCode+email);
       return;
     }
     try {
