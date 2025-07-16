@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import {FiEye, FiEyeOff} from "react-icons/fi";
 import { useUser } from "contexts/UserContext";
-
+import { updatePassword } from "firebase/auth";
+import { getAuth } from "firebase/auth";
+import { get } from "lodash";
 interface SetPasswordModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -17,6 +19,7 @@ const SetPasswordModal: React.FC<SetPasswordModalProps> = ({ isOpen, onClose, on
   const[type2, setType2] = useState("password");
   const debug_mode = import.meta.env.VITE_DEBUG_MODE; // Check if debug mode is enabled
   const { userId } = useUser();
+  const auth=getAuth();
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if(!password || password.trim() === "") {
@@ -48,6 +51,11 @@ const SetPasswordModal: React.FC<SetPasswordModalProps> = ({ isOpen, onClose, on
       if (!response.ok) {
         throw new Error("Failed to set password");
       }
+      const user = auth.currentUser;
+      if (!user) {
+        throw new Error("No user is currently logged in.");
+      }
+      await updatePassword(user, password);
 
       alert("Password set successfully.");
       onSuccess();

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { FiEye, FiEyeOff } from "react-icons/fi";
 import { useUser } from "contexts/UserContext";
+import { updatePassword } from "firebase/auth";
+import { getAuth } from "firebase/auth";
 interface EditPasswordModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -17,6 +19,7 @@ export const EditPasswordModal: React.FC<EditPasswordModalProps> = ({ isOpen, on
   const [type2, setType2] = useState("password");
   const [type3, setType3] = useState("password");
   const { userId } = useUser();
+  const auth = getAuth();
   const debug_mode = import.meta.env.VITE_DEBUG_MODE; // Check if debug mode is enabled
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -57,7 +60,11 @@ export const EditPasswordModal: React.FC<EditPasswordModalProps> = ({ isOpen, on
       if (!response.ok) {
         throw new Error("Failed to update password");
       }
-
+      const user = auth.currentUser;
+      if (!user) {
+        throw new Error("No user is currently logged in.");
+      }
+      await updatePassword(user, newPassword);
       alert("Password updated successfully.");
       onClose();
     } catch (error: any) {
