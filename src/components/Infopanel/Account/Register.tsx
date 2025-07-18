@@ -212,7 +212,7 @@ const RegisterForm = ({ toggleForm, onLoginSuccess }: { toggleForm: () => void; 
                             headers: {
                               "Content-Type": "application/json",
                             },
-                            body: JSON.stringify({email:formData.email,allowpasswordless:true}),
+                            body: JSON.stringify({email:formData.email,allowpasswordless:true,preVerified:false}),
                         });
                         const loginData = await loginResponse.json();
                         if (!loginResponse.ok) {
@@ -289,7 +289,7 @@ const registerwithsocials = async(formData:any)=>{
             headers: {
               "Content-Type": "application/json",
             },
-            body: JSON.stringify({email:formData.email,allowpasswordless:true}),
+            body: JSON.stringify({email:formData.email,allowpasswordless:true,preVerified:true}),
         });
         data = await response.json();
         if (!response.ok) {
@@ -310,7 +310,7 @@ const registerwithsocials = async(formData:any)=>{
                     headers: {
                       "Content-Type": "application/json",
                     },
-                    body: JSON.stringify({email:formData.email,allowpasswordless:true}),
+                    body: JSON.stringify({email:formData.email,allowpasswordless:true,preVerified:true}),
                 });
                 const data = await response.json();
                 if (!response.ok) {
