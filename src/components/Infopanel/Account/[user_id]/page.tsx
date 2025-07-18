@@ -76,9 +76,9 @@ try {
   if(!userCred) {
     throw new Error("User is not authenticated.");
   }
-  await sendEmailVerification(userCred, {
-  url: `${import.meta.env.VITE_API_BASE_URL}/api/auth/verify-email?email=${encodeURIComponent(user?.email || userCred.email || '')}`,
-  handleCodeInApp: true,
+   await sendEmailVerification(userCred, {
+url: `${import.meta.env.VITE_API_BASE_URL}api/auth/verify-email?email=${encodeURIComponent(user?.email || userCred.email || '')}`,
+    handleCodeInApp: true,
 });
   alert("A verification email has been sent to your email address.");
   setLastEmailSentTime(currentTime); // Update the last email sent time
