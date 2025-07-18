@@ -206,6 +206,23 @@ const RegisterForm = ({ toggleForm, onLoginSuccess }: { toggleForm: () => void; 
                         window.dispatchEvent(new Event("storage"));
                         toggleForm();
                         toast.success("Registration successful! You can now log in.");
+                        //add logic to log the user in directly after registration
+                        const loginResponse = await fetch(import.meta.env.VITE_API_BASE_URL+"api/auth/login", {
+                            method: "POST",
+                            headers: {
+                              "Content-Type": "application/json",
+                            },
+                            body: JSON.stringify({email:formData.email,allowpasswordless:true}),
+                        });
+                        const loginData = await loginResponse.json();
+                        if (!loginResponse.ok) {
+                            toast.error(loginData.message || "Something went wrong", { position: "bottom-center" });
+                            throw new Error(loginData.message || "Something went wrong");
+                          }
+                        console.log('Setting userId:', loginData.user_id);
+                        onLoginSuccess(loginData.user_id, loginData.token, loginData.user); // Notify the parent component
+                        toast.success("Login successful!");
+                        // Reset form data and state
                       setFormData({
                         email:'',
                         password:'',

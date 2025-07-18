@@ -59,7 +59,7 @@ const ProfilePage = () => {
 }
 
 try {
-  const response = await fetch(import.meta.env.VITE_API_BASE_URL + "api/auth/send_verification_email", {
+  /*const response = await fetch(import.meta.env.VITE_API_BASE_URL + "api/auth/send_verification_email", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -71,7 +71,7 @@ try {
   if (!response.ok) {
     const data = await response.json();
     throw new Error(data.message || "Failed to verify email");
-  }
+  }*/
   // Send the verification email using Firebase
   if(!userCred) {
     throw new Error("User is not authenticated.");
