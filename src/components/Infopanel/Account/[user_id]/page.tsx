@@ -77,7 +77,7 @@ try {
     throw new Error("User is not authenticated.");
   }
       await sendEmailVerification(userCred,{
-      url: import.meta.env.FRONT_END, // Change this to your production URL
+      url: import.meta.env.VITE_FRONT_END || window.location.origin, // Use VITE_FRONT_END or fallback to current origin
       handleCodeInApp: true,
     });
 
