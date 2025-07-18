@@ -76,11 +76,10 @@ try {
   if(!userCred) {
     throw new Error("User is not authenticated.");
   }
-      await sendEmailVerification(userCred,{
-      url: import.meta.env.VITE_FRONT_END || window.location.origin, // Use VITE_FRONT_END or fallback to current origin
-      handleCodeInApp: true,
-    });
-
+  await sendEmailVerification(userCred, {
+  url: `${import.meta.env.VITE_FRONT_END}/api/auth/verify-email?email=${encodeURIComponent(user?.email || userCred.email || '')}`,
+  handleCodeInApp: true,
+});
   alert("A verification email has been sent to your email address.");
   setLastEmailSentTime(currentTime); // Update the last email sent time
 } catch (error: any) {
