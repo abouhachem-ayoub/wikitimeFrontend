@@ -7,6 +7,9 @@ import SetPasswordModal from "./components/setPasswordModal";
 import {EditPasswordModal} from "./components/editPasswordModal";
 import ConfirmDeleteModal from "./components/confirmDeleteModal";
 import { useUser } from "contexts/UserContext";
+import toast  from "react-hot-toast";
+import { getAuth } from "firebase/auth";
+import { sendEmailVerification } from "firebase/auth";
 type ConfirmDeleteData =
   | { password: string } // When the user has a password
   | { pseudo: string; confirmPhrase: string }; // When the user does not have a password
@@ -22,6 +25,8 @@ type User = {
 };
 
 const ProfilePage = () => {
+  const auth = getAuth();
+  const userCred = auth.currentUser;
   const { userId, setUserId } = useUser();
   const [isViewInfoOpen, setIsViewInfoOpen] = useState(false);
   const [isSetPasswordOpen, setIsSetPasswordOpen] = useState(false);
@@ -67,6 +72,14 @@ try {
     const data = await response.json();
     throw new Error(data.message || "Failed to verify email");
   }
+  // Send the verification email using Firebase
+  if(!userCred) {
+    throw new Error("User is not authenticated.");
+  }
+      await sendEmailVerification(userCred,{
+      url: import.meta.env.FRONT_END, // Change this to your production URL
+      handleCodeInApp: true,
+    });
 
   alert("A verification email has been sent to your email address.");
   setLastEmailSentTime(currentTime); // Update the last email sent time
@@ -154,11 +167,11 @@ try {
     if(data.hasOwnProperty("password")) {
       const { password } = data as { password: string };
       if (!password) {
-        alert("Please enter your password to confirm account deletion.");
+        toast.error("Please enter your password to confirm account deletion.");
         return;
       }
     if (password.length < 8) {
-      alert("Password must be at least 8 characters long.");
+      toast.error("Password must be at least 8 characters long.");
       return;
     }
     try {
