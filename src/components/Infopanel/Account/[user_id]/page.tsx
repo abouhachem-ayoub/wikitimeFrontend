@@ -10,6 +10,7 @@ import { useUser } from "contexts/UserContext";
 import toast  from "react-hot-toast";
 import { getAuth } from "firebase/auth";
 import { sendEmailVerification } from "firebase/auth";
+import DataDeletionPolicy from "./components/datadeltionplicy";
 type ConfirmDeleteData =
   | { password: string } // When the user has a password
   | { pseudo: string; confirmPhrase: string }; // When the user does not have a password
@@ -256,6 +257,7 @@ url: `${import.meta.env.VITE_API_BASE_URL}api/firebase-handler?email=${encodeURI
         pseudo ={user?.pseudo || ""}
         hasPassword={hasPassword}
       />
+      <DataDeletionPolicy />
     </div>
   );
 };
