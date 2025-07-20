@@ -261,8 +261,9 @@ url: `${import.meta.env.VITE_API_BASE_URL}api/firebase-handler?email=${encodeURI
         onConfirm={(data) => handleDeleteAccount(data as ConfirmDeleteData)}
         pseudo ={user?.pseudo || ""}
         hasPassword={hasPassword}
+        onShowDeletePolicy={() => setShowDeletePolicy(true)}
       />
-      <DataDeletionPolicy />
+      {showDeletePolicy  && <DataDeletionPolicy />}
     </div>
   );
 };
