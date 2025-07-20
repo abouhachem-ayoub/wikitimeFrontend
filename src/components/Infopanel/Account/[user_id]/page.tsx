@@ -38,6 +38,7 @@ const ProfilePage = () => {
   const [hasPassword, setHasPassword] = useState(!!user?.password);
   const [lastEmailSentTime, setLastEmailSentTime] = useState<number | null>(null); // Track the last email sent time
   const debug_mode= import.meta.env.VITE_DEBUG_MODE // Check if debug mode is enabled
+  const [showDeletePolicy, setShowDeletePolicy] = useState(false);
 
   useEffect(() => {
     setHasPassword(!!user?.password);
@@ -230,6 +231,10 @@ url: `${import.meta.env.VITE_API_BASE_URL}api/firebase-handler?email=${encodeURI
     }
 
   };
+
+  if(showDeletePolicy) {
+    return <DataDeletionPolicy onClose={() => setShowDeletePolicy(false)} />;
+  }
 
   return (
     <div className="profile-page">

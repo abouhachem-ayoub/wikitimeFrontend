@@ -6,9 +6,10 @@ interface ConfirmDeleteModalProps {
   onConfirm: (data: { password?: string; pseudo?: string; confirmPhrase?: string }) => void;
   hasPassword: boolean; // Indicates if the user has a password set
   pseudo: string; 
+  onShowDeletePolicy?: () => void; // Optional callback to show the data deletion policy
 }
 
-const ConfirmDeleteModal: React.FC<ConfirmDeleteModalProps> = ({ isOpen, onClose, onConfirm,hasPassword,pseudo}) => {
+const ConfirmDeleteModal: React.FC<ConfirmDeleteModalProps> = ({ isOpen, onClose, onConfirm,hasPassword,pseudo,onShowDeletePolicy}) => {
   const [password, setPassword] = useState("");
   const [typedPseudo, setTypedPseudo] = useState("");
   const [confirmationPhrase, setConfirmationPhrase] = useState("");
@@ -69,19 +70,26 @@ const ConfirmDeleteModal: React.FC<ConfirmDeleteModalProps> = ({ isOpen, onClose
           </>
         )}
         <div className="fmodal-actions">
-          <button
-            onClick={onClose}
-            className="modal-button cancel-button"
-          >
-            Cancel
-          </button>
-          <button
-            onClick={handleConfirm}
-            className="modal-button delete-button"
-          >
-            Delete
-          </button>
-        </div>
+  <button
+    onClick={onShowDeletePolicy}
+    className="modal-button info-button"
+    type="button"
+  >
+    View Data Deletion Policy
+  </button>
+  <button
+    onClick={onClose}
+    className="modal-button cancel-button"
+  >
+    Cancel
+  </button>
+  <button
+    onClick={handleConfirm}
+    className="modal-button delete-button"
+  >
+    Delete
+  </button>
+</div>
       </div>
     </div>
   );

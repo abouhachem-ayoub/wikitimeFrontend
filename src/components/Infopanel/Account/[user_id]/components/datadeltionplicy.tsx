@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default function DataDeletionPolicy() {
+export default function DataDeletionPolicy({ onClose }: { onClose?: () => void }) {
   return (
     <div style={{ 
       maxWidth: '800px', 
@@ -8,8 +8,45 @@ export default function DataDeletionPolicy() {
       padding: '40px 20px', 
       fontFamily: 'Arial, sans-serif',
       lineHeight: '1.6',
-      color: '#333'
+      color: '#333',
+      position: 'relative'
     }}>
+      {onClose && (
+        <button
+          onClick={onClose}
+          style={{
+            position: 'absolute',
+            top: '20px',
+            right: '20px',
+            background: 'none',
+            border: 'none',
+            fontSize: '24px',
+            cursor: 'pointer',
+            color: '#666',
+            padding: '5px',
+            borderRadius: '50%',
+            width: '40px',
+            height: '40px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            transition: 'all 0.2s ease',
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = '#f0f0f0';
+            e.currentTarget.style.color = '#333';
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = 'none';
+            e.currentTarget.style.color = '#666';
+          }}
+          title="Close"
+          aria-label="Close data deletion policy"
+        >
+          ✕
+        </button>
+      )}
+      
       <h1 style={{ 
         color: '#2c3e50', 
         borderBottom: '3px solid #3498db', 
