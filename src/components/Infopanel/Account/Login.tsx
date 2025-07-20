@@ -10,8 +10,8 @@ import {getAuth, signInWithPopup, GoogleAuthProvider,FacebookAuthProvider,Github
 import { sendPasswordResetEmail } from "firebase/auth";
 import { confirmPasswordReset, updatePassword } from "firebase/auth";
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { sign } from 'crypto';
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -35,6 +35,7 @@ const Login: React.FC = () => {
   const [type3, setType3] = useState('password');
   const [oobCode, setOobCode] = useState<string | null>(null);
   const debug_mode=import.meta.env.VITE_DEBUG_MODE;
+
 
   const params = new URLSearchParams(window.location.search);
   const resetpasswordtoken = params.get('oobCode');
@@ -340,9 +341,12 @@ const Login: React.FC = () => {
       }
         localStorage.setItem('token', data.token); // Save token if needed
         setUserId(data.user_id); // Set userId in context
+        setForgottenPassword(false); // Switch back to login form
+        signInWithEmailAndPassword(auth, email, formData.password);
         toast.success("Password reset successful! You will be now logged in...");
         setResetPassword(false); // Switch back to login form
         setUserId(data.user_id); // Set userId in context
+
     } catch (error: any) {
       toast.error(error.message || "An error occurred");
     }
@@ -389,6 +393,10 @@ const Login: React.FC = () => {
   const handleToggle3 = () => {
     setType3(type3 === 'password' ? 'text' : 'password');
   };
+
+  useEffect(() => {
+    localStorage.setItem('debug_mode', debug_mode);
+  },[])
 
   return (
     <div>
