@@ -11,7 +11,7 @@ import { sendPasswordResetEmail } from "firebase/auth";
 import { confirmPasswordReset, updatePassword } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { sign } from 'crypto';
+import Spinner from 'components/spinner';
 
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
@@ -27,6 +27,8 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const Login: React.FC = () => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [loadingText, setLoadingText] = useState("Loading...");
   const [forgottenPassword, setForgottenPassword] = useState(false);
   const [resetPassword, setResetPassword] = useState(false); // New state for reset password form
   const [formData, setFormData] = useState({ email: '', password: '', confirmPassword: '' });
@@ -264,6 +266,8 @@ const Login: React.FC = () => {
 
   const handleForgottenPassword = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+      setIsLoading(true);
+  setLoadingText("Sending reset email...");
     const cooldownKey = 'resetPasswordCooldown';
     const cooldownTime = 5 * 60 * 1000; // 5 minutes in milliseconds
     const lastAttempt = localStorage.getItem(cooldownKey);
@@ -284,6 +288,10 @@ const Login: React.FC = () => {
   } catch (error: any) {
       const url = `${import.meta.env.VITE_FRONT_END}/reset-password?email=${encodeURIComponent(formData.email)}`;
       toast.error(JSON.stringify(error.message)+JSON.stringify(url)|| "An error occurred while sending the reset email.",);
+  }
+  finally{
+    setIsLoading(false);
+    setLoadingText('Loading...')
   }
     /*try {
       const response = await fetch(import.meta.env.VITE_API_BASE_URL+"api/auth/resetPassword", {
@@ -308,6 +316,8 @@ const Login: React.FC = () => {
 
   const handleResetPassword = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setIsLoading(true);
+    setLoadingText('Resetting password...');
     const params = new URLSearchParams(window.location.search);
     setOobCode(params.get('oobCode'));
     const continueUrl = params.get("continueUrl");
@@ -350,10 +360,16 @@ const Login: React.FC = () => {
     } catch (error: any) {
       toast.error(error.message || "An error occurred");
     }
+    finally{
+      setIsLoading(false);
+      setLoadingText('Loading...')
+    }
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+      setIsLoading(true);
+  setLoadingText("Logging in...");
     try {
       await loginWithEmailPassword(formData.email, formData.password);
       const response = await fetch(import.meta.env.VITE_API_BASE_URL+"api/auth/login", {
@@ -376,6 +392,10 @@ const Login: React.FC = () => {
       localStorage.setItem('user',data.user||'nothin')// Save token if needed
     } catch (error: any) {
       toast.error(error.message || "An error occurred");
+    }
+    finally{
+      setIsLoading(false);
+      setLoadingText('Loading...')
     }
   };
 
@@ -401,6 +421,7 @@ const Login: React.FC = () => {
   return (
     <div>
       <Toaster />
+        <Spinner isVisible={isLoading} text={loadingText} variant="classic" />
       {debug_mode === 'true' && (
         <p>Login Page at Login.tsx</p>
       )}
