@@ -11,6 +11,8 @@ import { sendPasswordResetEmail } from "firebase/auth";
 import { confirmPasswordReset, updatePassword } from "firebase/auth";
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import { signInWithEmailAndPassword } from "firebase/auth";
+
 const firebaseConfig = {
   apiKey: import.meta.env.VITE_FIREBASE_API_KAY,
   authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
@@ -38,6 +40,18 @@ const Login: React.FC = () => {
   const resetpasswordtoken = params.get('oobCode');
   const { setUserId } = useUser();
 
+  const loginWithEmailPassword = async (email: string, password: string) => {
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+    console.log("User logged in:", user);
+    // Handle successful login
+    return user;
+  } catch (error: any) {
+    console.error("Login error:", error.message);
+    throw error;
+  }
+};
   const handlesociallogin= async (authProvider:string) => {
     if(authProvider == 'google'){
         const provider = new GoogleAuthProvider();
@@ -337,6 +351,7 @@ const Login: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
+      await loginWithEmailPassword(formData.email, formData.password);
       const response = await fetch(import.meta.env.VITE_API_BASE_URL+"api/auth/login", {
         method: "POST",
         headers: {
