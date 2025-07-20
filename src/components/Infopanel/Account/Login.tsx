@@ -310,12 +310,12 @@ const Login: React.FC = () => {
     const params = new URLSearchParams(window.location.search);
     setOobCode(params.get('oobCode'));
     const continueUrl = params.get("continueUrl");
-    let email = null;
-    if (continueUrl) {
+    let email = params.get('email');
+  /*  if (continueUrl) {
       const continueParams = new URLSearchParams(continueUrl.split("?")[1]);
       console.log("email:", continueParams.get("email"));
       email = continueParams.get("email")||null;
-    }
+    }*/
     if (formData.password !== formData.confirmPassword) {
       toast.error("Passwords do not match!");
       return;
