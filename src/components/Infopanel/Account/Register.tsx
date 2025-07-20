@@ -11,6 +11,9 @@ import GoogleLogo from '../../../assets/social-login/google-logo.png'
 import GithubLogo from '../../../assets/social-login/github-logo.png'
 import {getAuth, signInWithPopup, GoogleAuthProvider,FacebookAuthProvider,GithubAuthProvider,createUserWithEmailAndPassword} from "firebase/auth";
 import { useUser } from 'contexts/UserContext';
+import { signInWithEmailAndPassword } from "firebase/auth";
+
+
 const defaultFormData = {
     email:'',
     password:'',
@@ -40,6 +43,18 @@ const RegisterForm = ({ toggleForm, onLoginSuccess }: { toggleForm: () => void; 
     const auth = getAuth();
     const debug_mode=import.meta.env.VITE_DEBUG_MODE;
     // Access the context's setUserId function
+    const loginWithEmailPassword = async (email: string, password: string) => {
+  try {
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+    console.log("User logged in:", user);
+    // Handle successful login
+    return user;
+  } catch (error: any) {
+    console.error("Login error:", error.message);
+    throw error;
+  }
+};
     useEffect(() => {
         const handler = setTimeout(() => {
             setDebouncedPseudo(pseudo);
@@ -207,6 +222,7 @@ const RegisterForm = ({ toggleForm, onLoginSuccess }: { toggleForm: () => void; 
                         toggleForm();
                         toast.success("Registration successful! You can now log in.");
                         //add logic to log the user in directly after registration
+                        await loginWithEmailPassword(formData.email, formData.password);
                         const loginResponse = await fetch(import.meta.env.VITE_API_BASE_URL+"api/auth/login", {
                             method: "POST",
                             headers: {

@@ -11,6 +11,8 @@ import toast  from "react-hot-toast";
 import { getAuth } from "firebase/auth";
 import { sendEmailVerification } from "firebase/auth";
 import DataDeletionPolicy from "./components/datadeltionplicy";
+import { signOut } from "firebase/auth";
+
 type ConfirmDeleteData =
   | { password: string } // When the user has a password
   | { pseudo: string; confirmPhrase: string }; // When the user does not have a password
@@ -45,11 +47,19 @@ const ProfilePage = () => {
   }, [user]);
 
    // Track if the user has a password
-    const handleSignOut = () => {
+    const handleSignOut = async () => {
+      try {
+    // Sign out from Firebase
+    await signOut(auth);
+    console.log("Firebase sign out successful");
+  } catch (error: any) {
+    console.error("Firebase sign out error:", error.message);
+  }
     localStorage.removeItem("token");
     localStorage.removeItem("userid");
     localStorage.removeItem("user");
     setUserId(null);
+    
   };
   const handleVerifyEmail = async () => {
     const currentTime = Date.now();
