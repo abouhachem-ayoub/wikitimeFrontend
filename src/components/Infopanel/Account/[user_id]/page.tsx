@@ -13,8 +13,7 @@ import { sendEmailVerification } from "firebase/auth";
 import DataDeletionPolicy from "./components/datadeltionplicy";
 import { signOut } from "firebase/auth";
 import Spinner from "components/spinner";
-import { set } from "lodash";
-import { s } from "vite/dist/node/types.d-aGj9QkWt";
+
 
 type ConfirmDeleteData =
   | { password: string } // When the user has a password
@@ -295,6 +294,7 @@ finally {
 
   return (
     <div className="profile-page">
+      <Spinner isVisible={isLoading} text={loadingText} variant="classic" />
       {debug_mode === "true" && (<p>User's profile page at user_id/page.tsx</p>)}
       <ProfileHeader user = {user}/>
       <ProfileDropdown

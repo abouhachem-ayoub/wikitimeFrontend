@@ -48,3 +48,4 @@ backup*
 #LockFiles---------------------------------------------------------
 .vercel
 .env-vercel
+comparaison.ps1
