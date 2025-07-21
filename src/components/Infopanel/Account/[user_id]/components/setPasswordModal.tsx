@@ -4,6 +4,7 @@ import { useUser } from "contexts/UserContext";
 import { updatePassword } from "firebase/auth";
 import { getAuth } from "firebase/auth";
 import { get } from "lodash";
+import toast,{ Toaster } from "react-hot-toast";
 interface SetPasswordModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -23,19 +24,19 @@ const SetPasswordModal: React.FC<SetPasswordModalProps> = ({ isOpen, onClose, on
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if(!password || password.trim() === "") {
-      alert("Please enter a password.");
+      toast.error("Please enter a password.");
       return;
     }
     if (password.length < 8) {
-      alert("Password must be at least 8 characters long.");
+      toast.error("Password must be at least 8 characters long.");
       return;
     }
     if (password !== confirmPassword) {
-      alert("Passwords do not match.");
+      toast.error("Passwords do not match.");
       return;
     }
     if (confirmPassword.length < 8) {
-      alert("Confirmation password must be at least 8 characters long.");
+      toast.error("Confirmation password must be at least 8 characters long.");
       return;
     }
     try {
@@ -56,12 +57,11 @@ const SetPasswordModal: React.FC<SetPasswordModalProps> = ({ isOpen, onClose, on
         throw new Error("No user is currently logged in.");
       }
       await updatePassword(user, password);
-
-      alert("Password set successfully.");
+      toast.success("Password set successfully.");
       onSuccess();
       onClose();
     } catch (error: any) {
-      alert(error.message || "An error occurred while setting your password.");
+      toast.error(error.message || "An error occurred while setting your password.");
     }
   };
 
@@ -69,6 +69,7 @@ const SetPasswordModal: React.FC<SetPasswordModalProps> = ({ isOpen, onClose, on
 
   return (
     <div className="modal-overlay">
+      <Toaster />
       <div className="modal-content">
       {debug_mode === "true" && (<p>Set Password Modal from user_id/components/setPasswordModal.tsx</p>)}
 

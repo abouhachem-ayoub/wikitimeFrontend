@@ -12,6 +12,7 @@ import GithubLogo from '../../../assets/social-login/github-logo.png'
 import {getAuth, signInWithPopup, GoogleAuthProvider,FacebookAuthProvider,GithubAuthProvider,createUserWithEmailAndPassword} from "firebase/auth";
 import { useUser } from 'contexts/UserContext';
 import { signInWithEmailAndPassword } from "firebase/auth";
+import Spinner from 'components/spinner';
 
 
 const defaultFormData = {
@@ -24,6 +25,7 @@ const defaultFormData = {
     pseudo:''
 }
 const RegisterForm = ({ toggleForm, onLoginSuccess }: { toggleForm: () => void; onLoginSuccess: (userId: string, token: string, user: string) => void }) => {
+    const [loadingText,setLoadingText] = useState('Loading...');
     const [loading, setLoading] = useState(false);
     const [formData,setFormData] = useState(defaultFormData);
     const [phone, setPhone] = useState('');
@@ -201,9 +203,10 @@ const RegisterForm = ({ toggleForm, onLoginSuccess }: { toggleForm: () => void; 
 
     const handleSubmit =async(e : FormEvent <HTMLFormElement>)=>{
         e.preventDefault();
+        setLoading(true);
+        setLoadingText('Creating your account...')
         try{
             if(!pseudoExists && !emailExists && passwordErrorMessage === '' && formData.password === formData.password2){
-                setLoading(true);
                     const userCredential = await createUserWithEmailAndPassword(auth, formData.email, formData.password);
                     const response = await fetch(import.meta.env.VITE_API_BASE_URL+"api/auth/register", {
                         method: "POST",
@@ -260,6 +263,7 @@ const RegisterForm = ({ toggleForm, onLoginSuccess }: { toggleForm: () => void; 
         }
         finally{
             setLoading(false);
+            setLoadingText('Loading...')
         }
     }
     const checkifsocialemailexists = async (email:any)=>{
@@ -283,6 +287,8 @@ const RegisterForm = ({ toggleForm, onLoginSuccess }: { toggleForm: () => void; 
         return 'something went wrong';
     }}
 const registerwithsocials = async(formData:any)=>{
+    setLoading(true);
+    setLoadingText('Registering...')
     if(!(await checkifsocialemailexists(formData.email))){
         try{
     let response = await fetch(import.meta.env.VITE_API_BASE_URL+"api/auth/register", {
@@ -318,7 +324,13 @@ const registerwithsocials = async(formData:any)=>{
         }
         catch(error){
                 console.log(error)
-        }}
+        }
+        finally{
+            setLoading(false);
+            setLoadingText('Loading...')
+        }
+    }
+    
     else{
         try{
                 const response = await fetch(import.meta.env.VITE_API_BASE_URL+"api/auth/login", {
@@ -340,9 +352,15 @@ const registerwithsocials = async(formData:any)=>{
         catch(error){
                 console.log(error);
         }
+        finally{
+            setLoading(false);
+            setLoadingText('Loading...')
+        }
         }
             }
 const handlesociallogin= async (authProvider:string) => {
+    setLoading(true);
+    setLoadingText('Registering...')
     if(authProvider == 'google'){
         const provider = new GoogleAuthProvider();
         signInWithPopup(auth, provider)
@@ -364,15 +382,22 @@ const handlesociallogin= async (authProvider:string) => {
                         pseudo: user.displayName || '',
                       };
                     registerwithsocials(socialFormData);
+                    setLoading(false);
+                    setLoadingText('Loading...')
                 }
   ).catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
     const email = error.customData.email;
     const credential = GoogleAuthProvider.credentialFromError(error);
-  });
+    setLoading(false);
+    setLoadingText('Loading...')
+  }
+);
     }
     else if(authProvider=='facebook'){
+    setLoading(true);
+    setLoadingText('Registering...')
     const provider = new FacebookAuthProvider();
     signInWithPopup(auth, provider)
     .then((result) => {
@@ -394,6 +419,8 @@ const handlesociallogin= async (authProvider:string) => {
     localStorage.setItem('scoialformdata',JSON.stringify(socialFormData));
     localStorage.setItem('fbemail',socialFormData.email);
     registerwithsocials(socialFormData);
+    setLoading(false);
+    setLoadingText('Loading...');
   }).catch((error) => {
     const errorCode = error.code;
     localStorage.setItem('fberrorcode',error.code);
@@ -403,10 +430,14 @@ const handlesociallogin= async (authProvider:string) => {
     localStorage.setItem('fberrorcustomemail',error.email);
     const credential = FacebookAuthProvider.credentialFromError(error);
     console.log(error);
+    setLoading(false);
+    setLoadingText('Loading...');
     toast.error('try to sign up with google instead, you already have an account');
   });
     }
     else if(authProvider == 'github'){
+        setLoading(true);
+        setLoadingText('Registering...')
         const provider = new GithubAuthProvider
         signInWithPopup(auth, provider)
         .then((result) => {
@@ -428,6 +459,8 @@ const handlesociallogin= async (authProvider:string) => {
     console.log('token',token);
     console.log(socialFormData);
     registerwithsocials(socialFormData);
+    setLoading(false);
+    setLoadingText('Loading...')
   }).catch((error) => {
     const errorCode = error.code;
     const errorMessage = error.message;
@@ -435,6 +468,8 @@ const handlesociallogin= async (authProvider:string) => {
     console.log(email,errorMessage);
     const credential = GithubAuthProvider.credentialFromError(error);
     console.log(email,errorMessage,credential);
+    setLoading(false);
+    setLoadingText('Loading...')
     toast.error('try to sign up with google instead, you already have an account');
 }  
   )
@@ -444,6 +479,7 @@ const handlesociallogin= async (authProvider:string) => {
     return (
         <div className="min-w-md max-w-lg mx-auto bg-white shadow-md rounded px-8 py-6"> 
             <Toaster/>
+            <Spinner isVisible={loading} text={loadingText} variant="classic" />
             {debug_mode==='true' && <p>Sign up page Register.tsx</p>}
             <form method='post' onSubmit={handleSubmit}>
             <div className="mb-4">

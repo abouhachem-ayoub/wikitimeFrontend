@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FiUser } from "react-icons/fi";
+import toast,{Toaster} from "react-hot-toast";
 interface ProfileDropdownProps {
   onViewInfo: () => void;
   onSetPassword: () => void;
@@ -44,12 +45,12 @@ const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
     const action = params.get("action");
 
     if (action === "verifyEmail") {
-      alert("Your email has been successfully verified!");
+      toast.success("Your email has been successfully verified!");
     }
   }, []);
   const handleVerifyEmail = () => {
     if (emailVerified !== null) {
-      alert("Your email is already verified!");
+      toast.error("Your email is already verified!");
       return;
     }
 
@@ -59,6 +60,7 @@ const ProfileDropdown: React.FC<ProfileDropdownProps> = ({
 
   return (
     <div className="profile-dropdown">
+      <Toaster />
       <button onClick={() => setIsOpen(!isOpen)} className="dropdown-button">
         <FiUser className="icon" />
         <span className="username">Profile</span>

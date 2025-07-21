@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import '../../../../../styles/infopanel.scss'; // Adjust the path as necessary
+import  toast,{Toaster}from 'react-hot-toast';
 interface ConfirmDeleteModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -24,7 +25,7 @@ const ConfirmDeleteModal: React.FC<ConfirmDeleteModalProps> = ({ isOpen, onClose
       if (typedPseudo === pseudo && confirmationPhrase.toLowerCase() === "delete my account") {
         onConfirm({ pseudo: typedPseudo, confirmPhrase: 'delete my account' });
       } else {
-        alert("Please type your pseudo and the confirmation phrase correctly.");
+        toast.error("Please type your pseudo and the confirmation phrase correctly.");
       }
     }
   };
@@ -33,6 +34,7 @@ const ConfirmDeleteModal: React.FC<ConfirmDeleteModalProps> = ({ isOpen, onClose
 
   return (
     <div className="modal-overlay">
+      <Toaster/>
       <div className="modal-content">
       {debug_mode === "true" && (<p>Confirm Delete Modal from user_id/components/confirmDeleteModal.tsx</p>)}
         <h2 className="modal title">Confirm Account Deletion</h2>

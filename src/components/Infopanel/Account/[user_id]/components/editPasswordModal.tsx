@@ -3,6 +3,7 @@ import { FiEye, FiEyeOff } from "react-icons/fi";
 import { useUser } from "contexts/UserContext";
 import { updatePassword } from "firebase/auth";
 import { getAuth } from "firebase/auth";
+import toast, { Toaster } from 'react-hot-toast';
 interface EditPasswordModalProps {
   isOpen: boolean;
   onClose: () => void;
@@ -24,27 +25,27 @@ export const EditPasswordModal: React.FC<EditPasswordModalProps> = ({ isOpen, on
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if(!currentPassword || !newPassword || !newPassword2) {
-      alert("Please fill in all fields.");
+      toast.error("Please fill in all fields.");
       return;
     }
     if (newPassword !== newPassword2) {
-      alert("New passwords do not match.");
+      toast.error("New passwords do not match.");
       return;
     }
     if (newPassword.length < 8) {
-      alert("New password must be at least 8 characters long.");
+      toast.error("New password must be at least 8 characters long.");
       return;
     }
     if (currentPassword === newPassword) {
-      alert("New password cannot be the same as the current password.");
+      toast.error("New password cannot be the same as the current password.");
       return;
     }
     if (newPassword !== newPassword2) {
-      alert("New password and confirmation do not match.");
+      toast.error("New password and confirmation do not match.");
       return;
     }
     if (newPassword2.length < 8) {
-      alert("Confirmation password must be at least 8 characters long.");
+      toast.error("Confirmation password must be at least 8 characters long.");
       return;
     }
     try {
@@ -65,10 +66,10 @@ export const EditPasswordModal: React.FC<EditPasswordModalProps> = ({ isOpen, on
         throw new Error("No user is currently logged in.");
       }
       await updatePassword(user, newPassword);
-      alert("Password updated successfully.");
+      toast.success("Password updated successfully.");
       onClose();
     } catch (error: any) {
-      alert(error.message || "An error occurred while updating your password.");
+      toast.error(error.message || "An error occurred while updating your password.");
     }
   };
 
@@ -76,6 +77,7 @@ export const EditPasswordModal: React.FC<EditPasswordModalProps> = ({ isOpen, on
 
   return (
     <div className="modal-overlay">
+      <Toaster />
       <div className="modal-content">
       {debug_mode === "true" && (<p>Edit Password Modal from user_id/components/editPasswordModal.tsx</p>)}
 

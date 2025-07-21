@@ -12,6 +12,9 @@ import { getAuth } from "firebase/auth";
 import { sendEmailVerification } from "firebase/auth";
 import DataDeletionPolicy from "./components/datadeltionplicy";
 import { signOut } from "firebase/auth";
+import Spinner from "components/spinner";
+import { set } from "lodash";
+import { s } from "vite/dist/node/types.d-aGj9QkWt";
 
 type ConfirmDeleteData =
   | { password: string } // When the user has a password
@@ -41,6 +44,8 @@ const ProfilePage = () => {
   const [lastEmailSentTime, setLastEmailSentTime] = useState<number | null>(null); // Track the last email sent time
   const debug_mode= import.meta.env.VITE_DEBUG_MODE // Check if debug mode is enabled
   const [showDeletePolicy, setShowDeletePolicy] = useState(false);
+  const [isLoading,setIsLoading] = useState(false);
+  const [loadingText,setLoadingText] = useState('Loading...');
 
   useEffect(() => {
     setHasPassword(!!user?.password);
@@ -48,12 +53,18 @@ const ProfilePage = () => {
 
    // Track if the user has a password
     const handleSignOut = async () => {
+      setIsLoading(true);
+      setLoadingText('Signing out...')
       try {
     // Sign out from Firebase
     await signOut(auth);
     console.log("Firebase sign out successful");
   } catch (error: any) {
     console.error("Firebase sign out error:", error.message);
+  }
+  finally{
+    setIsLoading(false);
+    setLoadingText('Loading...');
   }
     localStorage.removeItem("token");
     localStorage.removeItem("userid");
@@ -62,11 +73,13 @@ const ProfilePage = () => {
     
   };
   const handleVerifyEmail = async () => {
+    setIsLoading(true);
+    setLoadingText('Sending verification email...');
     const currentTime = Date.now();
     // Check if the cooldown period has elapsed
     if (lastEmailSentTime && currentTime - lastEmailSentTime < 5 * 60 * 1000) {
       const remainingTime = Math.ceil((5 * 60 * 1000 - (currentTime - lastEmailSentTime)) / 1000);
-  alert(`Please wait ${remainingTime} seconds before sending another verification email.`);
+  toast(`Please wait ${remainingTime} seconds before sending another verification email.`);
   return;
 }
 
@@ -91,16 +104,21 @@ try {
    await sendEmailVerification(userCred, {
 url: `${import.meta.env.VITE_API_BASE_URL}api/firebase-handler?email=${encodeURIComponent(user?.email || userCred.email || '')}`,    handleCodeInApp: true,
 });
-  alert("A verification email has been sent to your email address.");
+  toast.success("A verification email has been sent to your email address.");
   setLastEmailSentTime(currentTime); // Update the last email sent time
 } catch (error: any) {
-  alert(error.message || "An error occurred while verifying your email.");
+  toast.error(error.message || "An error occurred while verifying your email.");
 }
-};
+finally {
+  setIsLoading(false);
+  setLoadingText('Loading...');
+}};
   const handleSetPasswordSuccess = () => {
     setHasPassword(true);
   }
   const fetchUserInfo = async (userId: string) => {
+    setIsLoading(true);
+    setLoadingText('Loading...')
     try {
       const response = await fetch(import.meta.env.VITE_API_BASE_URL+"api/auth/getuserinfo", {
         method: "POST",
@@ -121,11 +139,17 @@ url: `${import.meta.env.VITE_API_BASE_URL}api/firebase-handler?email=${encodeURI
     } catch (error: any) {
       console.error("Error fetching user info:", error.message);
     }
+    finally{
+      setIsLoading(false); 
+      setLoadingText('Loading...');
+    }
   };
 
   useEffect(() => {
     const fetchAndSetUserInfo = async () => {
       if (userId) {
+        setIsLoading(true);
+        setLoadingText('Loading...');
         try {
           const userInfo:User = await fetchUserInfo(userId); // Await the async function
           if (userInfo) {
@@ -135,6 +159,10 @@ url: `${import.meta.env.VITE_API_BASE_URL}api/firebase-handler?email=${encodeURI
           }
         } catch (error) {
           console.error("Error fetching user info:", error);
+        }
+        finally {
+          setIsLoading(false);
+          setLoadingText('Loading...');
         }
       } else {
         console.error("User ID is not set.");
@@ -148,6 +176,8 @@ url: `${import.meta.env.VITE_API_BASE_URL}api/firebase-handler?email=${encodeURI
 
   
   const handleEditUserInfo = async (updatedUserInfo: Partial<User>) => {
+    setIsLoading(true);
+    setLoadingText('Updating user info...');
     try {
       const response = await fetch(import.meta.env.VITE_API_BASE_URL + "api/auth/edituserinfo", {
         method: "POST",
@@ -168,9 +198,13 @@ url: `${import.meta.env.VITE_API_BASE_URL}api/firebase-handler?email=${encodeURI
       }; // Ensure all required fields are present
       setUser(updatedUser); // Update the user state
       localStorage.setItem("userINFO", JSON.stringify(updatedUser)); // Update localStorage
-      alert("Your information has been updated.");
+      toast.success("Your information has been updated.");
     } catch (error: any) {
-      alert(error.message || "An error occurred while updating your information.");
+      toast.error(error.message || "An error occurred while updating your information.");
+    }
+    finally {
+      setIsLoading(false);
+      setLoadingText('Loading...');
     }
   };
   const handleDeleteAccount = async (data:ConfirmDeleteData) => {
@@ -185,6 +219,8 @@ url: `${import.meta.env.VITE_API_BASE_URL}api/firebase-handler?email=${encodeURI
       return;
     }
     try {
+      setIsLoading(true);
+      setLoadingText('Deleting account...');
       const response = await fetch(import.meta.env.VITE_API_BASE_URL + "api/auth/deleteaccount", {
         method: "DELETE",
         headers: {
@@ -199,26 +235,33 @@ url: `${import.meta.env.VITE_API_BASE_URL}api/firebase-handler?email=${encodeURI
         throw new Error(data.message || "Failed to delete account");
       }
 
-      alert("Your account has been deleted. You will be logged out.");
+      toast.success("Your account has been deleted. You will be logged out.");
       handleSignOut();
     } catch (error: any) {
-      alert(error.message || "An error occurred while deleting your account.");
-    }}
+      toast.error(error.message || "An error occurred while deleting your account.");
+    }
+    finally {
+      setIsLoading(false);
+      setLoadingText('Loading...');
+    }
+  }
     else {
       const { pseudo, confirmPhrase } = data as { pseudo: string; confirmPhrase: string };
       if (!pseudo || !confirmPhrase) {
-        alert("Please enter your pseudo and the confirmation phrase to delete your account.");
+        toast.error("Please enter your pseudo and the confirmation phrase to delete your account.");
         return;
       }
       if (pseudo !== user?.pseudo) {
-        alert("Pseudo does not match. Please try again.");
+        toast.error("Pseudo does not match. Please try again.");
         return;
       }
       if (confirmPhrase !== "delete my account") {
-        alert("Confirmation phrase is incorrect. Please type 'delete my account' to confirm.");
+        toast.error("Confirmation phrase is incorrect. Please type 'delete my account' to confirm.");
         return;
       }
       try {
+        setIsLoading(true);
+        setLoadingText('Deleting account...');
         const response = await fetch(import.meta.env.VITE_API_BASE_URL + "api/auth/deleteaccount", {
           method: "DELETE",
           headers: {
@@ -233,10 +276,14 @@ url: `${import.meta.env.VITE_API_BASE_URL}api/firebase-handler?email=${encodeURI
           throw new Error(data.message || "Failed to delete account");
         }
 
-        alert("Your account has been deleted. You will be logged out.");
+        toast.success("Your account has been deleted. You will be logged out.");
         handleSignOut();
       } catch (error: any) {
-        alert(error.message || "An error occurred while deleting your account.");
+        toast.error(error.message || "An error occurred while deleting your account.");
+      }
+      finally {
+        setIsLoading(false);
+        setLoadingText('Loading...');
       }
     }
 
